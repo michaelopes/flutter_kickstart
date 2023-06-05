@@ -1,0 +1,15 @@
+enum TransitionType {
+  native,
+  nativeModal,
+  inFromLeft,
+  inFromTop,
+  inFromRight,
+  inFromBottom,
+  fadeIn,
+  custom,
+  material,
+  materialFullScreenDialog,
+  cupertino,
+  cupertinoFullScreenDialog,
+  none,
+}

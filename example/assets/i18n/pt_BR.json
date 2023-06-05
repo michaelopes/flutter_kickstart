@@ -1,0 +1,11 @@
+{
+  "pages": {
+    "main": {
+      "title": "Página inicial",
+      "testeX": "Esse é um teste"
+    },
+    "settings": {
+      "title": "Configurações"
+    }
+  }
+}
