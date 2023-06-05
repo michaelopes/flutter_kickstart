@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_kickstart/src/util/toolkit.dart';
 
 class _InternalInitializeFocus {
@@ -8,12 +9,15 @@ class _InternalInitializeFocus {
   bool setted = false;
 
   _InternalInitializeFocus(this.lengthToReset, this.name);
+
+  factory _InternalInitializeFocus.empty() {
+    return _InternalInitializeFocus(0, "");
+  }
 }
 
 abstract class FkReactive extends ChangeNotifier {
   final _store = {};
-
-  _InternalInitializeFocus _initializeFocus = _InternalInitializeFocus(0, "");
+  _InternalInitializeFocus _initializeFocus = _InternalInitializeFocus.empty();
 
   FkReactive() {
     init();
@@ -48,7 +52,7 @@ abstract class FkReactive extends ChangeNotifier {
       if (_initializeFocus.name.isNotEmpty &&
           _initializeFocus.counter >= _initializeFocus.lengthToReset &&
           _initializeFocus.setted) {
-        _initializeFocus = _InternalInitializeFocus(0, "");
+        _initializeFocus = _InternalInitializeFocus.empty();
       }
 
       notifyListeners();
