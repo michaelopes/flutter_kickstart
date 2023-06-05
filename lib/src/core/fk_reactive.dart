@@ -12,6 +12,7 @@ class _InternalInitializeFocus {
 
 abstract class FkReactive extends ChangeNotifier {
   final _store = {};
+
   _InternalInitializeFocus _initializeFocus = _InternalInitializeFocus(0, "");
 
   FkReactive() {
