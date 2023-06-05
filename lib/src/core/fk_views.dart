@@ -98,6 +98,14 @@ class _SimpleViewBuilderState extends State<_SimpleViewBuilder> {
   }
 
   @override
+  void reassemble() {
+    if (_reactive is FkReactive) {
+      //  (_reactive as FkReactive).init();
+    }
+    super.reassemble();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return _reactive == null
         ? widget.builder(context)
@@ -160,6 +168,12 @@ class _FkViewState<Vm extends FkViewModel> extends State<FkView> {
     _viewModel?.addSetupParam("GetView", () => widget);
     _viewModel?.init();
     super.initState();
+  }
+
+  @override
+  void reassemble() {
+    //  _viewModel?.reactive.init();
+    super.reassemble();
   }
 
   @override

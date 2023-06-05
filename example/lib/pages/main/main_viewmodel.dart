@@ -3,14 +3,32 @@ import 'package:flutter_kickstart/flutter_kickstart.dart';
 import '../../app_reactive.dart';
 import '../../model.dart';
 
-class MainReactive extends AppReactive {
-  MainReactive() {
+class MainReactive extends FkReactive with AppReactive {
+  @override
+  init() {
     list = FkList();
     user = Model(
-      name: "Douglas",
+      name: "Douglas d",
       enable: false,
     );
+    name2 = "Joana 555 dd";
+    novo2 = "TSADASD  444444 55";
+    novo3 = "DKJDSJKSDJKSDJKSD";
+    novo4 = "pppppppppp";
   }
+
+  String get name2;
+  set name2(String value);
+
+  String get novo2;
+  set novo2(String value);
+
+  String get novo3;
+  set novo3(String value);
+
+  String get novo4;
+  set novo4(String value);
+
   FkList<int> get list;
   set list(FkList<int> value);
 

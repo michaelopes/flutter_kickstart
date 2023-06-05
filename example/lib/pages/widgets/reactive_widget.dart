@@ -8,10 +8,6 @@ import '../main/main_viewmodel.dart';
 class ReactiveWidget extends FkSimpleView<GlobalReactive> {
   ReactiveWidget({super.key}) : super(reactive: GlobalReactive());
 
-  t() {
-    var sd = context;
-  }
-
   @override
   Widget builder(BuildContext context) {
     return SizedBox(

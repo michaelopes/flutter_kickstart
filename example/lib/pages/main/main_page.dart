@@ -38,6 +38,7 @@ class MainView extends FkView<MainViewModel> {
               const SizedBox(
                 height: 16,
               ),
+              Text(vm.reactive.novo4),
               Text("ViewModel"),
               Text(vm.reactive.global.counter.toString()),
               const SizedBox(

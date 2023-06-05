@@ -6,7 +6,11 @@ class GlobalReactive extends FkReactive {
   factory GlobalReactive() {
     return _singleton;
   }
-  GlobalReactive._internal() {
+
+  GlobalReactive._internal();
+
+  @override
+  init() {
     counter = 0;
   }
 
