@@ -6,7 +6,7 @@ import '../interfaces/fk_asset.dart';
 import '../setup/fk_animations.dart';
 import '../setup/fk_icons.dart';
 import '../setup/fk_images.dart';
-import '../widgets/fk_app_params.dart';
+import '../setup/fk_globals.dart' as globals;
 import 'fk_inject.dart';
 import 'fk_reactive.dart';
 import 'fk_viewmodel.dart';
@@ -47,9 +47,8 @@ abstract class FkSimpleView<T extends FkReactive> extends StatelessWidget
   dynamic get animations => FkDynamicAnimations();
 
   A assets<A extends FkAsset>() {
-    var ctx = FkAppParams.of(context)!;
-    if (ctx.assetsSnippeds.isNotEmpty) {
-      return ctx.assetsSnippeds.whereType<A>().first;
+    if (globals.assetsSnippeds.isNotEmpty) {
+      return globals.assetsSnippeds.whereType<A>().first;
     } else {
       var message =
           "The asset snipped $T not registred on FkApp inicialization. Register your custom asset snipped on  assetsSnippeds: [] on FpApp creation";
@@ -129,9 +128,8 @@ abstract class FkView<Vm extends FkViewModel> extends StatefulWidget
   dynamic get animations => FkDynamicAnimations();
 
   T assets<T extends FkAsset>() {
-    FkAppParams params = _get();
-    if (params.assetsSnippeds.isNotEmpty) {
-      return params.assetsSnippeds.whereType<T>().first;
+    if (globals.assetsSnippeds.isNotEmpty) {
+      return globals.assetsSnippeds.whereType<T>().first;
     } else {
       var message =
           "The asset snipped $T not registred on FkApp inicialization. Register your custom asset snipped on  assetsSnippeds: [] on FpApp creation";
@@ -156,7 +154,6 @@ class _FkViewState<Vm extends FkViewModel> extends State<FkView> {
     widget._set<BuildContext>(context);
     widget._set<FkTranslatorProcessor>(FkTranslatorProcessor(context));
     widget._set<GoRouter>(GoRouter.of(context));
-    widget._set<FkAppParams>(FkAppParams.of(context)!);
     if (_viewModel != null) {
       widget._set<Vm>(_viewModel!);
     }

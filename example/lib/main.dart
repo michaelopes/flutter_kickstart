@@ -15,6 +15,11 @@ void main() async {
     i18nDirectory: "assets/i18n/",
     availableLanguages: ["pt_BR"],
     defaultLocale: const Locale("pt", "BR"),
+    assetsSnippeds: [
+      AppAnimations(),
+      AppIcons(),
+      AppImages(),
+    ],
   );
 
   runApp(
@@ -25,12 +30,6 @@ void main() async {
       //Register app injections
       injections: () => [
         Injections.inject,
-      ],
-      //Register app Icons, Images and Animation snippes.
-      assetsSnippeds: [
-        AppAnimations(),
-        AppIcons(),
-        AppImages(),
       ],
       globalFailureHandler: AppGlobalError(),
     ),
