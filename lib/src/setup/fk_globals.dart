@@ -12,4 +12,5 @@ String iconsDirectory = "";
 String imagesDirectory = "";
 String animationsDirectory = "";
 String i18nDirectory = "";
+String baseUrl = "";
 bool enableHttpDriverLogger = true;

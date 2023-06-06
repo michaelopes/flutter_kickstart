@@ -2,15 +2,20 @@ import 'package:dio/dio.dart';
 import 'package:flutter_kickstart/src/http_driver/dio_client.dart';
 import 'package:flutter_kickstart/src/interfaces/http_driver_interface.dart';
 
-base class BaseRepository {
+abstract class BaseRepository {
   IHttpDriver? _httpDriver;
+  String? _baseUrl;
 
-  BaseRepository({IHttpDriver? httpDriver}) {
+  BaseRepository({IHttpDriver? httpDriver, String? baseUrl}) {
     _httpDriver = httpDriver;
+    _baseUrl = baseUrl;
   }
 
   IHttpDriver get httpDriver {
-    _httpDriver ??= DioClient(Dio());
+    _httpDriver ??= DioClient(
+      Dio(),
+      baseUrl: _baseUrl,
+    );
     return _httpDriver!;
   }
 

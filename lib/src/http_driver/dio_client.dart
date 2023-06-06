@@ -9,12 +9,17 @@ import 'fk_http_driver_response_parser.dart';
 
 class DioClient implements IHttpDriver {
   final Dio dio;
+  String? baseUrl;
 
-  DioClient(this.dio) {
+  DioClient(
+    this.dio, {
+    this.baseUrl,
+  }) {
     _setConfig();
   }
 
   void _setConfig() {
+    dio.options.baseUrl = baseUrl ?? globals.baseUrl;
     dio.options.headers.addAll(
       {
         'content-type': "application/json; charset=utf-8",

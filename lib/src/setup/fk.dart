@@ -26,6 +26,7 @@ class Fk {
     FkBaseHttpDriverResponseParser? httpDriverResponseParser,
     bool enableHttpDriverLogger = true,
     IFkHttpDriverMiddleware? httpDriverMiddleware,
+    String baseUrl = "",
   }) async {
     WidgetsFlutterBinding.ensureInitialized();
 
@@ -35,6 +36,7 @@ class Fk {
     globals.i18nDirectory = i18nDirectory;
     globals.assetsSnippeds = assetsSnippeds;
     globals.enableHttpDriverLogger = enableHttpDriverLogger;
+    globals.baseUrl = baseUrl;
 
     if (httpDriverResponseParser != null) {
       globals.httpDriverResponseParser = httpDriverResponseParser;

@@ -1,9 +1,6 @@
-import 'package:example/app_reactive.dart';
 import 'package:example/global_reactive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
-
-import '../main/main_viewmodel.dart';
 
 class ReactiveWidget extends FkSimpleView<GlobalReactive> {
   ReactiveWidget({super.key}) : super(reactive: GlobalReactive());
