@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/src/interfaces/fk_asset.dart';
-import 'fk_globals.dart' as globals;
 import '../util/toolkit.dart';
 
 class FkImages extends FkAsset {
-  @override
-  T? tryGet<T>() {
-    try {
-      return FkImages() as T;
-    } catch (e) {
-      return null;
-    }
-  }
+  FkImages(super.directory);
 
   @override
   dynamic noSuchMethod(Invocation invocation) {
@@ -31,11 +23,22 @@ class FkImages extends FkAsset {
       debugPrint(message);
       throw Exception(message);
     }
-    return FpImage(fileName: "$fileName.$ext");
+    return FpImage(fileName: "$fileName.$ext", directory: directory);
+  }
+}
+
+class FkImagesSnippetProvider extends FkImages
+    implements FkAssetSnippetProvider {
+  FkImagesSnippetProvider() : super("");
+  @override
+  void setDirectory(String value) {
+    super.directory = value;
   }
 }
 
 class FkDynamicImages extends FkImages {
+  FkDynamicImages(super.directory);
+
   @override
   Widget noSuchMethod(Invocation invocation) {
     return super.noSuchMethod(invocation).toImage();
@@ -47,21 +50,22 @@ class FpImage {
   final double? width;
   final double? height;
   final BoxFit? fit;
+  final String directory;
 
   FpImage({
     required String fileName,
     this.width,
     this.height,
     this.fit,
+    required this.directory,
   }) {
-    this.fileName =
-        "${Toolkit.formatInputedDirectory(globals.imagesDirectory)}/$fileName";
+    this.fileName = "${Toolkit.formatInputedDirectory(directory)}/$fileName";
   }
 
   Image toImage({double? width, double? height, BoxFit? fit}) {
-    if (globals.imagesDirectory.isEmpty) {
+    if (directory.isEmpty) {
       var message =
-          "Unable to load image, imagesDirectory not given at Fk.init";
+          "Unable to load image, imagesDirectory not given on FkTheme creation";
       debugPrint(message);
       throw Exception(message);
     }

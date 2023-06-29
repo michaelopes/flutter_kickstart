@@ -1,4 +1,3 @@
-import 'package:example/pages/main/main_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
@@ -22,7 +21,7 @@ class MainSecondView extends FkView<MainSecondViewModel> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(vm.moduleVariable),
-            Text("ReactiveWidget"),
+            const Text("ReactiveWidget"),
             ReactiveWidget()
           ],
         )),

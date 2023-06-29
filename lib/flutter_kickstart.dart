@@ -29,3 +29,5 @@ export './src/collections/fk_set.dart';
 export './src/http_driver/fk_http_driver_middleware.dart';
 export './src/http_driver/fk_http_driver_request.dart';
 export './src/http_driver/fk_http_driver_response_parser.dart';
+
+export 'src/theme/fk_theme.dart';

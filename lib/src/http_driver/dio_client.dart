@@ -7,16 +7,24 @@ import '../setup/fk_globals.dart' as globals;
 import 'custom_interceptor.dart';
 import 'fk_http_driver_response_parser.dart';
 
+class _DioFactory {
+  static Dio? _dio;
+  static Dio get instance {
+    _dio ??= Dio();
+    return _dio!;
+  }
+}
+
 class DioClient implements IHttpDriver {
-  final Dio dio;
   String? baseUrl;
 
-  DioClient(
-    this.dio, {
+  DioClient({
     this.baseUrl,
   }) {
     _setConfig();
   }
+
+  Dio get dio => _DioFactory.instance;
 
   void _setConfig() {
     dio.options.baseUrl = baseUrl ?? globals.baseUrl;

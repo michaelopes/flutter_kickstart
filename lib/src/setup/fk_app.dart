@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_kickstart/flutter_kickstart.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'package:flutter_kickstart/flutter_kickstart.dart';
+
 import '../i18n/app_localizations_delegate.dart';
 import '../i18n/i18n.dart';
 import '../util/global_error_observer.dart';
-
 import 'fk_globals.dart' as globals;
 
 typedef InjectionsFunc = List<VoidCallback> Function();
@@ -14,16 +15,17 @@ class FkApp extends StatefulWidget {
   const FkApp({
     super.key,
     required this.modules,
+    required this.theme,
     this.appTitle = "",
     this.globalFailureHandler,
     this.injections,
   });
 
   final String appTitle;
-  //final List<QRoute> routes;
   final IGlobalFailureHandler? globalFailureHandler;
   final FkModulesFunc modules;
   final InjectionsFunc? injections;
+  final FkThemeData theme;
 
   @override
   State<FkApp> createState() => _FkAppState();
@@ -83,6 +85,8 @@ class _FkAppState extends State<FkApp> {
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
+        theme: widget.theme.light.theme,
+        darkTheme: widget.theme.dark.theme,
         routerConfig: routerConfig,
       ),
     );

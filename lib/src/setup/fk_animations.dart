@@ -3,17 +3,9 @@ import 'package:flutter_kickstart/src/interfaces/fk_asset.dart';
 import 'package:lottie/lottie.dart';
 
 import '../util/toolkit.dart';
-import 'fk_globals.dart' as globals;
 
 class FkAnimations extends FkAsset {
-  @override
-  T? tryGet<T>() {
-    try {
-      return FkAnimations() as T;
-    } catch (e) {
-      return null;
-    }
-  }
+  FkAnimations(super.directory);
 
   @override
   dynamic noSuchMethod(Invocation invocation) {
@@ -32,11 +24,22 @@ class FkAnimations extends FkAsset {
       debugPrint(message);
       throw Exception(message);
     }
-    return FpAnimation(fileName: "$fileName.$ext");
+    return FpAnimation(fileName: "$fileName.$ext", directory: directory);
+  }
+}
+
+class FkAnimationsSnippetProvider extends FkAnimations
+    implements FkAssetSnippetProvider {
+  FkAnimationsSnippetProvider() : super("");
+  @override
+  void setDirectory(String value) {
+    super.directory = value;
   }
 }
 
 class FkDynamicAnimations extends FkAnimations {
+  FkDynamicAnimations(super.directory);
+
   @override
   Widget noSuchMethod(Invocation invocation) {
     return super.noSuchMethod(invocation).toAnimation();
@@ -48,14 +51,15 @@ class FpAnimation {
   final double? width;
   final double? height;
   final BoxFit? fit;
+  final String directory;
   FpAnimation({
     required String fileName,
+    required this.directory,
     this.width,
     this.height,
     this.fit,
   }) {
-    this.fileName =
-        "${Toolkit.formatInputedDirectory(globals.animationsDirectory)}/$fileName";
+    this.fileName = "${Toolkit.formatInputedDirectory(directory)}/$fileName";
   }
 
   Widget toAnimation({
@@ -65,9 +69,9 @@ class FpAnimation {
     double? height,
     BoxFit? fit,
   }) {
-    if (globals.animationsDirectory.isEmpty) {
+    if (directory.isEmpty) {
       var message =
-          "Unable to load animation, animationsDirectory not given at Fk.init";
+          "Unable to load animation, animationsDirectory not given on FkTheme creation";
       debugPrint(message);
       throw Exception(message);
     }

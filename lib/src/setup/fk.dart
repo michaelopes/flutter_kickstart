@@ -5,7 +5,6 @@ import 'package:flutter_kickstart/src/model/fk_font.dart';
 import '../http_driver/fk_http_driver_middleware.dart';
 import '../http_driver/fk_http_driver_response_parser.dart';
 import '../i18n/i18n.dart';
-import '../interfaces/fk_asset.dart';
 import 'fk_infos.dart';
 import 'fk_load_font.dart';
 
@@ -15,14 +14,10 @@ class Fk {
   static Future<dynamic> init({
     String env = "",
     String i18nDirectory = "",
-    String iconsDirectory = "",
-    String imagesDirectory = "",
-    String animationsDirectory = "",
     Locale defaultLocale = const Locale("en"),
     List<FkFont> fonts = const [],
     List<Future> extraInits = const [],
     List<String> availableLanguages = const [],
-    List<FkAsset> assetsSnippeds = const [],
     FkBaseHttpDriverResponseParser? httpDriverResponseParser,
     bool enableHttpDriverLogger = true,
     IFkHttpDriverMiddleware? httpDriverMiddleware,
@@ -30,11 +25,8 @@ class Fk {
   }) async {
     WidgetsFlutterBinding.ensureInitialized();
 
-    globals.animationsDirectory = animationsDirectory;
-    globals.imagesDirectory = imagesDirectory;
-    globals.iconsDirectory = iconsDirectory;
     globals.i18nDirectory = i18nDirectory;
-    globals.assetsSnippeds = assetsSnippeds;
+
     globals.enableHttpDriverLogger = enableHttpDriverLogger;
     globals.baseUrl = baseUrl;
 

@@ -4,7 +4,6 @@ import 'package:flutter_kickstart/flutter_kickstart.dart';
 
 import '../../assets_snippeds/app_icons.dart';
 import '../../assets_snippeds/app_images.dart';
-import '../widgets/reactive_widget.dart';
 import 'main_viewmodel.dart';
 
 class MainView extends FkView<MainViewModel> {
@@ -39,12 +38,12 @@ class MainView extends FkView<MainViewModel> {
                 height: 16,
               ),
               Text(vm.reactive.novo4),
-              Text("ViewModel"),
+              const Text("ViewModel"),
               Text(vm.reactive.global.counter.toString()),
               const SizedBox(
                 height: 16,
               ),
-              Text("User status"),
+              const Text("User status"),
               Text(vm.reactive.user.enable.toString()),
               const SizedBox(
                 height: 16,
@@ -62,7 +61,7 @@ class MainView extends FkView<MainViewModel> {
               SizedBox(
                 height: 50,
                 width: 50,
-                child: icons.flutter,
+                child: theme.icons.flutter,
               ),
               const SizedBox(
                 height: 16,
@@ -71,7 +70,7 @@ class MainView extends FkView<MainViewModel> {
               SizedBox(
                 height: 50,
                 width: 50,
-                child: assets<AppIcons>().flutter.toIcon(),
+                child: theme.assets<AppIcons>().flutter.toIcon(),
               ),
               const SizedBox(
                 height: 16,
@@ -80,7 +79,7 @@ class MainView extends FkView<MainViewModel> {
               SizedBox(
                 height: 50,
                 width: 50,
-                child: images.flutter,
+                child: theme.images.flutter,
               ),
               const SizedBox(
                 height: 16,
@@ -89,7 +88,7 @@ class MainView extends FkView<MainViewModel> {
               SizedBox(
                 height: 50,
                 width: 50,
-                child: assets<AppImages>().flutter.toImage(),
+                child: theme.assets<AppImages>().flutter.toImage(),
               ),
               const SizedBox(
                 height: 16,
@@ -98,7 +97,7 @@ class MainView extends FkView<MainViewModel> {
               SizedBox(
                 height: 50,
                 width: 50,
-                child: images.flutterj$JPEG,
+                child: theme.images.flutterj$JPEG,
               ),
               const SizedBox(
                 height: 16,
@@ -107,7 +106,7 @@ class MainView extends FkView<MainViewModel> {
               SizedBox(
                 height: 50,
                 width: 50,
-                child: assets<AppImages>().flutterj$JPEG.toImage(),
+                child: theme.assets<AppImages>().flutterj$JPEG.toImage(),
               ),
             ],
           ),

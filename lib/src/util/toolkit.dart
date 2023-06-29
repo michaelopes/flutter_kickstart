@@ -51,4 +51,38 @@ class Toolkit {
 
     return T.toString();
   }
+
+  static Color generateHighlightColor(Color tColor) {
+    if (ThemeData.estimateBrightnessForColor(tColor) == Brightness.dark) {
+      return const Color(0xFFF6F6F8);
+    }
+    return const Color(0xFF1A191B);
+  }
+
+  static Color generateHighlightHarmonicColor(Color tColor) {
+    var hslColor = HSLColor.fromColor(tColor);
+
+    double adjustedSaturation = hslColor.saturation - 0.2;
+
+    double adjustedLightness = hslColor.lightness > 0.5
+        ? hslColor.lightness - 0.2
+        : hslColor.lightness + 0.2;
+
+    if (adjustedLightness > 1) {
+      adjustedLightness = 1;
+    } else if (adjustedLightness < 0) {
+      adjustedLightness = 0;
+    }
+
+    if (adjustedSaturation > 1) {
+      adjustedSaturation = 1;
+    } else if (adjustedSaturation < 0) {
+      adjustedSaturation = 0;
+    }
+
+    var highlightHslColor = HSLColor.fromAHSL(
+        1, hslColor.hue, adjustedSaturation, adjustedLightness);
+
+    return highlightHslColor.toColor();
+  }
 }

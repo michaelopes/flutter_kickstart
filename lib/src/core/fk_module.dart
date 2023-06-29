@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
-import '../enums/transition_type.dart';
 import '../util/toolkit.dart';
 import 'fk_custom_page.dart';
 

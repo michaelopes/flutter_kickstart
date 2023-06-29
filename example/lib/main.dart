@@ -9,17 +9,9 @@ import 'modules.dart';
 
 void main() async {
   await Fk.init(
-    animationsDirectory: "assets/animations/",
-    iconsDirectory: "assets/icons/",
-    imagesDirectory: "assets/images/",
     i18nDirectory: "assets/i18n/",
     availableLanguages: ["pt_BR"],
     defaultLocale: const Locale("pt", "BR"),
-    assetsSnippeds: [
-      AppAnimations(),
-      AppIcons(),
-      AppImages(),
-    ],
   );
 
   runApp(
@@ -32,6 +24,22 @@ void main() async {
         Injections.inject,
       ],
       globalFailureHandler: AppGlobalError(),
+      theme: FkThemeData.single(
+        data: FkTheme.light(
+          colorPalete: FkColorPalete(
+              primary: FkColor(
+            shade500: Colors.red,
+          )),
+          iconsDirectory: "assets/icons/",
+          imagesDirectory: "assets/images/",
+          animationsDirectory: "assets/animations/",
+          assetsSnippets: [
+            AppAnimations(),
+            AppIcons(),
+            AppImages(),
+          ],
+        ),
+      ),
     ),
   );
 }

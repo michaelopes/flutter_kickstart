@@ -3,17 +3,9 @@ import 'package:flutter_kickstart/src/interfaces/fk_asset.dart';
 import 'package:flutter_kickstart/src/util/toolkit.dart';
 
 import '../widgets/fp_icn.dart';
-import 'fk_globals.dart' as globals;
 
 class FkIcons extends FkAsset {
-  @override
-  T? tryGet<T>() {
-    try {
-      return FkIcons() as T;
-    } catch (e) {
-      return null;
-    }
-  }
+  FkIcons(super.directory);
 
   @override
   dynamic noSuchMethod(Invocation invocation) {
@@ -32,11 +24,20 @@ class FkIcons extends FkAsset {
       debugPrint(message);
       throw Exception(message);
     }
-    return FpIcon(fileName: "$fileName.$ext");
+    return FpIcon(fileName: "$fileName.$ext", directory: directory);
+  }
+}
+
+class FkIconsSnippetProvider extends FkIcons implements FkAssetSnippetProvider {
+  FkIconsSnippetProvider() : super("");
+  @override
+  void setDirectory(String value) {
+    super.directory = value;
   }
 }
 
 class FkDynamicIcons extends FkIcons {
+  FkDynamicIcons(super.directory);
   @override
   Widget noSuchMethod(Invocation invocation) {
     return super.noSuchMethod(invocation).toIcon();
@@ -49,21 +50,23 @@ class FpIcon {
   final double? height;
   final BoxFit? fit;
   final Color? color;
+  final String directory;
 
   FpIcon({
     required String fileName,
+    required this.directory,
     this.width,
     this.height,
     this.fit,
     this.color,
   }) {
-    this.fileName =
-        "${Toolkit.formatInputedDirectory(globals.iconsDirectory)}/$fileName";
+    this.fileName = "${Toolkit.formatInputedDirectory(directory)}/$fileName";
   }
 
   Widget toIcon({double? width, double? height, BoxFit? fit, Color? color}) {
-    if (globals.iconsDirectory.isEmpty) {
-      var message = "Unable to load icon, iconsDirectory not given at Fk.init";
+    if (directory.isEmpty) {
+      var message =
+          "Unable to load icon, iconsDirectory not given on FkTheme creation";
       debugPrint(message);
       throw Exception(message);
     }

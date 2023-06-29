@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import '../../flutter_kickstart.dart';
 import '../setup/fk_globals.dart' as globals;
 

@@ -1,3 +1,8 @@
 abstract class FkAsset {
-  T? tryGet<T>();
+  String directory;
+  FkAsset(this.directory);
+}
+
+abstract class FkAssetSnippetProvider {
+  void setDirectory(String value);
 }
