@@ -10,6 +10,9 @@ class MainView extends FkView<MainViewModel> {
   MainView({super.key});
 
   @override
+  String get themeBranch => "MainView";
+
+  @override
   Widget builder(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

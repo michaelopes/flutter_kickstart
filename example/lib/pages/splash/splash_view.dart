@@ -10,6 +10,7 @@ class SplashView extends FkView<SplashViewModel> {
 
   @override
   Widget builder(BuildContext context) {
+    print("Splash AKI ${theme.colorPalete.primary.color}");
     return Scaffold(
       body: Center(
         child: Column(

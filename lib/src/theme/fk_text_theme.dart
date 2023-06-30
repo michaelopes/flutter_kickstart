@@ -89,6 +89,7 @@ final class FkTypography {
         const TextStyle(fontSize: 18, fontWeight: FontWeight.w700);
     _headline06 = headline01 ??
         const TextStyle(fontSize: 16, fontWeight: FontWeight.w700);
+
     _bodyTiny =
         bodyTiny ?? const TextStyle(fontSize: 10, fontWeight: FontWeight.w400);
     _bodyMini =
@@ -134,9 +135,9 @@ final class FkTypography {
       labelLarge: bodyDefault.copyWith(fontWeight: FontWeight.w500),
       labelMedium: bodySmall.copyWith(fontWeight: FontWeight.w500),
       labelSmall: bodyMini.copyWith(fontWeight: FontWeight.w500),
-      titleLarge: headline04.copyWith(fontWeight: FontWeight.w400),
-      titleMedium: headline05.copyWith(fontWeight: FontWeight.w500),
-      titleSmall: headline06.copyWith(fontWeight: FontWeight.w500),
+      titleLarge: bodyLarge.copyWith(fontWeight: FontWeight.w500),
+      titleMedium: bodyDefault.copyWith(fontWeight: FontWeight.w500),
+      titleSmall: bodySmall.copyWith(fontWeight: FontWeight.w500),
     );
   }
 

@@ -27,12 +27,27 @@ void main() async {
       theme: FkThemeData.single(
         data: FkTheme.light(
           colorPalete: FkColorPalete(
-              primary: FkColor(
-            shade500: Colors.red,
-          )),
+            primary: FkColor(
+              shade500: Colors.amber,
+            ),
+          ),
           iconsDirectory: "assets/icons/",
           imagesDirectory: "assets/images/",
           animationsDirectory: "assets/animations/",
+          themeBranchs: (mainTheme) {
+            return [
+              FkThemeBranch(
+                name: "MainView",
+                theme: mainTheme.copyWith(
+                  colorPalete: FkColorPalete(
+                    primary: FkColor.color(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              )
+            ];
+          },
           assetsSnippets: [
             AppAnimations(),
             AppIcons(),

@@ -27,11 +27,11 @@ typedef BottomNavigationBarThemeFunc = BottomNavigationBarThemeData? Function(
 typedef ThemeBranchsFunc = List<FkThemeBranch>? Function(FkTheme owner);
 
 final class FkThemeBranch {
-  final String widgetName;
+  final String name;
   final FkTheme theme;
 
   FkThemeBranch({
-    required this.widgetName,
+    required this.name,
     required this.theme,
   });
 }
@@ -42,6 +42,8 @@ final class FkTheme extends ThemeExtension<FkTheme> {
   final String iconsDirectory;
   final String imagesDirectory;
   final String animationsDirectory;
+  final BoxDecoration? decoration;
+
   late final FkColor _background;
   late final FkTypography _typography;
   late final ThemeData _themeData;
@@ -82,7 +84,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
 
   FkTheme? getBranch(String widgetName) {
     var filter = _themeBranchs.where(
-      (e) => e.widgetName.trim() == widgetName.trim(),
+      (e) => e.name.trim() == widgetName.trim(),
     );
     if (filter.isNotEmpty) {
       return filter.first.theme;
@@ -95,6 +97,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     required this.iconsDirectory,
     required this.imagesDirectory,
     required this.animationsDirectory,
+    this.decoration,
     this.assetsSnippets = const [],
     FkTypography? typography,
     BackgroundColorFunc? background,
@@ -113,7 +116,6 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     _appBarTheme = appBarTheme;
     _bottomNavigationBarTheme = bottomNavigationBarTheme;
 
-    _themeBranchs = themeBranchs?.call(this) ?? [];
     _background = background?.call(colorPalete) ??
         FkColor.color(
           color: Colors.white,
@@ -155,6 +157,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
         onErrorContainer: colorPalete.errorVariant.onColor,
       ),
     );
+    _themeBranchs = themeBranchs?.call(this) ?? [];
   }
 
   FkTheme.dark({
@@ -163,6 +166,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     required this.imagesDirectory,
     required this.animationsDirectory,
     this.assetsSnippets = const [],
+    this.decoration,
     FkTypography? typography,
     BackgroundColorFunc? background,
     OutlinedButtonThemeFunc? outlinedButtonTheme,
@@ -180,7 +184,6 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     _appBarTheme = appBarTheme;
     _bottomNavigationBarTheme = bottomNavigationBarTheme;
 
-    _themeBranchs = themeBranchs?.call(this) ?? [];
     _background = background?.call(colorPalete) ??
         FkColor.color(
           color: Colors.white,
@@ -222,6 +225,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
         onErrorContainer: colorPalete.errorVariant.onColor,
       ),
     );
+    _themeBranchs = themeBranchs?.call(this) ?? [];
   }
 
   @override
@@ -235,6 +239,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     InputDecorationThemeFunc? inputDecorationTheme,
     AppBarThemeFunc? appBarTheme,
     BottomNavigationBarThemeFunc? bottomNavigationBarTheme,
+    BoxDecoration? decoration,
   }) {
     var cPalete = colorPalete ?? this.colorPalete;
     return _themeData.brightness == Brightness.light
@@ -255,6 +260,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
             themeBranchs: (_) => [],
             assetsSnippets: assetsSnippets,
             typography: typography ?? _typography,
+            decoration: decoration,
           )
         : FkTheme.dark(
             iconsDirectory: iconsDirectory,
@@ -273,6 +279,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
             themeBranchs: (_) => [],
             assetsSnippets: assetsSnippets,
             typography: typography ?? _typography,
+            decoration: decoration,
           );
   }
 
@@ -298,7 +305,13 @@ final class FkTheme extends ThemeExtension<FkTheme> {
             outlinedButtonTheme: other._outlinedButtonTheme,
             themeBranchs: (_) => other._themeBranchs,
             typography: typography.lerp(other._typography, t),
-            assetsSnippets: other.assetsSnippets)
+            assetsSnippets: other.assetsSnippets,
+            decoration: other.decoration != null
+                ? decoration != null
+                    ? BoxDecoration.lerp(decoration, other.decoration, t)
+                    : other.decoration
+                : other.decoration,
+          )
         : FkTheme.dark(
             iconsDirectory: other.iconsDirectory,
             imagesDirectory: other.imagesDirectory,
@@ -314,6 +327,11 @@ final class FkTheme extends ThemeExtension<FkTheme> {
             themeBranchs: (_) => other._themeBranchs,
             typography: typography.lerp(other._typography, t),
             assetsSnippets: other.assetsSnippets,
+            decoration: other.decoration != null
+                ? decoration != null
+                    ? BoxDecoration.lerp(decoration, other.decoration, t)
+                    : other.decoration
+                : other.decoration,
           );
   }
 }
