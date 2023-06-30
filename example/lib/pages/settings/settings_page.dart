@@ -13,7 +13,23 @@ class SettingsView extends FkView<SettingsViewModel> {
           tr.pages.settings.title(),
         ),
       ),
-      body: Container(),
+      body: FkLayout.builderByDevice(
+        mobile: (_, __) {
+          return const Center(
+            child: Text("MOBILE"),
+          );
+        },
+        tablet: (_, __) {
+          return const Center(
+            child: Text("TABLET"),
+          );
+        },
+        desktop: (_, __) {
+          return const Center(
+            child: Text("DESKTOP"),
+          );
+        },
+      ),
     );
   }
 }

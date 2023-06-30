@@ -12,6 +12,8 @@ void main() async {
     i18nDirectory: "assets/i18n/",
     availableLanguages: ["pt_BR"],
     defaultLocale: const Locale("pt", "BR"),
+    httpDriverMiddleware: AppHttpMiddleware(),
+    httpDriverResponseParser: AppHttpResponseParser(),
   );
 
   runApp(
@@ -62,4 +64,28 @@ void main() async {
 class AppGlobalError extends IGlobalFailureHandler {
   @override
   void onFailure(BuildContext context, Object error, StackTrace stackTrace) {}
+}
+
+class AppHttpMiddleware extends IFkHttpDriverMiddleware {
+  @override
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    return handler.next(options);
+  }
+}
+
+final class AppHttpResponseParser extends FkBaseHttpDriverResponseParser {
+  @override
+  FkHttpDriverResponse range200(FkHttpDriverResponse response) {
+    return response;
+  }
+
+  @override
+  FkHttpDriverResponse range400(FkHttpDriverResponse response) {
+    return response;
+  }
+
+  @override
+  FkHttpDriverResponse range500(FkHttpDriverResponse response) {
+    return response;
+  }
 }

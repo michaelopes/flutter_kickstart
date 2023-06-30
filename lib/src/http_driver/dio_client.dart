@@ -4,7 +4,6 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../interfaces/http_driver_interface.dart';
 
 import '../setup/fk_globals.dart' as globals;
-import 'custom_interceptor.dart';
 import 'fk_http_driver_response_parser.dart';
 
 class _DioFactory {
@@ -35,9 +34,7 @@ class DioClient implements IHttpDriver {
     );
     dio.interceptors.addAll(
       [
-        CustomInterceptor(
-          dio,
-        ),
+        globals.httpDriverMiddleware..setHttpDriver(this),
         if (globals.enableHttpDriverLogger)
           PrettyDioLogger(
             requestHeader: true,
@@ -83,7 +80,6 @@ class DioClient implements IHttpDriver {
   @override
   Future<FkHttpDriverResponse> getFile<T>(
     String path, {
-    String? key,
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
@@ -101,12 +97,10 @@ class DioClient implements IHttpDriver {
   Future<FkHttpDriverResponse> patch(
     String path, {
     dynamic data,
-    String? key,
     Map<String, dynamic>? queryParameters,
     Options? options,
     HttpDriverProgressCallback? onReceiveProgress,
   }) async {
-    dio.options.extra["key"] = key;
     resetContentType();
     return await interceptRequests(
       dio.patch(
@@ -123,12 +117,10 @@ class DioClient implements IHttpDriver {
   Future<FkHttpDriverResponse> post(
     String path, {
     dynamic data,
-    String? key,
     Map<String, dynamic>? queryParameters,
     Options? options,
     HttpDriverProgressCallback? onReceiveProgress,
   }) async {
-    dio.options.extra["key"] = key;
     resetContentType();
     return await interceptRequests(
       dio.post(
@@ -145,12 +137,10 @@ class DioClient implements IHttpDriver {
   Future<FkHttpDriverResponse> put(
     String path, {
     dynamic data,
-    String? key,
     Map<String, dynamic>? queryParameters,
     Options? options,
     HttpDriverProgressCallback? onReceiveProgress,
   }) async {
-    dio.options.extra["key"] = key;
     resetContentType();
     return await interceptRequests(
       dio.put(
@@ -171,7 +161,6 @@ class DioClient implements IHttpDriver {
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
-    dio.options.extra["key"] = key;
     resetContentType();
     return await interceptRequests(
       dio.delete<T>(
@@ -192,13 +181,11 @@ class DioClient implements IHttpDriver {
   Future<FkHttpDriverResponse> sendFile<T>(
     String path, {
     dynamic data,
-    String? key,
     Map<String, dynamic>? queryParameters,
     Options? options,
     HttpDriverProgressCallback? onReceiveProgress,
     HttpDriverProgressCallback? onSendProgress,
   }) async {
-    dio.options.extra["key"] = key;
     dio.options.headers['content-type'] = 'multipart/form-data';
     return await interceptRequests(
       dio.post<T>(
