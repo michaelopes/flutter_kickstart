@@ -1,11 +1,12 @@
-import 'package:example/assets_snippeds/app_animations.dart';
-import 'package:example/assets_snippeds/app_icons.dart';
+import 'package:example/setup/app_injections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
-import 'assets_snippeds/app_images.dart';
-import 'injections.dart';
-import 'modules.dart';
+import 'setup/app_global_error_handler.dart';
+import 'setup/app_http_middleware.dart';
+import 'setup/app_http_response_parse.dart';
+import 'setup/app_modules.dart';
+import 'theme/app_theme.dart';
 
 void main() async {
   await Fk.init(
@@ -20,72 +21,13 @@ void main() async {
     FkApp(
       appTitle: "Flutter Kickstart",
       //Register app modules
-      modules: () => AppRoutes.modules,
+      modules: () => AppModules().modules,
       //Register app injections
-      injections: () => [
-        Injections.inject,
-      ],
+      injections: AppInjections().get,
+      //Register app global error handler
       globalFailureHandler: AppGlobalError(),
-      theme: FkThemeData.single(
-        data: FkTheme.light(
-          colorPalete: FkColorPalete(
-            primary: FkColor(
-              shade500: Colors.amber,
-            ),
-          ),
-          iconsDirectory: "assets/icons/",
-          imagesDirectory: "assets/images/",
-          animationsDirectory: "assets/animations/",
-          themeBranchs: (mainTheme) {
-            return [
-              FkThemeBranch(
-                name: "MainView",
-                theme: mainTheme.copyWith(
-                  colorPalete: FkColorPalete(
-                    primary: FkColor.color(
-                      color: Colors.red,
-                    ),
-                  ),
-                ),
-              )
-            ];
-          },
-          assetsSnippets: [
-            AppAnimations(),
-            AppIcons(),
-            AppImages(),
-          ],
-        ),
-      ),
+      //Register app theme
+      theme: AppTheme().theme,
     ),
   );
-}
-
-class AppGlobalError extends IGlobalFailureHandler {
-  @override
-  void onFailure(BuildContext context, Object error, StackTrace stackTrace) {}
-}
-
-class AppHttpMiddleware extends IFkHttpDriverMiddleware {
-  @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    return handler.next(options);
-  }
-}
-
-final class AppHttpResponseParser extends FkBaseHttpDriverResponseParser {
-  @override
-  FkHttpDriverResponse range200(FkHttpDriverResponse response) {
-    return response;
-  }
-
-  @override
-  FkHttpDriverResponse range400(FkHttpDriverResponse response) {
-    return response;
-  }
-
-  @override
-  FkHttpDriverResponse range500(FkHttpDriverResponse response) {
-    return response;
-  }
 }

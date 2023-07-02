@@ -1,15 +1,15 @@
-import 'package:example/modules.dart';
+import 'package:example/setup/app_modules.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
-class InitialBottomNavigator extends FkSimpleView {
-  InitialBottomNavigator({super.key, required this.child});
+class InitialNavigator extends FkSimpleView {
+  InitialNavigator({super.key, required this.child});
 
   final Widget child;
 
   int get currentIndex => switch (nav.location) {
-        AppRoutes.main => 1,
-        AppRoutes.settings => 2,
+        AppModules.main => 1,
+        AppModules.settings => 2,
         _ => 0
       };
 

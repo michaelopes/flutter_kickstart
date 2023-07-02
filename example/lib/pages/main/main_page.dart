@@ -1,4 +1,4 @@
-import 'package:example/modules.dart';
+import 'package:example/assets_snippeds/app_animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
@@ -16,226 +16,158 @@ class MainView extends FkView<MainViewModel> {
   Widget builder(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          tr.pages.main.testeX(),
-        ),
+        title: const Text("How to using assets"),
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          /*
+             This is an example of how to use images assets
+          **/
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  vm.setModuleValue();
-                  context.push(AppRoutes.mainSecond);
-                },
-                child: const Text("Navegação"),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
+              /* 
+                In this way, just place the image file inside the assets/images 
+                folder and directly call the file name and its extension separated 
+                by the  symbol "$"  as below:
 
-              const SizedBox(
-                height: 16,
-              ),
-              Text(vm.reactive.novo4),
-              const Text("ViewModel"),
-              Text(vm.reactive.global.counter.toString()),
-              const SizedBox(
-                height: 16,
-              ),
-              const Text("User status"),
-              Text(vm.reactive.user.enable.toString()),
-              const SizedBox(
-                height: 16,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  vm.increment();
-                },
-                child: const Text("Increment"),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              //Ghost icon import
-              SizedBox(
-                height: 50,
-                width: 50,
-                child: theme.icons.flutter,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              //Import icon by snipped
-              SizedBox(
-                height: 50,
-                width: 50,
-                child: theme.assets<AppIcons>().flutter.toIcon(),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              //Ghost image import without extension
-              SizedBox(
-                height: 50,
-                width: 50,
-                child: theme.images.flutter,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              //Import icon by snipped without extension
-              SizedBox(
-                height: 50,
-                width: 50,
-                child: theme.assets<AppImages>().flutter.toImage(),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              //Ghost image import with extension
+
+              If the file has the PNG file extension, it is not necessary to inform 
+              the extension after the symbol "$" 
+              **/
               SizedBox(
                 height: 50,
                 width: 50,
                 child: theme.images.flutterj$JPEG,
               ),
               const SizedBox(
-                height: 16,
+                width: 24,
               ),
-              //Import icon by snipped withextension
+              /* If image is PNG is not necessary to inform the extension */
               SizedBox(
                 height: 50,
                 width: 50,
-                child: theme.assets<AppImages>().flutterj$JPEG.toImage(),
+                child: theme.images.flutter,
+              ),
+              const SizedBox(
+                width: 24,
+              ),
+              /* 
+               In this way, a snippet was created to aid in the search for image files found 
+               within the assets_snippeds/app_images folder. dart the snippet is a reference 
+               aid for files added within the assets/images folder, the name of the snippet variable 
+               must have the same name as the file in the folder if it is a PNG it is not foreseen 
+               to specify the extension of the same case the extension must be written 
+               after the symbol "$"  as below:
+              **/
+              SizedBox(
+                height: 50,
+                width: 50,
+                child:
+                    theme.assets<AppImagesSnippets>().flutterj$JPEG.toImage(),
+              ),
+              const SizedBox(
+                width: 24,
+              ),
+              /* If image is PNG is not necessary to inform the extension */
+              SizedBox(
+                height: 50,
+                width: 50,
+                child: theme.assets<AppImagesSnippets>().flutter.toImage(),
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-/*class MainPage extends FkStatefulPage<IMainViewmodel> {
-  MainPage({super.key});
-
-  @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    print("context build f ${context.hashCode}");
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.tr.pages.main.title(),
-        ),
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
+          const SizedBox(
+            height: 40,
+          ),
+          /*
+             This is an example of how to use icons assets
+          **/
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  widget.vm.setModuleValue();
-                  context.push(Modules.mainSecond);
-                },
-                child: const Text("Navegação"),
-              ),
+              /* 
+                In this way, just place the icon file inside the assets/icons 
+                folder and directly call the file name and its extension separated 
+                by the  symbol "$"  as below:
+
+              If the file has the SVG file extension, it is not necessary to inform 
+              the extension after the symbol "$" 
+              **/
+              SizedBox(height: 50, width: 50, child: theme.icons.flutter$PNG),
               const SizedBox(
-                height: 16,
+                width: 24,
               ),
-              //Ghost icon import
+              /* If image is SVG is not necessary to inform the extension */
+              SizedBox(height: 50, width: 50, child: theme.icons.flutter),
+              const SizedBox(
+                width: 24,
+              ),
+              /* 
+               In this way, a snippet was created to aid in the search for icons files found 
+               within the assets_snippeds/app_icons folder. dart the snippet is a reference 
+               aid for files added within the assets/icons folder, the name of the snippet variable 
+               must have the same name as the file in the folder if it is a SVG it is not foreseen 
+               to specify the extension of the same case the extension must be written 
+               after the symbol "$"  as below:
+              **/
               SizedBox(
                 height: 50,
                 width: 50,
-                child: widget.icons.flutter,
+                child: theme.assets<AppIconsSnippets>().flutter$PNG.toIcon(),
               ),
               const SizedBox(
-                height: 16,
+                width: 24,
               ),
-              //Import icon by snipped
+              /* If image is SVG is not necessary to inform the extension */
               SizedBox(
                 height: 50,
                 width: 50,
-                child: widget.assets<AppIcons>().flutter.toIcon(),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              //Ghost image import without extension
-              SizedBox(
-                height: 50,
-                width: 50,
-                child: widget.images.flutter,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              //Import icon by snipped without extension
-              SizedBox(
-                height: 50,
-                width: 50,
-                child: widget.assets<AppImages>().flutter.toImage(),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              //Ghost image import with extension
-              SizedBox(
-                height: 50,
-                width: 50,
-                child: widget.images.flutterj$JPEG,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              //Import icon by snipped withextension
-              SizedBox(
-                height: 50,
-                width: 50,
-                child: widget.assets<AppImages>().flutterj$JPEG.toImage(),
+                child: theme.assets<AppIconsSnippets>().flutter.toIcon(),
               ),
             ],
           ),
-        ),
+          const SizedBox(
+            height: 40,
+          ),
+          /*
+             This is an example of how to use animations assets 
+             ONLY JSON IS ALLOWED
+          **/
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              /* 
+                In this way, just place the icon file inside the assets/animations 
+                folder and directly call the file name bellow:
+              **/
+              SizedBox(
+                height: 50,
+                width: 50,
+                child: theme.animations.splash2,
+              ),
+              const SizedBox(
+                width: 24,
+              ),
+
+              /* 
+               In this way, a snippet was created to aid in the search for animations files found 
+               within the assets_snippeds/app_animatios folder. dart the snippet is a reference 
+               aid for files added within the assets/animations folder, the name of the snippet variable 
+               must have the same name as the file in the folder ex:
+              **/
+              SizedBox(
+                height: 50,
+                width: 50,
+                child:
+                    theme.assets<AppAnimationsSnippets>().splash.toAnimation(),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
-}*/
-
-
-/*class MainPage extends FkStatelessPage<IMainViewmodel> {
-  MainPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          tr.pages.main.title(),
-        ),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            QR.toName(Modules.mainSecond);
-          },
-          child: Text("teste"),
-        ),
-      ),
-    );
-  }
-}*/
+}

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_kickstart/src/util/toolkit.dart';
 
 final class FkTypography {
   late final TextStyle _heading01;
@@ -117,8 +116,8 @@ final class FkTypography {
         const TextStyle(fontSize: 20, fontWeight: FontWeight.w600);
   }
 
-  void setMakeHighlightColor(Color targetColor) {
-    _textColor = Toolkit.generateHighlightColor(targetColor);
+  void setTextColor(Color color) {
+    _textColor = color;
   }
 
   TextTheme toTextTheme() {

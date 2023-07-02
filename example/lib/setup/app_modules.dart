@@ -1,25 +1,25 @@
-import 'package:example/pages/splash/splash_viewmodel.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
-import 'pages/home/home_page.dart';
-import 'pages/home/home_viewmodel.dart';
-import 'pages/main/main_page.dart';
-import 'pages/main/main_second_page.dart';
-import 'pages/main/main_second_viewmodel.dart';
-import 'pages/main/main_viewmodel.dart';
-import 'pages/settings/settings_page.dart';
-import 'pages/settings/settings_viewmodel.dart';
-import 'pages/splash/splash_view.dart';
-import 'pages/widgets/initial_bottom_navigator.dart';
+import '../pages/home/home_page.dart';
+import '../pages/home/home_viewmodel.dart';
+import '../pages/main/main_page.dart';
+import '../pages/main/main_second_page.dart';
+import '../pages/main/main_second_viewmodel.dart';
+import '../pages/main/main_viewmodel.dart';
+import '../pages/settings/settings_page.dart';
+import '../pages/settings/settings_viewmodel.dart';
+import '../pages/splash/splash_view.dart';
+import '../pages/splash/splash_viewmodel.dart';
+import '../pages/widgets/initial_bottom_navigator.dart';
 
-class AppRoutes {
+class AppModules {
   static const splash = "/";
   static const home = "/home";
   static const main = "/main";
   static const settings = "/settings";
   static const mainSecond = "/second";
 
-  static List<FkBaseModule> get modules {
+  List<FkBaseModule> get modules {
     return [
       FkModule.singleView(
         path: splash,
@@ -28,7 +28,7 @@ class AppRoutes {
       ),
       FkModuleGroup(
         builder: (_, __, child) {
-          return InitialBottomNavigator(child: child);
+          return InitialNavigator(child: child);
         },
         modules: [
           FkModule(

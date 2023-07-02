@@ -1,5 +1,5 @@
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
-class AppAnimations extends FkAnimationsSnippetProvider {
+class AppAnimationsSnippets extends FkAnimationsSnippetProvider {
   FpAnimation get splash;
 }

@@ -17,6 +17,7 @@ export './src/util/fk_failures.dart';
 export './src/setup/fk_animations.dart';
 export './src/setup/fk_icons.dart';
 export './src/setup/fk_images.dart';
+export './src/interfaces/fk_asset.dart';
 
 export './src/interfaces/global_failure_handler_interface.dart';
 export './src/interfaces/http_driver_interface.dart';
@@ -30,4 +31,5 @@ export './src/http_driver/fk_http_driver_middleware.dart';
 export './src/http_driver/fk_http_driver_response_parser.dart';
 
 export 'src/theme/fk_theme.dart';
-export 'src/widgets/fk_layout.dart';
+export 'src/widgets/fk_responsive_layout.dart';
+export 'src/widgets/fk_responsive_row.dart';

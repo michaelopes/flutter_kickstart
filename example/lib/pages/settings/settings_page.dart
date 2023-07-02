@@ -13,23 +13,76 @@ class SettingsView extends FkView<SettingsViewModel> {
           tr.pages.settings.title(),
         ),
       ),
-      body: FkLayout.builderByDevice(
-        mobile: (_, __) {
-          return const Center(
-            child: Text("MOBILE"),
-          );
-        },
-        tablet: (_, __) {
-          return const Center(
-            child: Text("TABLET"),
-          );
-        },
-        desktop: (_, __) {
-          return const Center(
-            child: Text("DESKTOP"),
-          );
-        },
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            FkResponsiveLayout.builderByDevice(
+              mobile: (_, __) {
+                return const Center(
+                  child: Text("MOBILE"),
+                );
+              },
+              tablet: (_, __) {
+                return const Center(
+                  child: Text("TABLET"),
+                );
+              },
+              desktop: (_, __) {
+                return const Center(
+                  child: Text("DESKTOP"),
+                );
+              },
+            ),
+            FkResposiveRow(
+              children: [
+                FkResponsiveCol(
+                  sm: FkResponsiveSize.col12,
+                  md: FkResponsiveSize.col6,
+                  lg: FkResponsiveSize.col4,
+                  xl: FkResponsiveSize.col3,
+                  child: Container(
+                    height: 80,
+                    color: Colors.red,
+                  ),
+                ),
+                FkResponsiveCol(
+                  sm: FkResponsiveSize.col12,
+                  md: FkResponsiveSize.col6,
+                  lg: FkResponsiveSize.col4,
+                  xl: FkResponsiveSize.col3,
+                  child: Container(
+                    height: 80,
+                    color: Colors.blue,
+                  ),
+                ),
+                FkResponsiveCol(
+                  sm: FkResponsiveSize.col12,
+                  md: FkResponsiveSize.col6,
+                  lg: FkResponsiveSize.col4,
+                  xl: FkResponsiveSize.col3,
+                  child: Container(
+                    height: 80,
+                    color: Colors.green,
+                  ),
+                ),
+                FkResponsiveCol(
+                  sm: FkResponsiveSize.col12,
+                  md: FkResponsiveSize.col6,
+                  lg: FkResponsiveSize.col4,
+                  xl: FkResponsiveSize.col3,
+                  child: Container(
+                    height: 80,
+                    width: 400,
+                    color: Colors.yellow,
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
 }
+
+ /* */

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_kickstart/src/util/toolkit.dart';
 
-final class FkColor {
+typedef FkColorTargetFunc = Color Function(FkColor thiz);
+
+final class FkColor implements Color {
   late final Color _shade50;
   late final Color _shade100;
   late final Color _shade200;
@@ -24,6 +26,7 @@ final class FkColor {
   late final Color _onShade700;
   late final Color _onShade800;
   late final Color _onShade900;
+  late final FkColorTargetFunc? _target;
 
   FkColor({
     Color? shade50,
@@ -46,6 +49,7 @@ final class FkColor {
     Color? onShade700,
     Color? onShade800,
     Color? onShade900,
+    FkColorTargetFunc? target,
   }) {
     var sList = [
       shade50,
@@ -94,6 +98,7 @@ final class FkColor {
       }
       _setOnShadeColor(onSColor, i);
     }
+    _target = target;
   }
 
   Color _getShadeColorByIndex(int index) {
@@ -253,8 +258,30 @@ final class FkColor {
   Color get onShade800 => _onShade800;
   Color get onShade900 => _onShade900;
 
-  Color get color => _shade500;
-  Color get onColor => _onShade500;
+  Color get color => _target?.call(this) ?? _shade500;
+  Color get onColor {
+    if (color == shade50) {
+      return onShade50;
+    } else if (color == shade100) {
+      return onShade100;
+    } else if (color == shade200) {
+      return onShade200;
+    } else if (color == shade300) {
+      return onShade300;
+    } else if (color == shade400) {
+      return onShade400;
+    } else if (color == shade500) {
+      return onShade500;
+    } else if (color == shade600) {
+      return onShade600;
+    } else if (color == shade700) {
+      return onShade700;
+    } else if (color == shade800) {
+      return onShade800;
+    } else {
+      return onShade900;
+    }
+  }
 
   factory FkColor.color({
     required Color color,
@@ -361,5 +388,53 @@ final class FkColor {
       onShade800: Color.lerp(onShade800, other.onShade800, t),
       onShade900: Color.lerp(onShade900, other.onShade900, t),
     );
+  }
+
+  @override
+  int get alpha => color.alpha;
+
+  @override
+  int get blue => color.blue;
+
+  @override
+  double computeLuminance() {
+    return color.computeLuminance();
+  }
+
+  @override
+  int get green => color.green;
+
+  @override
+  double get opacity => color.opacity;
+
+  @override
+  int get red => color.red;
+
+  @override
+  int get value => color.value;
+
+  @override
+  Color withAlpha(int a) {
+    return color.withAlpha(a);
+  }
+
+  @override
+  Color withBlue(int b) {
+    return color.withBlue(b);
+  }
+
+  @override
+  Color withGreen(int g) {
+    return color.withBlue(g);
+  }
+
+  @override
+  Color withOpacity(double opacity) {
+    return color.withOpacity(opacity);
+  }
+
+  @override
+  Color withRed(int r) {
+    return color.withRed(r);
   }
 }
