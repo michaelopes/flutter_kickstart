@@ -33,3 +33,4 @@ export './src/http_driver/fk_http_driver_response_parser.dart';
 export 'src/theme/fk_theme.dart';
 export 'src/widgets/fk_responsive_layout.dart';
 export 'src/widgets/fk_responsive_row.dart';
+export 'src/core/fk_responsive_metrics.dart';

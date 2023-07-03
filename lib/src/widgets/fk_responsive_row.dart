@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_kickstart/flutter_kickstart.dart';
 
 enum FkResponsiveSize {
   none,
@@ -76,12 +77,13 @@ class FkResponsiveCol {
     if (all != null) {
       return all!.index;
     }
+    var metrics = FkResponsiveMetrics.fromSize(Size(parentWidth, 0));
     int result;
-    if (parentWidth >= 1200) {
+    if (metrics.isXL) {
       result = xl.index;
-    } else if (parentWidth >= 992) {
+    } else if (metrics.isLG) {
       result = lg.index;
-    } else if (parentWidth >= 768) {
+    } else if (metrics.isMD) {
       result = md.index;
     } else {
       result = sm.index;

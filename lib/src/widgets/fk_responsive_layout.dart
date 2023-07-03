@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_kickstart/flutter_kickstart.dart';
 
 typedef FkResponsiveLayoutBuilder = Widget Function(
     BuildContext context, Size size);
@@ -48,17 +49,17 @@ class _FkResponsiveLayoutState extends State<FkResponsiveLayout> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.sizeOf(context);
+    var metrics = FkResponsiveMetrics.of(context);
 
     Widget result;
-    if (size.width >= 1200) {
-      result = widget.xl(context, size);
-    } else if (size.width >= 992) {
-      result = widget.lg(context, size);
-    } else if (size.width >= 768) {
-      result = widget.md(context, size);
+    if (metrics.isXL) {
+      result = widget.xl(context, metrics.size);
+    } else if (metrics.isLG) {
+      result = widget.lg(context, metrics.size);
+    } else if (metrics.isMD) {
+      result = widget.md(context, metrics.size);
     } else {
-      result = widget.sm(context, size);
+      result = widget.sm(context, metrics.size);
     }
     return result;
   }
