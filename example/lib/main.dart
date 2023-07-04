@@ -15,6 +15,7 @@ void main() async {
     defaultLocale: const Locale("pt", "BR"),
     httpDriverMiddleware: AppHttpMiddleware(),
     httpDriverResponseParser: AppHttpResponseParser(),
+    baseUrl: "https://www.thecocktaildb.com/api/json",
   );
 
   runApp(

@@ -8,8 +8,9 @@ class InitialNavigator extends FkSimpleView {
   final Widget child;
 
   int get currentIndex => switch (nav.location) {
-        AppModules.main => 1,
-        AppModules.settings => 2,
+        AppModules.useAssets => 1,
+        AppModules.useResponsive => 2,
+        AppModules.drink => 3,
         _ => 0
       };
 
@@ -21,22 +22,35 @@ class InitialNavigator extends FkSimpleView {
         currentIndex: currentIndex,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
+            icon: Icon(Icons.abc),
+            label: "Typografy",
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Main"),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings")
+          BottomNavigationBarItem(
+            icon: Icon(Icons.image),
+            label: "Use Assets",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.aspect_ratio),
+            label: "Use Responsive",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.wine_bar),
+            label: "Drink",
+          )
         ],
         onTap: (index) {
           switch (index) {
             case 1:
-              nav.go("/main");
+              nav.go(AppModules.useAssets);
               break;
             case 2:
-              nav.go("/settings");
+              nav.go(AppModules.useResponsive);
+              break;
+            case 3:
+              nav.go(AppModules.drink);
               break;
             default:
-              nav.go("/home");
+              nav.go(AppModules.typography);
               break;
           }
         },

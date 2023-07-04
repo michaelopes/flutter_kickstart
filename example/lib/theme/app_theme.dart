@@ -4,7 +4,7 @@ import 'package:example/assets_snippeds/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
-import 'branchs/app_drink_card_theme_branch.dart';
+import 'branchs/app_vertical_card_theme_branch.dart';
 
 class AppTheme {
   final _colorPalete = FkColorPalete(
@@ -72,9 +72,40 @@ class AppTheme {
       animationsDirectory: animationsDirectory,
       background: (colorPalete) => colorPalete.neutralVariant,
       assetsSnippets: assetsSnippets,
+      bottomNavigationBarTheme: (colorPalete) {
+        return BottomNavigationBarThemeData(
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: colorPalete.primary,
+          unselectedItemColor: colorPalete.neutral,
+          backgroundColor: colorPalete.neutral.shade900,
+        );
+      },
+      inputDecorationTheme: (colorPalete) {
+        return InputDecorationTheme(
+          labelStyle: TextStyle(
+            color: colorPalete.neutral.onShade200,
+          ),
+          hintStyle: TextStyle(
+            color: colorPalete.neutral.onShade400,
+          ),
+          fillColor: colorPalete.neutralVariant.shade200,
+          filled: true,
+          border: InputBorder.none,
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: colorPalete.primary,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: colorPalete.neutralVariant.shade200,
+            ),
+          ),
+        );
+      },
       themeBranchs: (owner) {
         return [
-          AppDrinkCardThemeBranch(owner),
+          AppVerticalCardThemeBranch(owner),
         ];
       },
     );
@@ -94,11 +125,31 @@ class AppTheme {
       bottomNavigationBarTheme: (colorPalete) {
         return BottomNavigationBarThemeData(
           selectedItemColor: colorPalete.primary,
+          unselectedItemColor: colorPalete.neutral,
+        );
+      },
+      inputDecorationTheme: (colorPalete) {
+        return InputDecorationTheme(
+          labelStyle: TextStyle(
+            color: colorPalete.neutral.onShade200,
+          ),
+          hintStyle: TextStyle(
+            color: colorPalete.neutral.onShade300,
+          ),
+          fillColor: colorPalete.neutralVariant.onShade200,
+          filled: true,
+          border: InputBorder.none,
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: colorPalete.primary,
+            ),
+          ),
+          enabledBorder: const OutlineInputBorder(),
         );
       },
       themeBranchs: (owner) {
         return [
-          AppDrinkCardThemeBranch(owner),
+          AppVerticalCardThemeBranch(owner),
         ];
       },
     );

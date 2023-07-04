@@ -43,6 +43,7 @@ class _FkAppState extends State<FkApp> {
     }
     final modules = widget.modules();
     routerConfig = GoRouter(
+      debugLogDiagnostics: true,
       routes: modules.fold(
         <RouteBase>[],
         (previousValue, module) => previousValue..addAll(module.routes),
@@ -85,8 +86,8 @@ class _FkAppState extends State<FkApp> {
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
-        theme: widget.theme.light.theme,
-        darkTheme: widget.theme.dark.theme,
+        theme: widget.theme.light.nativeTheme,
+        darkTheme: widget.theme.dark.nativeTheme,
         routerConfig: routerConfig,
       ),
     );

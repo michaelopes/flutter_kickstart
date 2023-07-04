@@ -4,13 +4,10 @@ import 'package:flutter_kickstart/flutter_kickstart.dart';
 
 import '../../assets_snippeds/app_icons.dart';
 import '../../assets_snippeds/app_images.dart';
-import 'main_viewmodel.dart';
+import 'use_assets_viewmodel.dart';
 
-class MainView extends FkView<MainViewModel> {
-  MainView({super.key});
-
-  @override
-  String get themeBranch => "MainView";
+class UseAssetsView extends FkView<UseAssetsViewModel> {
+  UseAssetsView({super.key});
 
   @override
   Widget builder(BuildContext context) {

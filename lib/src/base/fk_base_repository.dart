@@ -1,11 +1,15 @@
 import 'package:flutter_kickstart/src/http_driver/dio_client.dart';
 import 'package:flutter_kickstart/src/interfaces/http_driver_interface.dart';
 
-abstract class BaseRepository {
+import '../core/fk_inject.dart';
+
+abstract base class FkBaseRepository {
   IHttpDriver? _httpDriver;
   String? _baseUrl;
 
-  BaseRepository({IHttpDriver? httpDriver, String? baseUrl}) {
+  final locator = FkInjectLocator();
+
+  FkBaseRepository({IHttpDriver? httpDriver, String? baseUrl}) {
     _httpDriver = httpDriver;
     _baseUrl = baseUrl;
   }

@@ -26,7 +26,7 @@ class SplashView extends FkView<SplashViewModel> {
               Future.delayed(
                 duration,
                 () {
-                  nav.go(AppModules.home);
+                  nav.go(AppModules.typography);
                 },
               );
             }),

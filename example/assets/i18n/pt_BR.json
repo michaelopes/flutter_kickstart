@@ -1,11 +1,15 @@
 {
   "pages": {
-    "main": {
-      "title": "Página inicial",
-      "testeX": "Esse é um teste"
+    "drink": {
+      "title": "Bebidas",
+      "search_label": "Buscar por drinks",
+      "search_placeholder": "Ex: margarita, beer, vodka...",
+      "empty_search_message": "Realize uma busca de drink. Ex: margarita, beer, vodka..",
+      "not_found_search_message": "Nenhum resultado foi encotrado com o termo buscado. Por favor, tente uma busca diferente,"
     },
-    "settings": {
-      "title": "Configurações"
+    "drink_detail": {
+      "ingredients": "Ingredientes",
+      "instructions": "Instruções"
     }
   }
 }

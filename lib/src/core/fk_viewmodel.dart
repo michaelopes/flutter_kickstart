@@ -11,7 +11,7 @@ abstract class FkViewModel<R extends FkReactive> extends ChangeNotifier {
   final R reactive;
   final _setupParams = <String, dynamic>{};
   final _errors = <ErrorListener>[];
-  final _loadings = <String, bool>{"default": true};
+  final _loadings = <String, bool>{"default": false};
   final locator = FkInjectLocator();
   OnDisposeListener? onDispose;
 

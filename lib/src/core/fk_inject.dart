@@ -31,7 +31,7 @@ final class FkInject {
 
   void add<T extends Object>(T Function() factoryFunc, {String? instanceName}) {
     _store.add(
-      _FkInjectItem(
+      _FkInjectItem<T>(
         factoryFunc: factoryFunc,
         instanceName: instanceName,
         isSingleton: false,
@@ -42,7 +42,7 @@ final class FkInject {
   void addSingleton<T extends Object>(T Function() factoryFunc,
       {String? instanceName}) {
     _store.add(
-      _FkInjectItem(
+      _FkInjectItem<T>(
         factoryFunc: factoryFunc,
         instanceName: instanceName,
         isSingleton: true,

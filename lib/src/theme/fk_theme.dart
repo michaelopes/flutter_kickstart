@@ -86,7 +86,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
 
   FkTypography get typography => _typography;
   FkColor get background => _background;
-  ThemeData get theme => _themeData;
+  ThemeData get nativeTheme => _themeData;
 
   dynamic get icons => FkDynamicIcons(iconsDirectory);
   dynamic get images => FkDynamicImages(imagesDirectory);

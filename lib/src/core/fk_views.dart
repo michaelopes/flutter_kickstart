@@ -106,7 +106,7 @@ class _SimpleViewBuilderState extends State<_SimpleViewBuilder> {
   Widget build(BuildContext context) {
     _processFkTheme();
     return Theme(
-      data: fkTheme?.theme ?? Theme.of(context),
+      data: fkTheme?.nativeTheme ?? Theme.of(context),
       child: _reactive == null
           ? widget.builder(context)
           : AnimatedBuilder(
@@ -188,7 +188,7 @@ class _FkViewState<Vm extends FkViewModel> extends State<FkView> {
     _setContextParams();
     return fkTheme != null
         ? Theme(
-            data: fkTheme!.theme,
+            data: fkTheme!.nativeTheme,
             child: AnimatedBuilder(
               animation: widget._get<Vm>(),
               builder: (_, __) => widget.builder(context),

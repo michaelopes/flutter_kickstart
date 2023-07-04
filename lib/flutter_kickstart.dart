@@ -34,3 +34,8 @@ export 'src/theme/fk_theme.dart';
 export 'src/widgets/fk_responsive_layout.dart';
 export 'src/widgets/fk_responsive_row.dart';
 export 'src/core/fk_responsive_metrics.dart';
+
+export 'src/base/fk_base_repository.dart';
+export 'src/base/fk_base_service.dart';
+
+export 'src/util/fk_debouncer.dart';

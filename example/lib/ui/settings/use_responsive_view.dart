@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
-import 'settings_viewmodel.dart';
+import 'use_responsive_viewmodel.dart';
 
-class SettingsView extends FkView<SettingsViewModel> {
-  SettingsView({super.key});
+class UseResponsiveView extends FkView<UseResponsiveViewModel> {
+  UseResponsiveView({super.key});
 
   @override
   Widget builder(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          tr.pages.settings.title(),
+        title: const Text(
+          "Resposive Grid System",
         ),
       ),
       body: SingleChildScrollView(
@@ -33,7 +33,7 @@ class SettingsView extends FkView<SettingsViewModel> {
                 );
               },
             ),
-            FkResposiveRow(
+            FkResponsiveRow(
               children: [
                 FkResponsiveCol(
                   sm: FkResponsiveSize.col12,
@@ -84,5 +84,3 @@ class SettingsView extends FkView<SettingsViewModel> {
     );
   }
 }
-
- /* */

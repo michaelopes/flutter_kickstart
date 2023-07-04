@@ -83,31 +83,33 @@ class FkHttpDriverResponse {
   String code;
   final String message;
   final int statusCode;
-  final FkFailure? failure;
+  late final FkFailure? _failure;
 
   FkHttpDriverResponse({
     required this.statusCode,
     required this.message,
     this.data,
     this.code = "",
-    this.failure,
-  });
+    FkFailure? failure,
+  }) {
+    _failure = failure;
+  }
 
   bool get isSuccess => statusCode == 200 || statusCode == 201;
 
-  void throwFailure() {
-    if (failure != null) {
-      throw failure!;
+  Object makeFailure() {
+    if (_failure != null) {
+      return _failure!;
     } else {
       if (statusCode >= 400 && statusCode < 500) {
-        throw FkHttpDriverServerBadResponseFailure(
+        return FkHttpDriverServerBadResponseFailure(
           message: message,
           code: code,
           data: data,
           statusCode: statusCode,
         );
-      } else if (statusCode >= 500 && statusCode <= 511) {
-        throw FkHttpDriverServerFailure(
+      } else {
+        return FkHttpDriverServerFailure(
           statusCode: statusCode,
           message: message,
         );
@@ -123,7 +125,7 @@ class FkHttpDriverResponse {
     return FkHttpDriverResponse(
       data: data ?? this.data,
       code: code ?? this.code,
-      failure: failure ?? this.failure,
+      failure: failure ?? _failure,
       statusCode: statusCode,
       message: message,
     );
