@@ -27,10 +27,20 @@ abstract class FkViewModel<R extends FkReactive> extends ChangeNotifier {
     _errors.add(listener);
   }
 
+  ///This functionality is not recommended for use on the WEB Platform.
+  ///For WEB please use the parameter passing by querystring in the
+  ///modules configuration.
+  ///
+  ///If you use this resource on the web platform, a null object error will occur.
   void addModuleValue<T>(String key, T value) {
     getSetupParam("ModuleAdd")(key, value);
   }
 
+  ///This functionality is not recommended for use on the WEB Platform.
+  ///For WEB please use the parameter passing by querystring in the
+  ///modules configuration.
+  ///
+  ///If you use this resource on the web platform, a null object error will occur.
   T getModuleValue<T>(String key) => getSetupParam("ModuleGet")(key);
 
   void addSetupParam(String key, dynamic value) {
