@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_kickstart/src/util/toolkit.dart';
+import 'package:flutter_kickstart/src/util/fk_toolkit.dart';
 
 typedef FkColorTargetFunc = Color Function(FkColor thiz);
 
@@ -94,7 +94,7 @@ final class FkColor implements Color {
       var onSColor = onSList[i];
       if (onSColor == null) {
         var shadeColor = _getShadeColorByIndex(i);
-        onSColor = Toolkit.generateHighlightHarmonicColor(shadeColor);
+        onSColor = FkToolkit.generateHighlightHarmonicColor(shadeColor);
       }
       _setOnShadeColor(onSColor, i);
     }

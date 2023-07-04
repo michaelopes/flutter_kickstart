@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/src/interfaces/fk_asset.dart';
 import 'package:lottie/lottie.dart';
 
-import '../util/toolkit.dart';
+import '../util/fk_toolkit.dart';
 
 class FkAnimations extends FkAsset {
   FkAnimations(super.directory);
 
   @override
   dynamic noSuchMethod(Invocation invocation) {
-    var fileName = Toolkit.getSymbolName(invocation.memberName);
+    var fileName = FkToolkit.getSymbolName(invocation.memberName);
     var ext = "json";
     if (fileName.contains("\$")) {
       var split = fileName.split("\$");
-      fileName = Toolkit.camelToUnderscore(split.first);
+      fileName = FkToolkit.camelToUnderscore(split.first);
       ext = split.last.toLowerCase();
     } else {
-      fileName = Toolkit.camelToUnderscore(fileName);
+      fileName = FkToolkit.camelToUnderscore(fileName);
     }
     if (!["json"].contains(ext)) {
       var message =
@@ -59,7 +59,7 @@ class FpAnimation {
     this.height,
     this.fit,
   }) {
-    this.fileName = "${Toolkit.formatInputedDirectory(directory)}/$fileName";
+    this.fileName = "${FkToolkit.formatInputedDirectory(directory)}/$fileName";
   }
 
   Widget toAnimation({

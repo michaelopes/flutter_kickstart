@@ -19,8 +19,12 @@ class FkMasks {
     );
   }
 
-  static TextInputMask get cellphone => TextInputMask(
+  static TextInputMask get brCellphone => TextInputMask(
         mask: '(99) 9 9999-9999',
+      );
+
+  static TextInputMask get brPhone => TextInputMask(
+        mask: '(99) 9999-9999',
       );
 
   static TextInputMask get cep => TextInputMask(
@@ -33,6 +37,10 @@ class FkMasks {
 
   static TextInputMask get cpf => TextInputMask(
         mask: '999.999.999-99',
+      );
+
+  static TextInputMask get cnpj => TextInputMask(
+        mask: '99.999.999/9999-99',
       );
 
   static TextInputMask get cardNumber => TextInputMask(

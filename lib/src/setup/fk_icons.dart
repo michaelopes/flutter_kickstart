@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/src/interfaces/fk_asset.dart';
-import 'package:flutter_kickstart/src/util/toolkit.dart';
+import 'package:flutter_kickstart/src/util/fk_toolkit.dart';
 
 import '../widgets/fp_icn.dart';
 
@@ -9,14 +9,14 @@ class FkIcons extends FkAsset {
 
   @override
   dynamic noSuchMethod(Invocation invocation) {
-    var fileName = Toolkit.getSymbolName(invocation.memberName);
+    var fileName = FkToolkit.getSymbolName(invocation.memberName);
     var ext = "svg";
     if (fileName.contains("\$")) {
       var split = fileName.split("\$");
-      fileName = Toolkit.camelToUnderscore(split.first);
+      fileName = FkToolkit.camelToUnderscore(split.first);
       ext = split.last.toLowerCase();
     } else {
-      fileName = Toolkit.camelToUnderscore(fileName);
+      fileName = FkToolkit.camelToUnderscore(fileName);
     }
     if (!["png", "svg"].contains(ext)) {
       var message =
@@ -60,7 +60,7 @@ class FpIcon {
     this.fit,
     this.color,
   }) {
-    this.fileName = "${Toolkit.formatInputedDirectory(directory)}/$fileName";
+    this.fileName = "${FkToolkit.formatInputedDirectory(directory)}/$fileName";
   }
 
   Widget toIcon({double? width, double? height, BoxFit? fit, Color? color}) {

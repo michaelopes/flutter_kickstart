@@ -5,7 +5,7 @@ export 'fk_theme_data.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
-import '../util/toolkit.dart';
+import '../util/fk_toolkit.dart';
 
 typedef BackgroundColorFunc = FkColor? Function(FkColorPalete colorPalete);
 typedef OutlinedButtonThemeFunc = OutlinedButtonThemeData? Function(
@@ -170,7 +170,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
       _typography.setTextColor(textColor);
       _defaultTextColor = defaultTextColor;
     } else {
-      var textColor = Toolkit.generateHighlightColor(_background);
+      var textColor = FkToolkit.generateHighlightColor(_background);
       _typography.setTextColor(textColor);
       _defaultTextColor = null;
     }
@@ -256,7 +256,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
       _typography.setTextColor(textColor);
       _defaultTextColor = defaultTextColor;
     } else {
-      var textColor = Toolkit.generateHighlightColor(_background);
+      var textColor = FkToolkit.generateHighlightColor(_background);
       _typography.setTextColor(textColor);
       _defaultTextColor = null;
     }

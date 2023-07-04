@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
-import '../util/toolkit.dart';
+import '../util/fk_toolkit.dart';
 import 'fk_custom_page.dart';
 
 typedef ViewBuilder<V extends FkView> = V Function(
@@ -80,7 +80,7 @@ final class FkModule extends FkBaseModule {
   }) {
     for (var i = 0; i < views.length; i++) {
       var item = views[i];
-      var instanceName = Toolkit.getInjectInstanceName(
+      var instanceName = FkToolkit.getInjectInstanceName(
         input: item.viewModelFactory,
       );
       FkInject.I.add(

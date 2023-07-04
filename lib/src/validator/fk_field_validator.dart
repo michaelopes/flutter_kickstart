@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import '../util/toolkit.dart';
+import '../util/fk_toolkit.dart';
 import 'card_expiring_date_validator.dart';
 import 'cnpj_validator.dart';
 import 'cpf_validator.dart';
@@ -47,9 +46,8 @@ class FkValidateRule {
 
 class FkFieldValidator {
   final List<FkValidateRule> validations;
-  final BuildContext context;
 
-  FkFieldValidator(this.validations, this.context);
+  FkFieldValidator(this.validations);
 
   String? validate(dynamic value) {
     String? result;
@@ -74,6 +72,9 @@ class FkFieldValidator {
           }
         case FkValidateTypes.isStrongPassword:
           {
+            if (value.isEmpty) {
+              return null;
+            }
             var isStrong = FkValidator.isStrongPassword(value);
             if (!isStrong) {
               result = errorMessage ??
@@ -91,12 +92,13 @@ class FkFieldValidator {
               var min = 0;
               var max = 0;
               if (valueRule != null) {
-                if (valueRule.length > 1) {
-                  min = int.tryParse(valueRule[0]) ?? 0;
-                  max = int.tryParse(valueRule[1]) ?? 0;
+                var split = valueRule.split(",");
+                if (split.length > 1) {
+                  min = int.tryParse(split[0]) ?? 0;
+                  max = int.tryParse(split[1]) ?? 0;
                 } else if (valueRule.length == 1) {
                   min = 0;
-                  max = int.tryParse(valueRule[0]) ?? 0;
+                  max = int.tryParse(split[0]) ?? 0;
                 }
               }
               result = (errorMessage ??
@@ -110,6 +112,9 @@ class FkFieldValidator {
           }
         case FkValidateTypes.isAlfanumeric:
           {
+            if (value.isEmpty) {
+              return null;
+            }
             var isValid = FkValidator.isAlfanumeric(value);
             if (!isValid) {
               result = (errorMessage ??
@@ -122,6 +127,9 @@ class FkFieldValidator {
 
         case FkValidateTypes.isName:
           {
+            if (value.isEmpty) {
+              return null;
+            }
             var isValid = FkValidator.isName(value);
             if (!isValid) {
               result =
@@ -133,6 +141,9 @@ class FkFieldValidator {
           }
         case FkValidateTypes.isBRPhone:
           {
+            if (value.isEmpty) {
+              return null;
+            }
             var isValid = FkValidator.isPhone(value);
             if (!isValid) {
               result = (errorMessage ??
@@ -144,6 +155,9 @@ class FkFieldValidator {
           }
         case FkValidateTypes.isBRCellphone:
           {
+            if (value.isEmpty) {
+              return null;
+            }
             var isValid = FkValidator.isCellphone(value);
             if (!isValid) {
               result = (errorMessage ??
@@ -183,6 +197,9 @@ class FkFieldValidator {
           }
         case FkValidateTypes.isEmail:
           {
+            if (value.isEmpty) {
+              return null;
+            }
             var emailValid = FkValidator.email(value.toString());
             if (!emailValid) {
               result =
@@ -194,6 +211,9 @@ class FkFieldValidator {
           }
         case FkValidateTypes.isCpf:
           {
+            if (value.isEmpty) {
+              return null;
+            }
             if (!CPFValidator.isValid(value.toString())) {
               result =
                   (errorMessage ?? FkValidator.validatorMessages.invalidCpf);
@@ -204,6 +224,9 @@ class FkFieldValidator {
           }
         case FkValidateTypes.isCnpj:
           {
+            if (value.isEmpty) {
+              return null;
+            }
             if (!CNPJValidator.isValid(value.toString())) {
               result =
                   (errorMessage ?? FkValidator.validatorMessages.invalidCnpj);
@@ -214,7 +237,10 @@ class FkFieldValidator {
           }
         case FkValidateTypes.isCpfOrCnpj:
           {
-            var text = Toolkit.removeSpecialCharacters(value.toString());
+            if (value.isEmpty) {
+              return null;
+            }
+            var text = FkToolkit.removeSpecialCharacters(value.toString());
             if (text.length == 11) {
               if (!CPFValidator.isValid(value.toString())) {
                 result =
@@ -234,6 +260,9 @@ class FkFieldValidator {
           }
         case FkValidateTypes.isCardNumber:
           {
+            if (value.isEmpty) {
+              return null;
+            }
             if (!FkValidator.isValidCreditCardNumber(value.toString())) {
               result = (errorMessage ??
                   FkValidator.validatorMessages.invalidCardNumber);
@@ -244,6 +273,9 @@ class FkFieldValidator {
           }
         case FkValidateTypes.isCardCVV:
           {
+            if (value.isEmpty) {
+              return null;
+            }
             if (!FkValidator.isValidCardCVV(value.toString())) {
               result = (errorMessage ??
                   FkValidator.validatorMessages.invalidCardCvv);
@@ -254,6 +286,9 @@ class FkFieldValidator {
           }
         case FkValidateTypes.isCardExpiringDate:
           {
+            if (value.isEmpty) {
+              return null;
+            }
             if (!CardExpiringDateValidator.isValid(value.toString())) {
               result = (errorMessage ??
                   FkValidator.validatorMessages.invalidCardExpiringDate);
@@ -339,6 +374,9 @@ class FkFieldValidator {
           }
         case FkValidateTypes.isCep:
           {
+            if (value.isEmpty) {
+              return null;
+            }
             if (value.toString().isEmpty) return null;
             if (value.length != 10) {
               result =
@@ -410,6 +448,9 @@ class FkFieldValidator {
           }
         case FkValidateTypes.isDate:
           {
+            if (value.isEmpty) {
+              return null;
+            }
             if (!FkValidator.isDateValid(value)) {
               result =
                   (errorMessage ?? FkValidator.validatorMessages.invalidDate);
@@ -420,6 +461,9 @@ class FkFieldValidator {
           }
         case FkValidateTypes.dateGreaterThanNow:
           {
+            if (value.isEmpty) {
+              return null;
+            }
             if (!FkValidator.isDateGreaterThanNow(value)) {
               result = (errorMessage ??
                   FkValidator.validatorMessages.invalidDateGreaterThanNow);

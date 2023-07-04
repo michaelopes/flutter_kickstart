@@ -1,4 +1,4 @@
-import '../util/toolkit.dart';
+import '../util/fk_toolkit.dart';
 import 'cnpj_validator.dart';
 import 'cpf_validator.dart';
 import 'fk_validador_messages.dart';
@@ -125,12 +125,12 @@ class FkValidator {
   }
 
   static bool isPhone(String text) {
-    var phone = Toolkit.removeSpecialCharacters(text);
+    var phone = FkToolkit.removeSpecialCharacters(text);
     return phone.length == 11 || phone.length == 10;
   }
 
   static bool isCellphone(String text) {
-    var phone = Toolkit.removeSpecialCharacters(text).replaceAll(" ", "");
+    var phone = FkToolkit.removeSpecialCharacters(text).replaceAll(" ", "");
     if (phone.isEmpty) {
       return true;
     }

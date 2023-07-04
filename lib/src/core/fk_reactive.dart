@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_kickstart/src/util/toolkit.dart';
+import 'package:flutter_kickstart/src/util/fk_toolkit.dart';
 
 class _InternalInitializeFocus {
   final int lengthToReset;
@@ -33,7 +33,7 @@ abstract class FkReactive extends ChangeNotifier {
 
   @override
   dynamic noSuchMethod(Invocation invocation) {
-    final memberName = Toolkit.getSymbolName(invocation.memberName);
+    final memberName = FkToolkit.getSymbolName(invocation.memberName);
     if (invocation.isSetter) {
       var value = invocation.positionalArguments.first;
       if (value is ChangeNotifier) {

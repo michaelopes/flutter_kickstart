@@ -40,6 +40,7 @@ export 'src/base/fk_base_service.dart';
 
 export 'src/util/fk_debouncer.dart';
 export 'src/util/fk_masks.dart';
+export 'src/util/fk_toolkit.dart';
 
 export 'src/validator/fk_field_validator.dart';
 export 'src/validator/fk_validador_messages.dart';

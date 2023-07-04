@@ -11,6 +11,7 @@ class InitialNavigator extends FkSimpleView {
         AppModules.useAssets => 1,
         AppModules.useResponsive => 2,
         AppModules.drink => 3,
+        AppModules.validations => 4,
         _ => 0
       };
 
@@ -36,6 +37,10 @@ class InitialNavigator extends FkSimpleView {
           BottomNavigationBarItem(
             icon: Icon(Icons.wine_bar),
             label: "Drink",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.checklist),
+            label: "Validations",
           )
         ],
         onTap: (index) {
@@ -48,6 +53,9 @@ class InitialNavigator extends FkSimpleView {
               break;
             case 3:
               nav.go(AppModules.drink);
+              break;
+            case 4:
+              nav.go(AppModules.validations);
               break;
             default:
               nav.go(AppModules.typography);
