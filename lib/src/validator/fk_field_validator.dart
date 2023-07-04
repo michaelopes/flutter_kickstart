@@ -3,7 +3,7 @@ import '../util/toolkit.dart';
 import 'card_expiring_date_validator.dart';
 import 'cnpj_validator.dart';
 import 'cpf_validator.dart';
-import 'validator.dart';
+import 'fk_validator.dart';
 
 enum FkValidateTypes {
   required,
