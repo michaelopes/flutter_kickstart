@@ -13,9 +13,13 @@ mixin class _FkViewWidgetLocator {
   T _get<T extends Object>() {
     return _storage[T]! as T;
   }
+
+  T? _tryGet<T extends Object>() {
+    return _storage[T] as T?;
+  }
 }
 
-abstract class FkSimpleView<T extends FkReactive> extends StatelessWidget
+abstract class FkSimpleView<T extends FkReactive> extends Widget
     with _FkViewWidgetLocator {
   FkSimpleView({
     super.key,
@@ -30,72 +34,23 @@ abstract class FkSimpleView<T extends FkReactive> extends StatelessWidget
 
   String get themeBranch => "";
 
-  final _viewBuilderKey = GlobalKey<_SimpleViewBuilderState>();
   T get reactive => _get<T>();
 
-  BuildContext get context => _viewBuilderKey.currentContext!;
-  FkTheme get theme => _viewBuilderKey.currentState!.fkTheme!;
+  BuildContext get context => _get();
+  FkTheme get theme => _get();
   GoRouter get nav => GoRouter.of(context);
   dynamic get tr => FkTranslatorProcessor(context);
 
   Widget builder(BuildContext context);
 
-  @override
-  Widget build(BuildContext context) {
-    return _SimpleViewBuilder(
-      key: _viewBuilderKey,
-      builder: builder,
-      reactive: reactive,
-      themeBranch: themeBranch,
-    );
-  }
-}
-
-class _SimpleViewBuilder extends StatefulWidget {
-  const _SimpleViewBuilder({
-    super.key,
-    required this.builder,
-    required this.reactive,
-    required this.themeBranch,
-  });
-
-  final Widget Function(BuildContext context) builder;
-  final ChangeNotifier? reactive;
-  final String themeBranch;
-
-  @override
-  State<_SimpleViewBuilder> createState() => _SimpleViewBuilderState();
-}
-
-class _SimpleViewBuilderState extends State<_SimpleViewBuilder> {
-  late final ChangeNotifier? _reactive;
-
-  FkTheme? fkTheme;
-
-  @override
-  void initState() {
-    _reactive = widget.reactive;
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  void reassemble() {
-    super.reassemble();
-  }
-
-  void _processFkTheme() {
+  void _processFkTheme(BuildContext context) {
     var fkThm = Theme.of(context).extension<FkTheme>();
     if (fkThm != null) {
-      var subSkTheme = fkThm.getBranch(widget.themeBranch);
+      var subSkTheme = fkThm.getBranch(themeBranch);
       if (subSkTheme != null) {
-        fkTheme = subSkTheme;
+        _set<FkTheme>(subSkTheme);
       } else {
-        fkTheme = fkThm;
+        _set<FkTheme>(fkThm);
       }
     } else {
       throw Exception("FkTheme dark or light is not created on app creation!");
@@ -103,18 +58,23 @@ class _SimpleViewBuilderState extends State<_SimpleViewBuilder> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    _processFkTheme();
-    return Theme(
-      data: fkTheme?.nativeTheme ?? Theme.of(context),
-      child: _reactive == null
-          ? widget.builder(context)
-          : AnimatedBuilder(
-              animation: _reactive!,
-              builder: (_, __) => widget.builder(context),
-            ),
-    );
-  }
+  StatelessElement createElement() => StatelessElement(
+        Builder(
+          builder: (context) {
+            _set<BuildContext>(context);
+            _processFkTheme(context);
+            return themeBranch.isEmpty
+                ? builder(context)
+                : Theme(
+                    data: _tryGet<FkTheme>()?.nativeTheme ?? Theme.of(context),
+                    child: AnimatedBuilder(
+                      animation: reactive,
+                      builder: (_, __) => builder(context),
+                    ),
+                  );
+          },
+        ),
+      );
 }
 
 abstract class FkView<Vm extends FkViewModel> extends StatefulWidget
