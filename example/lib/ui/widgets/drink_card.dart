@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
-class DrinkCard extends FkSimpleView {
+class DrinkCard extends FkViewless {
   DrinkCard({
     super.key,
     required this.drinkName,
@@ -16,7 +16,7 @@ class DrinkCard extends FkSimpleView {
   String get themeBranch => "VerticalCard";
 
   @override
-  Widget builder(BuildContext context) {
+  Widget build(BuildContext context) {
     return Container(
       decoration: theme.decoration,
       child: Column(

@@ -4,7 +4,8 @@ export 'package:dio/dio.dart';
 
 export 'package:go_router/go_router.dart';
 export 'src/core/fk_views.dart';
-export './src/core/fk_viewmodel.dart';
+export 'src/views/fk_viewless.dart';
+export 'src/core/fk_viewmodel.dart';
 
 export './src/core/fk_module.dart';
 export './src/setup/fk_app.dart';
