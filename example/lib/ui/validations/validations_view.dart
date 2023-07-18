@@ -558,7 +558,7 @@ class ValidationsView extends FkView<ValidationsViewModel> {
                 ElevatedButton(
                   onPressed: vm.submit,
                   child: const Text("Submit"),
-                )
+                ),
               ],
             ),
           ),

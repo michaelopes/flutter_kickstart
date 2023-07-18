@@ -4,6 +4,8 @@ import 'package:example/ui/widgets/drink_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
+import '../widgets/reactive_widget.dart';
+
 class DrinkView extends FkView<DrinkViewModel> {
   DrinkView({super.key});
 
@@ -122,6 +124,20 @@ class DrinkView extends FkView<DrinkViewModel> {
             _buildSearchInput,
             const SizedBox(
               height: 16,
+            ),
+            ReactiveWidget(),
+            ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (_) {
+                    return Dialog(
+                      child: ReactiveWidget(),
+                    );
+                  },
+                );
+              },
+              child: const Text("Show dialog"),
             ),
             Expanded(
               child: _buildDrinkList,

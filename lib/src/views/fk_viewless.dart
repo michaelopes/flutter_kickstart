@@ -22,6 +22,22 @@ class FkViewlessElement extends ComponentElement {
     _widget._elementHelper._element = this;
   }
 
+  @override
+  void mount(Element? parent, Object? newSlot) {
+    super.mount(parent, newSlot);
+    _widget.reactive.addListener(_onReactiveChanged);
+  }
+
+  @override
+  void unmount() {
+    _widget.reactive.removeListener(_onReactiveChanged);
+    super.unmount();
+  }
+
+  void _onReactiveChanged() {
+    markNeedsBuild();
+  }
+
   FkTheme get theme {
     var fkThm = Theme.of(this).extension<FkTheme>();
     if (fkThm != null) {
@@ -38,23 +54,12 @@ class FkViewlessElement extends ComponentElement {
 
   FkViewless get _widget => (widget as FkViewless);
 
-  Widget _buildWithReactiveCondition() {
-    return _widget._reactive == null
-        ? _widget.build(this)
-        : AnimatedBuilder(
-            animation: _widget.reactive,
-            builder: (_, __) {
-              return _widget.build(this);
-            },
-          );
-  }
-
   @override
   Widget build() => _widget.themeBranch.isEmpty
-      ? _buildWithReactiveCondition()
+      ? _widget.build(this)
       : Theme(
           data: theme.nativeTheme,
-          child: _buildWithReactiveCondition(),
+          child: _widget.build(this),
         );
 
   @override

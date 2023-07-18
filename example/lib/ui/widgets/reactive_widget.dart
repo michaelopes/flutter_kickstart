@@ -2,11 +2,11 @@ import 'package:example/global_reactive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
-class ReactiveWidget extends FkSimpleView<GlobalReactive> {
+class ReactiveWidget extends FkViewless<GlobalReactive> {
   ReactiveWidget({super.key}) : super(reactive: GlobalReactive());
 
   @override
-  Widget builder(BuildContext context) {
+  Widget build(BuildContext context) {
     return SizedBox(
       height: 80,
       width: double.infinity,
