@@ -12,8 +12,16 @@ class GlobalReactive extends FkReactive {
   @override
   init() {
     counter = 0;
+    initialized = false;
+    isLogged = false;
   }
 
   int get counter;
   set counter(int value);
+
+  set initialized(bool value);
+  bool get initialized;
+
+  set isLogged(bool value);
+  bool get isLogged;
 }

@@ -347,7 +347,7 @@ class ValidationsView extends FkView<ValidationsViewModel> {
  */
 
   @override
-  Widget builder(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(

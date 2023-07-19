@@ -2,7 +2,7 @@ import 'package:example/setup/app_modules.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
-class InitialNavigator extends FkSimpleView {
+class InitialNavigator extends FkWidget {
   InitialNavigator({super.key, required this.child});
 
   final Widget child;
@@ -16,7 +16,7 @@ class InitialNavigator extends FkSimpleView {
       };
 
   @override
-  Widget builder(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: child,
       bottomNavigationBar: BottomNavigationBar(

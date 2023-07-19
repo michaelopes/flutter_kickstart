@@ -2,7 +2,7 @@ import 'package:example/global_reactive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
-class ReactiveWidget extends FkViewless<GlobalReactive> {
+class ReactiveWidget extends FkWidget<GlobalReactive> {
   ReactiveWidget({super.key}) : super(reactive: GlobalReactive());
 
   @override

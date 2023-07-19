@@ -1,4 +1,5 @@
 import 'package:example/setup/app_injections.dart';
+import 'package:example/setup/app_module_middleware.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
@@ -29,6 +30,7 @@ void main() async {
       globalFailureHandler: AppGlobalError(),
       //Register app theme
       theme: AppTheme().theme,
+      moduleMiddleware: AppModuleMiddleware(),
     ),
   );
 }

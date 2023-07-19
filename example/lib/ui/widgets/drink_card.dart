@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
-class DrinkCard extends FkViewless {
+class DrinkCard extends FkWidget {
   DrinkCard({
     super.key,
     required this.drinkName,

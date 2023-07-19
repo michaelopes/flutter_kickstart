@@ -6,7 +6,7 @@ class UseResponsiveView extends FkView<UseResponsiveViewModel> {
   UseResponsiveView({super.key});
 
   @override
-  Widget builder(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(

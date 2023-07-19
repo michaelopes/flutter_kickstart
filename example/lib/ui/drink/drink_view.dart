@@ -112,7 +112,7 @@ class DrinkView extends FkView<DrinkViewModel> {
   }
 
   @override
-  Widget builder(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(pageTr.title()),

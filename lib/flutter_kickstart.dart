@@ -3,8 +3,8 @@ library flutter_kickstart;
 export 'package:dio/dio.dart';
 
 export 'package:go_router/go_router.dart';
-export 'src/core/fk_views.dart';
-export 'src/views/fk_viewless.dart';
+export 'src/ui/fk_widget.dart';
+export 'src/ui/fk_view.dart';
 export 'src/core/fk_viewmodel.dart';
 
 export './src/core/fk_module.dart';
@@ -12,6 +12,7 @@ export './src/setup/fk_app.dart';
 export 'src/setup/fk.dart';
 export 'src/core/fk_inject.dart';
 export 'src/core/fk_reactive.dart';
+export 'src/core/fk_app_middleware.dart';
 
 export './src/util/fk_failures.dart';
 

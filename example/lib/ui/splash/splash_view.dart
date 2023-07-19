@@ -1,5 +1,5 @@
 import 'package:example/assets_snippeds/app_animations.dart';
-import 'package:example/setup/app_modules.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
@@ -9,7 +9,7 @@ class SplashView extends FkView<SplashViewModel> {
   SplashView({super.key});
 
   @override
-  Widget builder(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Column(
@@ -21,15 +21,10 @@ class SplashView extends FkView<SplashViewModel> {
               height: 32,
             ),
             //Import animation  by snipped
-            theme.assets<AppAnimationsSnippets>().splash.toAnimation(
-                onLoaded: (duration) {
-              Future.delayed(
-                duration,
-                () {
-                  nav.go(AppModules.typography);
-                },
-              );
-            }),
+            theme
+                .assets<AppAnimationsSnippets>()
+                .splash
+                .toAnimation(onLoaded: (duration) {}),
           ],
         ),
       ),

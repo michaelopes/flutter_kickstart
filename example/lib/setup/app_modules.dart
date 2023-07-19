@@ -1,5 +1,7 @@
 import 'package:example/ui/drink/drink_detail_view.dart';
 import 'package:example/ui/drink/drink_view.dart';
+import 'package:example/ui/login/login_view.dart';
+import 'package:example/ui/login/login_viewmodel.dart';
 import 'package:example/ui/validations/validations_view.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
@@ -18,6 +20,7 @@ import '../ui/widgets/initial_navigator.dart';
 
 class AppModules {
   static const splash = "/";
+  static const login = "/login";
   static const typography = "/typography";
   static const useAssets = "/use-assets";
   static const useResponsive = "/use-responsive";
@@ -32,6 +35,11 @@ class AppModules {
         path: splash,
         builder: (context, goRouterStat) => SplashView(),
         viewModelFactory: () => SplashViewModel(),
+      ),
+      FkModule.singleView(
+        path: login,
+        builder: (context, goRouterStat) => LoginView(),
+        viewModelFactory: LoginViewModel.new,
       ),
       FkModuleGroup(
         builder: (_, __, child) {

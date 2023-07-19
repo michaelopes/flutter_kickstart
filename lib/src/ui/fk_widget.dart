@@ -5,21 +5,21 @@ import '../core/fk_reactive.dart';
 import '../i18n/fk_translate_processor.dart';
 import '../theme/fk_theme.dart';
 
-final class _ViewlessHelper<T extends FkReactive> {
-  late FkViewlessElement _element;
+final class _FkWidgetHelper {
+  late FkWidgetElement _element;
   FkTheme get theme => _element.theme;
   BuildContext get context => _element;
   GoRouter get nav => GoRouter.of(context);
   dynamic get tr => FkTranslatorProcessor(context);
 }
 
-class FkViewlessElement extends ComponentElement {
-  FkViewlessElement(FkViewless super.widget) {
+class FkWidgetElement extends ComponentElement {
+  FkWidgetElement(FkWidget super.widget) {
     _setHelperElement();
   }
 
   void _setHelperElement() {
-    _widget._elementHelper._element = this;
+    _widget._widgetHelper._element = this;
   }
 
   @override
@@ -52,7 +52,7 @@ class FkViewlessElement extends ComponentElement {
     }
   }
 
-  FkViewless get _widget => (widget as FkViewless);
+  FkWidget get _widget => (widget as FkWidget);
 
   @override
   Widget build() => _widget.themeBranch.isEmpty
@@ -63,7 +63,7 @@ class FkViewlessElement extends ComponentElement {
         );
 
   @override
-  void update(FkViewless newWidget) {
+  void update(FkWidget newWidget) {
     super.update(newWidget);
     assert(widget == newWidget);
     _setHelperElement();
@@ -71,25 +71,25 @@ class FkViewlessElement extends ComponentElement {
   }
 }
 
-abstract class _FkViewlessBase<T extends FkReactive> extends Widget {
+abstract class _FkWidgetBase<T extends FkReactive> extends Widget {
   final T? _reactive;
-  const _FkViewlessBase(this._reactive, {super.key});
+  const _FkWidgetBase(this._reactive, {super.key});
 }
 
-abstract class FkViewless<T extends FkReactive> extends _FkViewlessBase<T> {
-  FkViewless({super.key, T? reactive}) : super(reactive);
+abstract class FkWidget<T extends FkReactive> extends _FkWidgetBase<T> {
+  FkWidget({super.key, T? reactive}) : super(reactive);
 
-  final _elementHelper = _ViewlessHelper();
+  final _widgetHelper = _FkWidgetHelper();
 
   T get reactive => super._reactive ?? EmptyReactive() as T;
 
-  BuildContext get context => _elementHelper.context;
-  FkTheme get theme => _elementHelper.theme;
-  GoRouter get nav => _elementHelper.nav;
-  dynamic get tr => _elementHelper.tr;
+  BuildContext get context => _widgetHelper.context;
+  FkTheme get theme => _widgetHelper.theme;
+  GoRouter get nav => _widgetHelper.nav;
+  dynamic get tr => _widgetHelper.tr;
 
   @override
-  FkViewlessElement createElement() => FkViewlessElement(this);
+  FkWidgetElement createElement() => FkWidgetElement(this);
 
   String get themeBranch => "";
 

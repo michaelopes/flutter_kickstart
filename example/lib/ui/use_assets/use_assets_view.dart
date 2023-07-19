@@ -10,7 +10,7 @@ class UseAssetsView extends FkView<UseAssetsViewModel> {
   UseAssetsView({super.key});
 
   @override
-  Widget builder(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("How to using assets"),
