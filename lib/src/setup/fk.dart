@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_kickstart/flutter_kickstart.dart';
 import 'package:flutter_kickstart/src/model/fk_font.dart';
 
-import '../http_driver/fk_http_driver_middleware.dart';
-import '../http_driver/fk_http_driver_response_parser.dart';
 import '../i18n/i18n.dart';
 import 'fk_infos.dart';
 import 'fk_load_font.dart';
@@ -20,7 +19,8 @@ class Fk {
     List<String> availableLanguages = const [],
     FkBaseHttpDriverResponseParser? httpDriverResponseParser,
     bool enableHttpDriverLogger = true,
-    IFkHttpDriverMiddleware? httpDriverMiddleware,
+    FkHttpDriverMiddleware? httpDriverMiddleware,
+    FkModuleMiddleware? moduleMiddleware,
     String baseUrl = "",
   }) async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +37,8 @@ class Fk {
     if (httpDriverMiddleware != null) {
       globals.httpDriverMiddleware = httpDriverMiddleware;
     }
+
+    globals.moduleMiddleware = moduleMiddleware;
 
     if (env.isNotEmpty) {
       await dotenv.load(fileName: env);

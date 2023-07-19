@@ -15,6 +15,7 @@ void main() async {
     availableLanguages: ["pt_BR"],
     defaultLocale: const Locale("pt", "BR"),
     httpDriverMiddleware: AppHttpMiddleware(),
+    moduleMiddleware: AppModuleMiddleware(),
     httpDriverResponseParser: AppHttpResponseParser(),
     baseUrl: "https://www.thecocktaildb.com/api/json",
   );
@@ -30,7 +31,6 @@ void main() async {
       globalFailureHandler: AppGlobalError(),
       //Register app theme
       theme: AppTheme().theme,
-      moduleMiddleware: AppModuleMiddleware(),
     ),
   );
 }

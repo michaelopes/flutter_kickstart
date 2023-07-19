@@ -1,9 +1,8 @@
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
-class AppHttpMiddleware extends IFkHttpDriverMiddleware {
+class AppHttpMiddleware extends FkHttpDriverMiddleware {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.headers['Access-Control-Allow-Origin'] = '*';
     return handler.next(options);
   }
 }

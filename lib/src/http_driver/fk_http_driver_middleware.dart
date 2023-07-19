@@ -1,16 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_kickstart/src/interfaces/http_driver_interface.dart';
 
-abstract class IFkHttpDriverMiddleware extends Interceptor {
+abstract class FkHttpDriverMiddleware extends Interceptor {
   IHttpDriver? httpDriver;
   void setHttpDriver(IHttpDriver httpDriver) {
     this.httpDriver = httpDriver;
   }
 }
 
-final class DefaultFkHttpDriverMiddleware extends IFkHttpDriverMiddleware {
+final class DefaultFkHttpDriverMiddleware extends FkHttpDriverMiddleware {
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     return handler.next(err);
   }
 

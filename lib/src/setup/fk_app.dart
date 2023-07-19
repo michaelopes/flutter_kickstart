@@ -3,7 +3,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
-import '../core/fk_app_middleware.dart';
 import '../i18n/app_localizations_delegate.dart';
 import '../i18n/i18n.dart';
 import '../util/global_error_observer.dart';
@@ -20,7 +19,6 @@ class FkApp extends StatefulWidget {
     this.appTitle = "",
     this.globalFailureHandler,
     this.injections,
-    this.moduleMiddleware,
   });
 
   final String appTitle;
@@ -28,7 +26,6 @@ class FkApp extends StatefulWidget {
   final FkModulesFunc modules;
   final InjectionsFunc? injections;
   final FkThemeData theme;
-  final FkModuleMiddleware? moduleMiddleware;
 
   @override
   State<FkApp> createState() => _FkAppState();
@@ -51,9 +48,9 @@ class _FkAppState extends State<FkApp> {
         <RouteBase>[],
         (previousValue, module) => previousValue..addAll(module.routes),
       ),
-      refreshListenable: widget.moduleMiddleware?.reactive,
-      redirect: widget.moduleMiddleware?.onViewRedirect,
-      errorBuilder: widget.moduleMiddleware?.onViewError,
+      refreshListenable: globals.moduleMiddleware?.reactive,
+      redirect: globals.moduleMiddleware?.onViewRedirect,
+      errorBuilder: globals.moduleMiddleware?.onViewError,
     );
     if (widget.globalFailureHandler != null) {
       FlutterError.onError = (error) {
