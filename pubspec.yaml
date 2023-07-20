@@ -1,8 +1,7 @@
 name: flutter_kickstart
-description: A new Flutter package project.
+description: This is a project that aims to facilitate the start of a new application as well as its maintenance.
 version: 1.0.0-beta.1
 homepage: https://github.com/michaelopes/flutter_kickstart
-author: Michael S. Lopes
 license: MIT
 
 environment:
