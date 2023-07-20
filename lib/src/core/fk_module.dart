@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
-import '../util/fk_toolkit.dart';
 import 'fk_custom_page.dart';
 
 typedef ViewBuilder<V extends FkView> = V Function(

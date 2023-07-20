@@ -5,7 +5,6 @@ export 'fk_theme_data.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
-import '../util/fk_toolkit.dart';
 
 typedef BackgroundColorFunc = FkColor? Function(FkColorPalete colorPalete);
 typedef OutlinedButtonThemeFunc = OutlinedButtonThemeData? Function(

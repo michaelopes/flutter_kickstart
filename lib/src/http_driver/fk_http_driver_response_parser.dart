@@ -30,7 +30,7 @@ abstract base class FkBaseHttpDriverResponseParser {
 
   @mustCallSuper
   FkHttpDriverResponse error(Exception error) {
-    if (error is DioError) {
+    if (error is DioException) {
       var errorReponse = FkHttpDriverResponse(
         message: error.message ?? "",
         statusCode: error.response?.statusCode ?? 400,
