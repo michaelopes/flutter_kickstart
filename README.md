@@ -1115,6 +1115,62 @@ class UseResponsiveView extends FkView<UseResponsiveViewModel> {
   }
 }
 ```
+## Mascaras de texto (Input masks)
+
+Mascaras disponíves
+```dart
+FkMasks.cpf
+FkMasks.brCellphone
+FkMasks.brPhone
+FkMasks.cep
+FkMasks.brDate
+FkMasks.cnpj
+FkMasks.cardNumber
+FkMasks.cardExpiringDate
+FkMasks.money
+FkMasks.customMask(mask: <regra de mascara aqui>)
+```
+
+### Criar mascara customizada
+
+Parâmetros Possíveis:
+
+mask: Pode ser uma String ou uma Lista.
+reverse: Um booleano que indica se o usuário digitará da direita para a esquerda. Normalmente usado em campos de texto de moeda.
+maxLength: Um número inteiro que limita o tamanho máximo do texto mascarado retornado.
+placeholder: Um caractere de String a ser usado como espaço reservado para caracteres não digitados. Deve definir maxPlaceHolders.
+maxPlaceHolders: Um número inteiro que mapeia quantos espaços reservados possíveis podem ser colocados. Caracteres digitados consomem uma posição deste contador.
+Caracteres dos Padrões de Máscara:
+
+9: Usado para permitir um número de 0 a 9.
+A: Usado para permitir uma letra de a-z ou A-Z.
+N: Usado para permitir um número ou letra de 0 a 9, a-z ou A-Z.
+X: Usado para permitir qualquer caractere.
+Esses tokens 9, A, N e X podem ser seguidos por um modificador adicional:
+
+?: Indica que é opcional.
++: Indica que deve ter pelo menos 1 ou mais repetições.
+*: Indica que pode ter 0 ou mais repetições.
+: Usado como escape.
+*Qualquer caractere que seja interpretado como letra a ser inserida pode ser seguido pelo modificador **.
+
+!: Usado para imprimir forçadamente, quando pelo menos 1 caractere foi digitado no campo de texto.
+Qualquer outra letra será exibida na máscara.
+
+Exemplos de Máscaras de String:
+
+(número de cartão) 999 999 999 999
+(celular dos EUA) +1 (999) 999 99 99
+(moeda) $! !9+,999.99
+(versão) 99?9?.99?9?.99?9?
+(RG, documento brasileiro) 99.999.999-N
+
+Formantando uma String existente para CPF
+```dart
+var newText = FkMasks.cpf.maskText("00000000099")
+```
+O resultado será 000.000.000-99 essa lógica poder ser aplicado a todas as mascaras 
+incluindo as customizadas
 ## Validações
 O Flutter Kickstart suporta as principais validações utilizadas do Brasil. Caso tenho sugestões de validações adicione uma issue para 
 que possamos incorpora-la no projeto.
