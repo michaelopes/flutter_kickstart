@@ -835,6 +835,7 @@ class DrinkView extends FkView<DrinkViewModel> {
 Na proposta arquitetural todas as regras de negócios relacionadas ao negócios e a acesso os repositórios (Repositories) ficaram contidas dentro dos Services mas não só isso mas regras internas de implentação de serviços nativos também ficará nessa camada.
 
 Exemplo de criação de um serviço
+
 ```dart
 abstract interface class IDrinkService {
   Future<List<DrinkModel>> searchDrinks(String term);
@@ -856,7 +857,9 @@ final class DrinkService extends FkBaseService implements IDrinkService {
       throw resp.makeFailure();
     }
   }
-}```
+}
+```
+
 ## Repositórios (Repositories)
 O repositorório (Repository) ficará as chamas a API http a chamada a qualquer outra font de dados. Ao implementar um repository irá conter um atributo herdado chamado httpDriver a qual tem diversas implementações para requisições HTTP. 
 
@@ -885,7 +888,7 @@ final class TheCocktailDBRepo extends FkBaseRepository
     );
   }
 }
-```
+x
 ## Criar um widget
 Para criar uma view basta herdar da classe FkWidget como no exemplo abaixo:
 ```dart
