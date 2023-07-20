@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../ui/fk_view.dart';
 import '../util/global_error_observer.dart';
 import 'fk_inject.dart';
 import 'fk_reactive.dart';
@@ -81,6 +82,11 @@ abstract class FkViewModel<R extends FkReactive> extends ChangeNotifier {
     onDispose?.call();
     super.dispose();
   }
+
+  void didUpdateView(FkView oldView) {}
+  void didChangeDependencies() {}
+  void deactivate() {}
+  void reassemble() {}
 }
 
 abstract class FkViewModelView<R extends FkReactive, V extends Object>

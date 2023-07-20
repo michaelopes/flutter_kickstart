@@ -26,19 +26,6 @@ abstract class FkView<VM extends FkViewModel> extends StatefulWidget {
   dynamic get tr => _viewHelper.tr;
   VM get vm => _viewHelper.vm;
 
-  @protected
-  void initView(State<FkView> state) {}
-  @protected
-  void disposeView(State<FkView> state) {}
-  @protected
-  void didUpdateView(FkView oldWidget) {}
-  @protected
-  void didChangeDependencies() {}
-  @protected
-  void deactivate() {}
-  @protected
-  void reassemble() {}
-
   String get themeBranch => "";
 
   Widget build(BuildContext context);
@@ -59,7 +46,6 @@ class _FkViewState<VM extends FkViewModel> extends State<FkView> {
     viewModel?.reactive.addListener(_handleChange);
     widget._viewHelper._state = this;
     super.initState();
-    widget.initView(this);
   }
 
   @override
@@ -67,14 +53,13 @@ class _FkViewState<VM extends FkViewModel> extends State<FkView> {
     super.dispose();
     viewModel?.reactive.removeListener(_handleChange);
     viewModel?.dispose();
-    widget.disposeView(this);
   }
 
   @override
   void didUpdateWidget(covariant FkView oldWidget) {
     widget._viewHelper._state = this;
     super.didUpdateWidget(oldWidget);
-    widget.didUpdateView(oldWidget);
+    viewModel?.didUpdateView(oldWidget);
     if (viewModel?.reactive != viewModel?.reactive) {
       viewModel?.reactive.removeListener(_handleChange);
       viewModel?.reactive.addListener(_handleChange);
@@ -84,19 +69,19 @@ class _FkViewState<VM extends FkViewModel> extends State<FkView> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    widget.didChangeDependencies();
+    viewModel?.didChangeDependencies();
   }
 
   @override
   void deactivate() {
     super.deactivate();
-    widget.deactivate();
+    viewModel?.deactivate();
   }
 
   @override
   void reassemble() {
     super.reassemble();
-    widget.reassemble();
+    viewModel?.reassemble();
   }
 
   void _handleChange() {
