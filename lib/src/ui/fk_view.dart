@@ -27,17 +27,17 @@ abstract class FkView<VM extends FkViewModel> extends StatefulWidget {
   VM get vm => _viewHelper.vm;
 
   @protected
-  @mustCallSuper
-  void initView(State state) {}
+  void initView(State<FkView> state) {}
   @protected
-  @mustCallSuper
-  void dispose() {}
+  void disposeView(State<FkView> state) {}
   @protected
-  @mustCallSuper
   void didUpdateView(FkView oldWidget) {}
   @protected
-  @mustCallSuper
   void didChangeDependencies() {}
+  @protected
+  void deactivate() {}
+  @protected
+  void reassemble() {}
 
   String get themeBranch => "";
 
@@ -67,7 +67,7 @@ class _FkViewState<VM extends FkViewModel> extends State<FkView> {
     super.dispose();
     viewModel?.reactive.removeListener(_handleChange);
     viewModel?.dispose();
-    widget.dispose();
+    widget.disposeView(this);
   }
 
   @override
@@ -85,6 +85,18 @@ class _FkViewState<VM extends FkViewModel> extends State<FkView> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     widget.didChangeDependencies();
+  }
+
+  @override
+  void deactivate() {
+    super.deactivate();
+    widget.deactivate();
+  }
+
+  @override
+  void reassemble() {
+    super.reassemble();
+    widget.reassemble();
   }
 
   void _handleChange() {

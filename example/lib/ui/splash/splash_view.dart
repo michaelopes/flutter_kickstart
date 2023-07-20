@@ -1,5 +1,4 @@
 import 'package:example/assets_snippeds/app_animations.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
