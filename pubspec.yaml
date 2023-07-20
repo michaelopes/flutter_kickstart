@@ -2,6 +2,8 @@ name: flutter_kickstart
 description: A new Flutter package project.
 version: 1.0.0-beta.1
 homepage: https://github.com/michaelopes/flutter_kickstart
+author: Michael S. Lopes
+license: MIT
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
