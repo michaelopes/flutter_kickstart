@@ -1,4 +1,4 @@
-
+![LOGO](https://github.com/michaelopes/flutter_kickstart/assets/10121156/8c75fc04-0c44-473f-9187-43d4fdb0222f)
 # Flutter Kickstart
 
 O projeto Flutter Kickstart surgiu para facilitar o dia a dia do desenvolvedor, trazendo uma série de funcionalidades uteis para a rotina de desenvolvimento, mas também, ajudando a começar um novo projeto, já que embarca diversas soluções para criação de novos projetos. O projeto também visa facilitar o entendimento de quem está começando com o Flutter facilitando alguns processos de desenvolvimento. 
