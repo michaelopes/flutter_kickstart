@@ -1,6 +1,9 @@
 library flutter_kickstart;
 
 export 'package:dio/dio.dart';
+export 'package:intl/intl.dart';
+export 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+export 'package:shimmer/shimmer.dart';
 
 export 'package:go_router/go_router.dart';
 export 'src/ui/fk_widget.dart';
