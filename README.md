@@ -830,6 +830,62 @@ class DrinkView extends FkView<DrinkViewModel> {
   }
 }
 ```
+
+## Serviços (Services)
+Na proposta arquitetural todas as regras de negócios relacionadas ao negócios e a acesso os repositórios (Repositories) ficaram contidas dentro dos Services mas não só isso mas regras internas de implentação de serviços nativos também ficará nessa camada.
+
+Exemplo de criação de um serviço
+```dart
+abstract interface class IDrinkService {
+  Future<List<DrinkModel>> searchDrinks(String term);
+}
+
+final class DrinkService extends FkBaseService implements IDrinkService {
+  late final _drinkRepo = locator.get<ITheCocktailDBRepo>();
+
+  @override
+  Future<List<DrinkModel>> searchDrinks(String term) async {
+    var resp = await _drinkRepo.searchDrinks(term);
+    if (resp.isSuccess) {
+      return List.from(resp.data["drinks"] ?? [])
+          .map(
+            (e) => DrinkModel.fromMap(e),
+          )
+          .toList();
+    } else {
+      throw resp.makeFailure();
+    }
+  }
+}```
+## Repositórios (Repositories)
+O repositorório (Repository) ficará as chamas a API http a chamada a qualquer outra font de dados. Ao implementar um repository irá conter um atributo herdado chamado httpDriver a qual tem diversas implementações para requisições HTTP. 
+
+Exemplo de criação de um repository
+```dart
+abstract interface class ITheCocktailDBRepo {
+  Future<FkHttpDriverResponse> searchDrinks(String term);
+}
+
+final class TheCocktailDBRepo extends FkBaseRepository
+    implements ITheCocktailDBRepo {
+  
+  //Caso desejar pode passar uma baseUrl exlusiva para 
+  //esse repositório caso não passe nada essa configuração 
+  //virá da configuração informada na inicialização do app
+  TheCocktailDBRepo() :super(baseUrl: "<BASE URL EXCLUSIVA>");
+
+  @override
+  Future<FkHttpDriverResponse> searchDrinks(String term) {
+    //BASE URL IS SETTED ON main.dart
+    return httpDriver.get(
+      "/v1/1/search.php",
+      queryParameters: {
+        "s": term,
+      },
+    );
+  }
+}
+```
 ## Criar um widget
 Para criar uma view basta herdar da classe FkWidget como no exemplo abaixo:
 ```dart
