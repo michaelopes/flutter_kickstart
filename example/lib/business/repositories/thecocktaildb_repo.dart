@@ -6,6 +6,9 @@ abstract interface class ITheCocktailDBRepo {
 
 final class TheCocktailDBRepo extends FkBaseRepository
     implements ITheCocktailDBRepo {
+
+TheCocktailDBRepo() :super(baseUrl: "<BASE URL EXCLUSIVA>")
+  
   @override
   Future<FkHttpDriverResponse> searchDrinks(String term) {
     //BASE URL IS SETTED ON main.dart
