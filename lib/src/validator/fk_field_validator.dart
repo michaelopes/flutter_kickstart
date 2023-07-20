@@ -200,7 +200,7 @@ class FkFieldValidator {
             if (value.isEmpty) {
               return null;
             }
-            var emailValid = FkValidator.email(value.toString());
+            var emailValid = FkValidator.isEmail(value.toString());
             if (!emailValid) {
               result =
                   (errorMessage ?? FkValidator.validatorMessages.invalidEmail);

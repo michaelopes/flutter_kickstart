@@ -5,7 +5,7 @@ import 'fk_validador_messages.dart';
 
 class FkValidator {
   static FkValidadorMessages validatorMessages = FkValidadorMessages();
-  static bool email(String email) {
+  static bool isEmail(String email) {
     return RegExp(
                 r'^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
             .hasMatch(email) &&

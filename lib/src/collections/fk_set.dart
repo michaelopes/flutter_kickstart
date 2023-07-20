@@ -1,9 +1,9 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
 
-class RxSet<T> extends ChangeNotifier with SetMixin<T> {
+class FkSet<T> extends ChangeNotifier with SetMixin<T> {
   late final Set<T> _set;
-  RxSet([Set<T>? set]) {
+  FkSet([Set<T>? set]) {
     if (set != null) {
       _set = set;
     } else {
@@ -11,7 +11,7 @@ class RxSet<T> extends ChangeNotifier with SetMixin<T> {
     }
   }
 
-  static RxSet<T> of<T>(Set<T> set) => RxSet<T>(set);
+  static FkSet<T> of<T>(Set<T> set) => FkSet<T>(set);
 
   @override
   bool add(T value) {
