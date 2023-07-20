@@ -66,14 +66,16 @@ void main() async {
 Caso deseje trabalhar com traduções dentro do Flutter KickStart é bem simples.
 
 Basta criar uma pasta de onde estará os arquivos de tradução com a extenção .json. 
-Exemplo para tradução pt_BR será criado um arquivo no nosso exemplo, **pt_BR.json** dentro da pasta **assets/i18n** no root do projeto lembrado que essa pasta deverá ser referênciada no **pubspec.yaml** do projeto como abaixo:
+Exemplo para tradução pt_BR será criado um arquivo no nosso exemplo, **pt_BR.json** dentro da pasta **assets/i18n** 
+no root do projeto lembrado que essa pasta deverá ser referênciada no **pubspec.yaml** do projeto como abaixo:
 
 ```YAML
 flutter:
   assets:
     - assets/i18n/
 ```
-Após feito essa configuração basta criar o conteúdo do arquivo json como no exemplo abaixo, lembrado que não há limite de encadeamento de chaves de tradução.
+Após feito essa configuração basta criar o conteúdo do arquivo json como no exemplo abaixo, lembrado que não há 
+limite de encadeamento de chaves de tradução.
 
 ```json
 {
@@ -93,21 +95,24 @@ Após feito essa configuração basta criar o conteúdo do arquivo json como no 
 }
 ```
 
-Utilizando uma tradução em um FkView ou FkWidget ambas implementações terão um atributo herdado chamado **tr** a qual será utilizado como no exemplo abaixo.
+Utilizando uma tradução em um FkView ou FkWidget ambas implementações terão um atributo herdado chamado **tr** 
+a qual será utilizado como no exemplo abaixo.
 
 ```dart
 //Exemplo para tradução dentro do pages: { "drink": { "title": "Bebidas" } }
 //Que convertido para o sistema de tratução ficará como abaixo:
 final textoTraducao = tr.pages.drink.title();
 ```
-Lembre-se de sempre adicionar **()** no final da chamada da tratução feito isso o texto "Bebidas" será adicionado a variável textoTraducao, contudo pode ser adicionado diretamente ao widget de texto como no exemplo:
+Lembre-se de sempre adicionar **()** no final da chamada da tratução feito isso o texto "Bebidas" será 
+adicionado a variável textoTraducao, contudo pode ser adicionado diretamente ao widget de texto como no exemplo:
 
 ```dart
 Text(tr.pages.drink.not_found_search_message())
 ```
 Note que cada nó separado por ponto representa um nó no arquivo .json.
 ## Intermediador de requests HTTP
-O intermediado de requests http será utilizado com o intuido de interceptar erros, requisições e respostas enviadas em chamadas HTTPs do app. Segue um exemplo abaixo:
+O intermediado de requests http será utilizado com o intuido de interceptar erros, requisições e respostas enviadas 
+em chamadas HTTPs do app. Segue um exemplo abaixo:
 
 ```dart
 class AppHttpMiddleware extends FkHttpDriverMiddleware {
@@ -133,7 +138,8 @@ class AppHttpMiddleware extends FkHttpDriverMiddleware {
 
 Os requests do Flutter Kickstart são uma implementação do pacote DIO.
 ## Intermediador de navegação de Views
-O intemediador de navegação é utilizado para aplicação de regras de navegação, no exemplo abaixo foi adicionado regras de navegação para idenficar se há um usuário logado, caso não haja um usuário logado o mesmo será direcionado para View de login.
+O intemediador de navegação é utilizado para aplicação de regras de navegação, no exemplo abaixo foi adicionado regras de navegação para 
+idenficar se há um usuário logado, caso não haja um usuário logado o mesmo será direcionado para View de login.
 
 Ao criar um intemediador de módulo será obrigatório a adição de um reactive (Reativo) 
 a qual será exemplificado à frente. Este reactivo será o responsável por gerenciar o estado da aplicação.
@@ -171,7 +177,9 @@ final class AppModuleMiddleware extends FkModuleMiddleware<GlobalReactive> {
 }
 ```
 ## Parser de respostas HTTP
-O parser de respostas HTTP é um recurso que pode ser utilizado para realizar tratamentos de respostas HTTP por faixa de StatusCode pode ser muito util para resoluções de erros e casts de respostas não padronizadas dentro de um app utilização no exemplo abaixo.
+O parser de respostas HTTP é um recurso que pode ser utilizado para realizar tratamentos de respostas HTTP 
+por faixa de StatusCode pode ser muito util para resoluções de erros e casts de respostas não padronizadas 
+dentro de um app utilização no exemplo abaixo.
 
 ```dart
 final class AppHttpResponseParser extends FkBaseHttpDriverResponseParser {
@@ -195,7 +203,8 @@ final class AppHttpResponseParser extends FkBaseHttpDriverResponseParser {
 }
 ```
 ## Rotas/Modules
-O Flutter Kickstart usa uma camada de implementação sobre o package GoRouter para o gerenciamento de rotas, contudo com uma implementação simples de um sistema dividido por módulos. No exemplo abaixo de como é feito a implementação:
+O Flutter Kickstart usa uma camada de implementação sobre o package GoRouter para o gerenciamento de rotas, 
+contudo com uma implementação simples de um sistema dividido por módulos. No exemplo abaixo de como é feito a implementação:
 
 ```dart
 class AppModules {
@@ -274,7 +283,8 @@ Para um exemplo completo veja o exemplo no nosso repositório.
 
 
 ## Injeção de depêndencias
-O pacote comporta um sistema simples de injeção de depêndencias contudo que atende a maioria app do mercado. Assim como o atende 100% a proposta do desenvolvimento do Flutter Kickstart.
+O pacote comporta um sistema simples de injeção de depêndencias contudo que atende a maioria app do mercado. Assim 
+como o atende 100% a proposta do desenvolvimento do Flutter Kickstart.
 
 Exemplo de uso:
 ```dart
@@ -296,7 +306,8 @@ class AppInjections {
 }
 ```
 ## Gerenciador global de erros
-Esse recurso é muito util para interceptar erros comum dentro de um app. Caso tenha uma erro que ocorra em mais de um lugar dentro do app o mesmo pode ser tratado de forma global para evitar duplicidade de códigos.
+Esse recurso é muito util para interceptar erros comum dentro de um app. Caso tenha uma erro que ocorra em mais de um 
+lugar dentro do app o mesmo pode ser tratado de forma global para evitar duplicidade de códigos.
 
 ```dart
 class AppGlobalError extends IGlobalFailureHandler {
@@ -308,7 +319,8 @@ class AppGlobalError extends IGlobalFailureHandler {
 }
 ```
 ## (Tema do app) FkTheme
-Trabalhar com tema dentro do Flutter Kickstart é bem simples, foi criada uma implementação de tema em cima do sistema de tema nativo flutter material, adicionando mais recursos para deixar mais flexível e mais simples de utilizar os recursos.
+Trabalhar com tema dentro do Flutter Kickstart é bem simples, foi criada uma implementação de tema em cima do sistema de 
+tema nativo flutter material, adicionando mais recursos para deixar mais flexível e mais simples de utilizar os recursos.
 
 Exemplo da criação de um tema
 ```dart
@@ -474,7 +486,8 @@ class AppTheme {
 
 ```
 ## Braços de tema
-Braços de tema (Theme Branch), esse recurso visa facilitar o compartilhamento global de um recurso de thema independente do tema principal que pode ser referênciado para um ou mais FkWidget ou FkView dentro do app.
+Braços de tema (Theme Branch), esse recurso visa facilitar o compartilhamento global de um recurso de thema independente 
+do tema principal que pode ser referênciado para um ou mais FkWidget ou FkView dentro do app.
 
 Criação de um braço de tema
 
@@ -552,7 +565,8 @@ class DrinkCard extends FkWidget {
 }
 ```
 ## Reativo (Reactive)
-O reactive será responsável pela gerência de estados de forma reativa dentro de uma FkView o reative é referênciado pelo o ViewModel responsável da view, contudo, um FkWidget pode referênciar diretamente a um reactive para sua gerência interna de estado.
+O reactive será responsável pela gerência de estados de forma reativa dentro de uma FkView o reative é referênciado 
+pelo o ViewModel responsável da view, contudo, um FkWidget pode referênciar diretamente a um reactive para sua gerência interna de estado.
 
 Exemplo de criação de um Reativo
 ```dart
@@ -607,7 +621,9 @@ class ReactiveWidget extends FkWidget<GlobalReactive> {
 }
 ```
 ## ViewModel
-O ViewModel será responsável pela gerência de estados de uma view, mas não somente isso ele visa atuar como um controlador da view onde ficará as variáves e metodos responsáveis pela logica da view, assim como o acesso aos serviços, a view a princípios ficará somente responsável para rendenização dos widgets.
+O ViewModel será responsável pela gerência de estados de uma view, mas não somente isso ele visa atuar como um controlador 
+da view onde ficará as variáves e metodos responsáveis pela logica da view, assim como o acesso aos serviços, a view a 
+princípios ficará somente responsável para rendenização dos widgets.
 
 ```dart
 class DrinkViewModel extends FkViewModel<_DrinkViewModelReactive> {
@@ -668,7 +684,9 @@ class _DrinkViewModelReactive extends FkReactive {
 }
 ```
 ## Utilização dos assets
-Usar assets como icones, imagens e animações lottie dentro do flutter KickStart é muito simples. Basta colocar um icone dentro da pasta referenciada no tema exemplo **assets/icons** ex: **flutter.svg** que ele já está disponível para utilização como no exemplo abaixo:
+Usar assets como icones, imagens e animações lottie dentro do flutter KickStart é muito simples. Basta colocar um 
+icone dentro da pasta referenciada no tema exemplo **assets/icons** ex: **flutter.svg** que ele já está disponível 
+para utilização como no exemplo abaixo:
 
 ```dart
 class UseAssetsView extends FkView<UseAssetsViewModel> {
@@ -691,9 +709,9 @@ class UseAssetsView extends FkView<UseAssetsViewModel> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               /* 
-                Dessa forma, basta colocar o arquivo de imagem dentro da pasta "assets/images" e chamar diretamente o nome do arquivo e sua extensão separados pelo símbolo "$", como a seguir:
-
-Se o arquivo tiver a extensão PNG, não é necessário informar a extensão após o símbolo "$".
+                Dessa forma, basta colocar o arquivo de imagem dentro da pasta "assets/images" e chamar
+                 diretamente o nome do arquivo e sua extensão separados pelo símbolo "$", como a seguir:
+                 Se o arquivo tiver a extensão PNG, não é necessário informar a extensão após o símbolo "$".
               **/
               SizedBox(
                 height: 50,
@@ -713,7 +731,11 @@ Se o arquivo tiver a extensão PNG, não é necessário informar a extensão ap�
                 width: 24,
               ),
               /* 
-               Dessa forma, um snippet de código foi criado para auxiliar na busca por arquivos de imagem encontrados na pasta "assets_snippets/app_images". Em Dart, o snippet de código é uma referência para os arquivos adicionados dentro da pasta "assets/images". O nome da variável do trecho de código deve ter o mesmo nome do arquivo na pasta. Se for um arquivo PNG, não é necessário especificar a extensão. Caso a extensão seja necessária, ela deve ser escrita após o símbolo "$", como mostrado abaixo:
+               Dessa forma, um snippet de código foi criado para auxiliar na busca por arquivos de imagem encontrados
+              na pasta "assets_snippets/app_images". Em Dart, o snippet de código é uma referência para os arquivos adicionados
+              dentro da pasta "assets/images". O nome da variável do trecho de código deve ter o mesmo nome do arquivo na pasta.
+              Se for um arquivo PNG, não é necessário especificar a extensão. Caso a extensão seja necessária, ela deve ser escrita
+              após o símbolo "$", como mostrado abaixo:
               **/
               SizedBox(
                 height: 50,
@@ -742,9 +764,9 @@ Se o arquivo tiver a extensão PNG, não é necessário informar a extensão ap�
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               /* 
-                Dessa forma, basta colocar o arquivo de ícone dentro da pasta "assets/icons" e chamar diretamente o nome do arquivo e sua extensão separados pelo símbolo "$", como a seguir:
-
-Se o arquivo tiver a extensão SVG, não é necessário informar a extensão após o símbolo "$". 
+                Dessa forma, basta colocar o arquivo de ícone dentro da pasta "assets/icons" e
+                chamar diretamente o nome do arquivo e sua extensão separados pelo símbolo "$", como a seguir:
+                Se o arquivo tiver a extensão SVG, não é necessário informar a extensão após o símbolo "$". 
               **/
               SizedBox(height: 50, width: 50, child: theme.icons.flutter$PNG),
               const SizedBox(
@@ -756,8 +778,10 @@ Se o arquivo tiver a extensão SVG, não é necessário informar a extensão ap�
                 width: 24,
               ),
               /* 
-               
-Dessa forma, um snippet de código foi criado para auxiliar na busca por arquivos de ícones encontrados na pasta "assets_snippets/app_icons". Em Dart, o snippet de código é uma referência para os arquivos adicionados dentro da pasta "assets/icons". O nome da variável do trecho de código deve ter o mesmo nome do arquivo na pasta. Se for um arquivo SVG, não é necessário especificar a extensão. Caso a extensão seja necessária, ela deve ser escrita após o símbolo "$", como mostrado abaixo:
+              Dessa forma, um snippet de código foi criado para auxiliar na busca por arquivos de ícones encontrados na pasta "assets_snippets/app_icons".
+              Em Dart, o snippet de código é uma referência para os arquivos adicionados dentro da pasta "assets/icons". O nome da variável do trecho de
+              código deve ter o mesmo nome do arquivo na pasta. Se for um arquivo SVG, não é necessário especificar a extensão. Caso a extensão seja necessária,
+              ela deve ser escrita após o símbolo "$", como mostrado abaixo:
               **/
               SizedBox(
                 height: 50,
@@ -797,7 +821,9 @@ Dessa forma, um snippet de código foi criado para auxiliar na busca por arquivo
               ),
 
               /* 
-               Dessa forma, um snippet de código foi criado para auxiliar na busca por arquivos de animações encontrados na pasta "assets_snippets/app_animations". Em Dart, o snippet de código é uma referência para os arquivos adicionados dentro da pasta "assets/animations". O nome da variável do trecho de código deve ter o mesmo nome do arquivo na pasta. Por exemplo:
+               Dessa forma, um snippet de código foi criado para auxiliar na busca por arquivos de animações encontrados
+               na pasta "assets_snippets/app_animations". Em Dart, o snippet de código é uma referência para os arquivos adicionados dentro
+               da pasta "assets/animations". O nome da variável do trecho de código deve ter o mesmo nome do arquivo na pasta. Por exemplo:
               **/
               SizedBox(
                 height: 50,
@@ -904,7 +930,8 @@ class UseResponsiveView extends FkView<UseResponsiveViewModel> {
 }
 ```
 ## Validações
-O Flutter Kickstart suporta as principais validações utilizadas do Brasil. Caso tenho sugestões de validações adicione uma issue para que possamos incorpora-la no projeto.
+O Flutter Kickstart suporta as principais validações utilizadas do Brasil. Caso tenho sugestões de validações adicione uma issue para 
+que possamos incorpora-la no projeto.
 
 Validações suportadas.
 ```dart
