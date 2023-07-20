@@ -830,6 +830,45 @@ class DrinkView extends FkView<DrinkViewModel> {
   }
 }
 ```
+## Criar um widget
+Para criar uma view basta herdar da classe FkWidget como no exemplo abaixo:
+```dart
+class DrinkCard extends FkWidget {
+  DrinkCard({
+    super.key,
+    required this.drinkName,
+    required this.drinkThumbnail,
+  });
+
+  final String drinkName;
+  final String drinkThumbnail;
+
+  @override
+  String get themeBranch => "VerticalCard";
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: theme.decoration,
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: theme.decoration!.borderRadius,
+            child: Image.network(drinkThumbnail),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+            child: Text(
+              drinkName,
+              style: theme.typography.bodyExtra,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+```
 ## Utilização dos assets
 Usar assets como icones, imagens e animações lottie dentro do flutter KickStart é muito simples. Basta colocar um 
 icone dentro da pasta referenciada no tema exemplo **assets/icons** ex: **flutter.svg** que ele já está disponível 
