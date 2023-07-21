@@ -100,10 +100,10 @@ a qual será utilizado como no exemplo abaixo.
 
 ```dart
 //Exemplo para tradução dentro do pages: { "drink": { "title": "Bebidas" } }
-//Que convertido para o sistema de tratução ficará como abaixo:
+//Que convertido para o sistema de tradução ficará como abaixo:
 final textoTraducao = tr.pages.drink.title();
 ```
-Lembre-se de sempre adicionar **()** no final da chamada da tratução feito isso o texto "Bebidas" será 
+Lembre-se de sempre adicionar **()** no final da chamada da tradução feito isso o texto "Bebidas" será 
 adicionado a variável textoTraducao, contudo pode ser adicionado diretamente ao widget de texto como no exemplo:
 
 ```dart
