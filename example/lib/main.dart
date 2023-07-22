@@ -10,14 +10,13 @@ import 'setup/app_modules.dart';
 import 'theme/app_theme.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   await Fk.init(
     i18nDirectory: "assets/i18n/",
     availableLanguages: ["pt_BR"],
     defaultLocale: const Locale("pt", "BR"),
-    httpDriverMiddleware: AppHttpMiddleware(),
-    moduleMiddleware: AppModuleMiddleware(),
-    httpDriverResponseParser: AppHttpResponseParser(),
+    httpDriverMiddleware: () => AppHttpMiddleware(),
+    moduleMiddleware: () => AppModuleMiddleware(),
+    httpDriverResponseParser: () => AppHttpResponseParser(),
     baseUrl: "https://www.thecocktaildb.com/api/json",
   );
 

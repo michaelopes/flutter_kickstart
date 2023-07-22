@@ -9,6 +9,12 @@ import 'fk_load_font.dart';
 
 import 'fk_globals.dart' as globals;
 
+typedef HttpDriverMiddlewareFunc = FkHttpDriverMiddleware Function();
+typedef FkBaseHttpDriverResponseParserFunc = FkBaseHttpDriverResponseParser
+    Function();
+
+typedef FkModuleMiddlewareFunc = FkModuleMiddleware Function();
+
 class Fk {
   static Future<dynamic> init({
     String env = "",
@@ -17,10 +23,10 @@ class Fk {
     List<FkFont> fonts = const [],
     List<Future> extraInits = const [],
     List<String> availableLanguages = const [],
-    FkBaseHttpDriverResponseParser? httpDriverResponseParser,
     bool enableHttpDriverLogger = true,
-    FkHttpDriverMiddleware? httpDriverMiddleware,
-    FkModuleMiddleware? moduleMiddleware,
+    FkBaseHttpDriverResponseParserFunc? httpDriverResponseParser,
+    HttpDriverMiddlewareFunc? httpDriverMiddleware,
+    FkModuleMiddlewareFunc? moduleMiddleware,
     String baseUrl = "",
   }) async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -31,14 +37,14 @@ class Fk {
     globals.baseUrl = baseUrl;
 
     if (httpDriverResponseParser != null) {
-      globals.httpDriverResponseParser = httpDriverResponseParser;
+      globals.httpDriverResponseParser = httpDriverResponseParser();
     }
 
     if (httpDriverMiddleware != null) {
-      globals.httpDriverMiddleware = httpDriverMiddleware;
+      globals.httpDriverMiddleware = httpDriverMiddleware();
     }
 
-    globals.moduleMiddleware = moduleMiddleware;
+    globals.moduleMiddleware = moduleMiddleware?.call();
 
     if (env.isNotEmpty) {
       await dotenv.load(fileName: env);

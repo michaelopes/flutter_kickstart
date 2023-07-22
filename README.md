@@ -33,15 +33,15 @@ void main() async {
     defaultLocale: const Locale("pt", "BR"),
     //Intermediador de requests HTTP (OPCIONAL)
     //Será exemplificado à frente 
-    httpDriverMiddleware: AppHttpMiddleware(),
+    httpDriverMiddleware: () => AppHttpMiddleware(),
     //Intermediador de navegação de view (OPCIONAL).
     //Pode ser utilizado por exemplo para chegar se o usuário está 
     //com o login válido no app será exemplificado à frente 
-    moduleMiddleware: AppModuleMiddleware(),
+    moduleMiddleware: () => AppModuleMiddleware(),
     //Parser de respostas HTTP (OPCIONAL).
     //Com esse parser é possivel customizar erros ou respostas para 
     //cada faixa de códigos HTTP ex: 200, 400, 500, etc..
-    httpDriverResponseParser: AppHttpResponseParser(),
+    httpDriverResponseParser: () => AppHttpResponseParser(),
     baseUrl: "https://www.thecocktaildb.com/api/json",
   );
 
