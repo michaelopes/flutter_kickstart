@@ -374,9 +374,9 @@ class AppTheme {
   //Tanto para o tema light quanto para o 
   //tema dark, contudo cada tema pode ter
   //icones independentes 
-  final iconsDirectory = "assets/icons/";
-  final imagesDirectory = "assets/images/";
-  final animationsDirectory = "assets/animations/";
+  final iconsDirectory = "assets/icons/" //OU ["assets/icons/", "assets/seconds_icons/"];
+  final imagesDirectory = "assets/images/"//OU ["assets/images/", "assets/seconds_images/"];
+  final animationsDirectory = "assets/animations/"//OU ["assets/animations/", "assets/seconds_animations/"];
 
   final assetsSnippets = <FkAssetSnippetProvider>[
     //Adição de snippets de assets forma de utilização 
