@@ -51,7 +51,7 @@ class AppTheme {
     shade900: const Color(0xFF393939),
   );
 
-  final iconsDirectory = "assets/icons/";
+  final iconsDirectory = ["assets/second_icons", "assets/icons/"];
   final imagesDirectory = "assets/images/";
   final animationsDirectory = "assets/animations/";
 

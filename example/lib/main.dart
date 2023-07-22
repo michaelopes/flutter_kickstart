@@ -10,6 +10,7 @@ import 'setup/app_modules.dart';
 import 'theme/app_theme.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Fk.init(
     i18nDirectory: "assets/i18n/",
     availableLanguages: ["pt_BR"],

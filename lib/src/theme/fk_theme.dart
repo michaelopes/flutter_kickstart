@@ -63,7 +63,7 @@ abstract base class FkCustomThemeBranch implements _IFkThemeBranch {
 final class FkTheme extends ThemeExtension<FkTheme> {
   final FkColorPalete colorPalete;
   final List<FkAssetSnippetProvider> assetsSnippets;
-  final String iconsDirectory;
+  final dynamic iconsDirectory;
   final String imagesDirectory;
   final String animationsDirectory;
   final BoxDecoration? decoration;

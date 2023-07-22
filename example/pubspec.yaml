@@ -27,6 +27,7 @@ flutter:
     - assets/images/
     - assets/animations/
     - assets/icons/
+    - assets/second_icons/
     - assets/i18n/
 
   # example:

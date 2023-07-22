@@ -891,7 +891,7 @@ final class TheCocktailDBRepo extends FkBaseRepository
 ```
 
 ## Criar um widget
-Para criar uma view basta herdar da classe FkWidget como no exemplo abaixo:
+Para criar uma widget basta herdar da classe FkWidget como no exemplo abaixo:
 ```dart
 class DrinkCard extends FkWidget {
   DrinkCard({

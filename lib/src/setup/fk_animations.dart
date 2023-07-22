@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_kickstart/src/interfaces/fk_asset.dart';
 import 'package:lottie/lottie.dart';
 
@@ -24,7 +25,14 @@ class FkAnimations extends FkAsset {
       debugPrint(message);
       throw Exception(message);
     }
-    return FpAnimation(fileName: "$fileName.$ext", directory: directory);
+    final directories = <String>[];
+    if (directory is String) {
+      directories.add(directory);
+    } else if (directory is List<String>) {
+      directories.addAll(directory);
+    }
+
+    return FpAnimation(fileName: "$fileName.$ext", directories: directories);
   }
 }
 
@@ -32,7 +40,7 @@ class FkAnimationsSnippetProvider extends FkAnimations
     implements FkAssetSnippetProvider {
   FkAnimationsSnippetProvider() : super("");
   @override
-  void setDirectory(String value) {
+  void setDirectory(dynamic value) {
     super.directory = value;
   }
 }
@@ -47,19 +55,37 @@ class FkDynamicAnimations extends FkAnimations {
 }
 
 class FpAnimation {
-  late final String fileName;
+  final List<String> fileNames = [];
   final double? width;
   final double? height;
   final BoxFit? fit;
-  final String directory;
+  final List<String> directories;
   FpAnimation({
     required String fileName,
-    required this.directory,
+    required this.directories,
     this.width,
     this.height,
     this.fit,
   }) {
-    this.fileName = "${FkToolkit.formatInputedDirectory(directory)}/$fileName";
+    for (var directory in directories) {
+      fileNames.add("${FkToolkit.formatInputedDirectory(directory)}/$fileName");
+    }
+  }
+
+  Future<Uint8List> _loadAssetFromIndex(int index) async {
+    ByteData data;
+    var fileName = fileNames[index];
+    try {
+      data = await rootBundle.load(fileName);
+    } catch (e) {
+      if (fileNames.length == index + 1) {
+        throw Exception("Animation with name $fileName not found!");
+      } else {
+        index = index + 1;
+        return _loadAssetFromIndex(index);
+      }
+    }
+    return data.buffer.asUint8List();
   }
 
   Widget toAnimation({
@@ -69,19 +95,29 @@ class FpAnimation {
     double? height,
     BoxFit? fit,
   }) {
-    if (directory.isEmpty) {
+    if (directories.isEmpty) {
       var message =
           "Unable to load animation, animationsDirectory not given on FkTheme creation";
       debugPrint(message);
       throw Exception(message);
     }
-    return Lottie.asset(
-      fileName,
-      width: width ?? this.width,
-      height: height ?? this.height,
-      fit: fit ?? (this.fit ?? BoxFit.contain),
-      controller: controller,
-      onLoaded: (composition) => onLoaded?.call(composition.duration),
-    );
+    return FutureBuilder<Uint8List>(
+        future: _loadAssetFromIndex(0),
+        builder: (_, snapshot) {
+          return snapshot.hasData
+              ? Lottie.memory(
+                  snapshot.data!,
+                  width: width ?? this.width,
+                  height: height ?? this.height,
+                  fit: fit ?? (this.fit ?? BoxFit.contain),
+                  controller: controller,
+                  onLoaded: (composition) =>
+                      onLoaded?.call(composition.duration),
+                )
+              : SizedBox(
+                  height: width ?? this.width,
+                  width: height ?? this.height,
+                );
+        });
   }
 }

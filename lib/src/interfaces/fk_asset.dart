@@ -1,5 +1,5 @@
 abstract class FkAsset {
-  String directory;
+  dynamic directory;
   FkAsset(this.directory);
 }
 
