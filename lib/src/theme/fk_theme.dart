@@ -64,8 +64,8 @@ final class FkTheme extends ThemeExtension<FkTheme> {
   final FkColorPalete colorPalete;
   final List<FkAssetSnippetProvider> assetsSnippets;
   final dynamic iconsDirectory;
-  final String imagesDirectory;
-  final String animationsDirectory;
+  final dynamic imagesDirectory;
+  final dynamic animationsDirectory;
   final BoxDecoration? decoration;
 
   late final FkColor _background;
