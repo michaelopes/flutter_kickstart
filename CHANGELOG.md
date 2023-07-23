@@ -1,3 +1,6 @@
+## 1.0.0-beta.6
+
+* Correção de bug
 ## 1.0.0-beta.5
 
 * Atualização de documentação.
