@@ -1,3 +1,6 @@
+## 1.0.0-beta.7
+
+* Adicionado suporte para font family
 ## 1.0.0-beta.6
 
 * Correção de bug

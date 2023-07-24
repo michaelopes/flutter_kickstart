@@ -67,6 +67,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
   final dynamic imagesDirectory;
   final dynamic animationsDirectory;
   final BoxDecoration? decoration;
+  final String? fontFamily;
 
   late final FkColor _background;
   late final FkTypography _typography;
@@ -127,6 +128,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     required this.iconsDirectory,
     required this.imagesDirectory,
     required this.animationsDirectory,
+    this.fontFamily,
     this.decoration,
     this.assetsSnippets = const [],
     FkTypography? typography,
@@ -166,11 +168,18 @@ final class FkTheme extends ThemeExtension<FkTheme> {
 
     if (defaultTextColor != null) {
       var textColor = defaultTextColor(colorPalete);
-      _typography.setTextColor(textColor);
+      _typography.setTextExtraData(
+        color: textColor,
+        fontFamily: fontFamily,
+      );
+      ;
       _defaultTextColor = defaultTextColor;
     } else {
       var textColor = FkToolkit.generateHighlightColor(_background);
-      _typography.setTextColor(textColor);
+      _typography.setTextExtraData(
+        color: textColor,
+        fontFamily: fontFamily,
+      );
       _defaultTextColor = null;
     }
 
@@ -214,6 +223,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     required this.iconsDirectory,
     required this.imagesDirectory,
     required this.animationsDirectory,
+    this.fontFamily,
     this.assetsSnippets = const [],
     this.decoration,
     FkTypography? typography,
@@ -252,11 +262,17 @@ final class FkTheme extends ThemeExtension<FkTheme> {
 
     if (defaultTextColor != null) {
       var textColor = defaultTextColor(colorPalete);
-      _typography.setTextColor(textColor);
+      _typography.setTextExtraData(
+        color: textColor,
+        fontFamily: fontFamily,
+      );
       _defaultTextColor = defaultTextColor;
     } else {
       var textColor = FkToolkit.generateHighlightColor(_background);
-      _typography.setTextColor(textColor);
+      _typography.setTextExtraData(
+        color: textColor,
+        fontFamily: fontFamily,
+      );
       _defaultTextColor = null;
     }
     _defaultIndicatorColor = defaultIndicatorColor;
@@ -309,10 +325,12 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     DefaultTextColorFunc? defaultTextColor,
     DefaultIndicatorColorFunc? defaultIndicatorColor,
     BoxDecoration? decoration,
+    String? fontFamily,
   }) {
     var cPalete = colorPalete ?? this.colorPalete;
     return _themeData.brightness == Brightness.light
         ? FkTheme.light(
+            fontFamily: fontFamily ?? this.fontFamily,
             colorPalete: cPalete,
             iconsDirectory: iconsDirectory,
             imagesDirectory: imagesDirectory,
@@ -336,6 +354,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
                 defaultIndicatorColor ?? _defaultIndicatorColor,
           )
         : FkTheme.dark(
+            fontFamily: fontFamily ?? this.fontFamily,
             iconsDirectory: iconsDirectory,
             imagesDirectory: imagesDirectory,
             animationsDirectory: animationsDirectory,
@@ -369,6 +388,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     var cPalete = colorPalete.lerp(other.colorPalete, t);
     return _themeData.brightness == Brightness.light
         ? FkTheme.light(
+            fontFamily: other.fontFamily,
             iconsDirectory: other.iconsDirectory,
             imagesDirectory: other.imagesDirectory,
             animationsDirectory: other.animationsDirectory,
@@ -393,6 +413,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
                 : other.decoration,
           )
         : FkTheme.dark(
+            fontFamily: other.fontFamily,
             iconsDirectory: other.iconsDirectory,
             imagesDirectory: other.imagesDirectory,
             animationsDirectory: other.animationsDirectory,
