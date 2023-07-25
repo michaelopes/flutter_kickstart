@@ -72,7 +72,7 @@ class AppTheme {
       animationsDirectory: animationsDirectory,
       background: (colorPalete) => colorPalete.neutralVariant,
       assetsSnippets: assetsSnippets,
-      bottomNavigationBarTheme: (colorPalete) {
+      bottomNavigationBarTheme: (colorPalete, _) {
         return BottomNavigationBarThemeData(
           type: BottomNavigationBarType.fixed,
           selectedItemColor: colorPalete.primary,
@@ -80,7 +80,7 @@ class AppTheme {
           backgroundColor: colorPalete.neutral.shade900,
         );
       },
-      inputDecorationTheme: (colorPalete) {
+      inputDecorationTheme: (colorPalete, _) {
         return InputDecorationTheme(
           labelStyle: TextStyle(
             color: colorPalete.neutral.onShade200,
@@ -122,13 +122,13 @@ class AppTheme {
       animationsDirectory: animationsDirectory,
       background: (colorPalete) => colorPalete.neutralVariant,
       assetsSnippets: assetsSnippets,
-      bottomNavigationBarTheme: (colorPalete) {
+      bottomNavigationBarTheme: (colorPalete, _) {
         return BottomNavigationBarThemeData(
           selectedItemColor: colorPalete.primary,
           unselectedItemColor: colorPalete.neutral,
         );
       },
-      inputDecorationTheme: (colorPalete) {
+      inputDecorationTheme: (colorPalete, _) {
         return InputDecorationTheme(
           labelStyle: TextStyle(
             color: colorPalete.neutral.onShade200,

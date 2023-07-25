@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/fk_inject.dart';
@@ -26,6 +29,7 @@ abstract class FkView<VM extends FkViewModel> extends StatefulWidget {
   dynamic get tr => _viewHelper.tr;
   VM get vm => _viewHelper.vm;
 
+  SystemUiOverlayStyle? get systemOverlayStyle => null;
   String get themeBranch => "";
 
   Widget build(BuildContext context);
@@ -37,6 +41,7 @@ abstract class FkView<VM extends FkViewModel> extends StatefulWidget {
 class _FkViewState<VM extends FkViewModel> extends State<FkView> {
   final _locator = FkInjectLocator();
   VM? viewModel;
+  SystemUiOverlayStyle? _systemOverlayStyleToReset;
 
   @override
   void initState() {
@@ -45,14 +50,29 @@ class _FkViewState<VM extends FkViewModel> extends State<FkView> {
     viewModel?.init();
     viewModel?.reactive.addListener(_handleChange);
     widget._viewHelper._state = this;
+    if (widget.systemOverlayStyle != null) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        var fkThm = Theme.of(context).extension<FkTheme>();
+        _systemOverlayStyleToReset = fkThm?.brightness == Brightness.dark
+            ? SystemUiOverlayStyle.dark
+            : SystemUiOverlayStyle.light;
+      });
+      Timer(const Duration(milliseconds: 300), () {
+        SystemChrome.setSystemUIOverlayStyle(widget.systemOverlayStyle!);
+      });
+    }
+
     super.initState();
   }
 
   @override
   void dispose() {
-    super.dispose();
     viewModel?.reactive.removeListener(_handleChange);
     viewModel?.dispose();
+    if (_systemOverlayStyleToReset != null) {
+      SystemChrome.setSystemUIOverlayStyle(_systemOverlayStyleToReset!);
+    }
+    super.dispose();
   }
 
   @override

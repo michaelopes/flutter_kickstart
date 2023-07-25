@@ -31,7 +31,8 @@ final class FkTypography {
   late final TextStyle _buttonLarge;
   late final TextStyle _buttonExtra;
 
-  Color _textColor = Colors.black;
+  Color _bodyTextColor = Colors.black;
+  Color _decorationTextColor = Colors.black;
   String? _fontFamily;
 
   FkTypography({
@@ -118,10 +119,12 @@ final class FkTypography {
   }
 
   void setTextExtraData({
-    required Color color,
+    required Color bodyColor,
+    required Color decorationColor,
     String? fontFamily,
   }) {
-    _textColor = color;
+    _bodyTextColor = bodyColor;
+    _decorationTextColor = decorationColor;
     _fontFamily = fontFamily;
   }
 
@@ -142,63 +145,141 @@ final class FkTypography {
       titleLarge: bodyLarge.copyWith(fontWeight: FontWeight.w500),
       titleMedium: bodyDefault.copyWith(fontWeight: FontWeight.w500),
       titleSmall: bodySmall.copyWith(fontWeight: FontWeight.w500),
+    ).apply(
+      bodyColor: _bodyTextColor,
+      decorationColor: _decorationTextColor,
+      fontFamily: _fontFamily,
     );
   }
 
-  TextStyle get heading01 =>
-      _heading01.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get heading02 =>
-      _heading02.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get heading03 =>
-      _heading03.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get heading04 =>
-      _heading04.copyWith(color: _textColor, fontFamily: _fontFamily);
+  TextStyle get heading01 => _heading01.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get heading02 => _heading02.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get heading03 => _heading03.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get heading04 => _heading04.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get display01 => _display01.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get display02 => _display02.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get display03 => _display03.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
 
-  TextStyle get display01 =>
-      _display01.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get display02 =>
-      _display02.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get display03 =>
-      _display03.copyWith(color: _textColor, fontFamily: _fontFamily);
+  TextStyle get headline01 => _headline01.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get headline02 => _headline02.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get headline03 => _headline03.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get headline04 => _headline04.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get headline05 => _headline05.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get headline06 => _headline06.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
 
-  TextStyle get headline01 =>
-      _headline01.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get headline02 =>
-      _headline02.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get headline03 =>
-      _headline03.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get headline04 =>
-      _headline04.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get headline05 =>
-      _headline05.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get headline06 =>
-      _headline06.copyWith(color: _textColor, fontFamily: _fontFamily);
+  TextStyle get bodyTiny => _bodyTiny.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get bodyMini => _bodyMini.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get bodySmall => _bodySmall.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get bodyDefault => _bodyDefault.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get bodyLarge => _bodyLarge.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get bodyExtra => _bodyExtra.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
 
-  TextStyle get bodyTiny =>
-      _bodyTiny.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get bodyMini =>
-      _bodyMini.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get bodySmall =>
-      _bodySmall.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get bodyDefault =>
-      _bodyDefault.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get bodyLarge =>
-      _bodyLarge.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get bodyExtra =>
-      _bodyExtra.copyWith(color: _textColor, fontFamily: _fontFamily);
-
-  TextStyle get buttonTiny =>
-      _buttonTiny.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get buttonMini =>
-      _buttonMini.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get buttonSmall =>
-      _buttonSmall.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get buttonDefault =>
-      _buttonDefault.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get buttonLarge =>
-      _buttonLarge.copyWith(color: _textColor, fontFamily: _fontFamily);
-  TextStyle get buttonExtra =>
-      _buttonExtra.copyWith(color: _textColor, fontFamily: _fontFamily);
+  TextStyle get buttonTiny => _buttonTiny.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get buttonMini => _buttonMini.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get buttonSmall => _buttonSmall.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get buttonDefault => _buttonDefault.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get buttonLarge => _buttonLarge.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
+  TextStyle get buttonExtra => _buttonExtra.apply(
+        fontFamily: _fontFamily,
+        color: _bodyTextColor,
+        decorationColor: _decorationTextColor,
+      );
 
   FkTypography copyWith({
     TextStyle? heading01,

@@ -6,20 +6,38 @@ export 'fk_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 
-typedef BackgroundColorFunc = FkColor? Function(FkColorPalete colorPalete);
+typedef BackgroundColorFunc = FkColor? Function(
+  FkColorPalete colorPalete,
+);
 typedef OutlinedButtonThemeFunc = OutlinedButtonThemeData? Function(
-    FkColorPalete colorPalete);
+  FkColorPalete colorPalete,
+  FkTypography typography,
+);
 typedef ElevatedButtonThemeFunc = ElevatedButtonThemeData? Function(
-    FkColorPalete colorPalete);
+  FkColorPalete colorPalete,
+  FkTypography typography,
+);
 typedef FloatingActionButtonThemeFunc = FloatingActionButtonThemeData? Function(
-    FkColorPalete colorPalete);
+  FkColorPalete colorPalete,
+  FkTypography typography,
+);
 typedef InputDecorationThemeFunc = InputDecorationTheme? Function(
-    FkColorPalete colorPalete);
-typedef AppBarThemeFunc = AppBarTheme? Function(FkColorPalete colorPalete);
+  FkColorPalete colorPalete,
+  FkTypography typography,
+);
+typedef AppBarThemeFunc = AppBarTheme? Function(
+  FkColorPalete colorPalete,
+  FkTypography typography,
+);
 typedef BottomNavigationBarThemeFunc = BottomNavigationBarThemeData? Function(
-    FkColorPalete colorPalete);
+  FkColorPalete colorPalete,
+  FkTypography typography,
+);
 
 typedef IconThemeFunc = IconThemeData? Function(FkColorPalete colorPalete);
+
+typedef TextSelectionThemeFunc = TextSelectionThemeData? Function(
+    FkColorPalete colorPalete);
 
 // ignore: library_private_types_in_public_api
 typedef ThemeBranchsFunc = List<_IFkThemeBranch>? Function(FkTheme owner);
@@ -79,9 +97,11 @@ final class FkTheme extends ThemeExtension<FkTheme> {
   late final InputDecorationThemeFunc? _inputDecorationTheme;
   late final AppBarThemeFunc? _appBarTheme;
   late final BottomNavigationBarThemeFunc? _bottomNavigationBarTheme;
+  late final TextSelectionThemeFunc? _textSelectionTheme;
   late final IconThemeFunc? _iconTheme;
 
-  late final DefaultTextColorFunc? _defaultTextColor;
+  late final DefaultTextColorFunc? _defaultBodyColorTextColor;
+  late final DefaultTextColorFunc? _defaultDecorationColorTextColor;
   late final DefaultIndicatorColorFunc? _defaultIndicatorColor;
 
   FkTypography get typography => _typography;
@@ -123,6 +143,22 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     return null;
   }
 
+  OutlinedButtonThemeData? _oBTheme;
+  ElevatedButtonThemeData? _eBTheme;
+  FloatingActionButtonThemeData? _fATheme;
+  InputDecorationTheme? _iTheme;
+  AppBarTheme? _aBTheme;
+  BottomNavigationBarThemeData? _bNTheme;
+  TextSelectionThemeData? _tSTheme;
+
+  OutlinedButtonThemeData? get outlinedButtonTheme => _oBTheme;
+  ElevatedButtonThemeData? get elevatedButtonTheme => _eBTheme;
+  FloatingActionButtonThemeData? get floatingActionButtonTheme => _fATheme;
+  InputDecorationTheme? get inputDecorationTheme => _iTheme;
+  AppBarTheme? get appBarTheme => _aBTheme;
+  BottomNavigationBarThemeData? get bottomNavigationBarTheme => _bNTheme;
+  TextSelectionThemeData? get textSelectionTheme => _tSTheme;
+
   FkTheme.light({
     required this.colorPalete,
     required this.iconsDirectory,
@@ -140,9 +176,11 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     AppBarThemeFunc? appBarTheme,
     BottomNavigationBarThemeFunc? bottomNavigationBarTheme,
     IconThemeFunc? iconTheme,
-    DefaultTextColorFunc? defaultTextColor,
+    DefaultTextColorFunc? defaultBodyTextColor,
+    DefaultTextColorFunc? defaultDecorationColorTextColor,
     DefaultIndicatorColorFunc? defaultIndicatorColor,
     ThemeBranchsFunc? themeBranchs,
+    TextSelectionThemeFunc? textSelectionTheme,
   }) {
     _outlinedButtonTheme = outlinedButtonTheme;
     _elevatedButtonTheme = elevatedButtonTheme;
@@ -151,6 +189,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     _appBarTheme = appBarTheme;
     _bottomNavigationBarTheme = bottomNavigationBarTheme;
     _iconTheme = iconTheme;
+    _textSelectionTheme = textSelectionTheme;
 
     _background = background?.call(colorPalete) ??
         FkColor.color(
@@ -159,40 +198,37 @@ final class FkTheme extends ThemeExtension<FkTheme> {
         );
 
     _typography = typography ?? FkTypography();
-    var oBTheme = _outlinedButtonTheme?.call(colorPalete);
-    var eBTheme = _elevatedButtonTheme?.call(colorPalete);
-    var fATheme = _floatingActionButtonTheme?.call(colorPalete);
-    var iTheme = _inputDecorationTheme?.call(colorPalete);
-    var aBTheme = _appBarTheme?.call(colorPalete);
-    var bNTheme = _bottomNavigationBarTheme?.call(colorPalete);
+    _oBTheme = _outlinedButtonTheme?.call(colorPalete, _typography);
+    _eBTheme = _elevatedButtonTheme?.call(colorPalete, _typography);
+    _fATheme = _floatingActionButtonTheme?.call(colorPalete, _typography);
+    _iTheme = _inputDecorationTheme?.call(colorPalete, _typography);
+    _aBTheme = _appBarTheme?.call(colorPalete, _typography);
+    _bNTheme = _bottomNavigationBarTheme?.call(colorPalete, _typography);
+    _tSTheme = _textSelectionTheme?.call(colorPalete);
 
-    if (defaultTextColor != null) {
-      var textColor = defaultTextColor(colorPalete);
-      _typography.setTextExtraData(
-        color: textColor,
-        fontFamily: fontFamily,
-      );
-      ;
-      _defaultTextColor = defaultTextColor;
-    } else {
-      var textColor = FkToolkit.generateHighlightColor(_background);
-      _typography.setTextExtraData(
-        color: textColor,
-        fontFamily: fontFamily,
-      );
-      _defaultTextColor = null;
-    }
+    _defaultBodyColorTextColor = defaultBodyTextColor ??
+        (_) => FkToolkit.generateHighlightColor(_background);
+    _defaultDecorationColorTextColor = defaultDecorationColorTextColor ??
+        (_) =>
+            FkToolkit.generateHighlightColor(_iTheme?.fillColor ?? _background);
+
+    _typography.setTextExtraData(
+      bodyColor: _defaultBodyColorTextColor!(colorPalete),
+      decorationColor: _defaultDecorationColorTextColor!(colorPalete),
+      fontFamily: fontFamily,
+    );
 
     _defaultIndicatorColor = defaultIndicatorColor;
 
     _themeData = ThemeData.light(useMaterial3: true).copyWith(
       extensions: [this],
-      outlinedButtonTheme: oBTheme,
-      elevatedButtonTheme: eBTheme,
-      inputDecorationTheme: iTheme,
-      floatingActionButtonTheme: fATheme,
-      appBarTheme: aBTheme,
-      bottomNavigationBarTheme: bNTheme,
+      textSelectionTheme: _tSTheme,
+      outlinedButtonTheme: _oBTheme,
+      elevatedButtonTheme: _eBTheme,
+      inputDecorationTheme: _iTheme,
+      floatingActionButtonTheme: _fATheme,
+      appBarTheme: _aBTheme,
+      bottomNavigationBarTheme: _bNTheme,
       textTheme: _typography.toTextTheme(),
       scaffoldBackgroundColor: _background,
       primaryColor: colorPalete.primary,
@@ -235,9 +271,11 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     IconThemeFunc? iconTheme,
     AppBarThemeFunc? appBarTheme,
     BottomNavigationBarThemeFunc? bottomNavigationBarTheme,
-    DefaultTextColorFunc? defaultTextColor,
+    DefaultTextColorFunc? defaultBodyTextColor,
+    DefaultTextColorFunc? defaultDecorationColorTextColor,
     DefaultIndicatorColorFunc? defaultIndicatorColor,
     ThemeBranchsFunc? themeBranchs,
+    TextSelectionThemeFunc? textSelectionTheme,
   }) {
     _outlinedButtonTheme = outlinedButtonTheme;
     _elevatedButtonTheme = elevatedButtonTheme;
@@ -246,45 +284,47 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     _appBarTheme = appBarTheme;
     _bottomNavigationBarTheme = bottomNavigationBarTheme;
     _iconTheme = iconTheme;
+    _textSelectionTheme = textSelectionTheme;
 
     _background = background?.call(colorPalete) ??
         FkColor.color(
           color: Colors.white,
           onColor: Colors.black,
         );
-    _typography = typography ?? FkTypography();
-    var oBTheme = _outlinedButtonTheme?.call(colorPalete);
-    var eBTheme = _elevatedButtonTheme?.call(colorPalete);
-    var fATheme = _floatingActionButtonTheme?.call(colorPalete);
-    var iTheme = _inputDecorationTheme?.call(colorPalete);
-    var aBTheme = _appBarTheme?.call(colorPalete);
-    var bNTheme = _bottomNavigationBarTheme?.call(colorPalete);
 
-    if (defaultTextColor != null) {
-      var textColor = defaultTextColor(colorPalete);
-      _typography.setTextExtraData(
-        color: textColor,
-        fontFamily: fontFamily,
-      );
-      _defaultTextColor = defaultTextColor;
-    } else {
-      var textColor = FkToolkit.generateHighlightColor(_background);
-      _typography.setTextExtraData(
-        color: textColor,
-        fontFamily: fontFamily,
-      );
-      _defaultTextColor = null;
-    }
+    _typography = typography ?? FkTypography();
+
+    _defaultBodyColorTextColor = defaultBodyTextColor ??
+        (_) => FkToolkit.generateHighlightColor(_background);
+    _defaultDecorationColorTextColor = defaultDecorationColorTextColor ??
+        (_) =>
+            FkToolkit.generateHighlightColor(_iTheme?.fillColor ?? _background);
+
+    _typography.setTextExtraData(
+      bodyColor: _defaultBodyColorTextColor!(colorPalete),
+      decorationColor: _defaultDecorationColorTextColor!(colorPalete),
+      fontFamily: fontFamily,
+    );
+
     _defaultIndicatorColor = defaultIndicatorColor;
+
+    _oBTheme = _outlinedButtonTheme?.call(colorPalete, _typography);
+    _eBTheme = _elevatedButtonTheme?.call(colorPalete, _typography);
+    _fATheme = _floatingActionButtonTheme?.call(colorPalete, _typography);
+    _iTheme = _inputDecorationTheme?.call(colorPalete, _typography);
+    _aBTheme = _appBarTheme?.call(colorPalete, _typography);
+    _bNTheme = _bottomNavigationBarTheme?.call(colorPalete, _typography);
+    _tSTheme = _textSelectionTheme?.call(colorPalete);
 
     _themeData = ThemeData.dark(useMaterial3: true).copyWith(
       extensions: [this],
-      outlinedButtonTheme: oBTheme,
-      elevatedButtonTheme: eBTheme,
-      inputDecorationTheme: iTheme,
-      floatingActionButtonTheme: fATheme,
-      appBarTheme: aBTheme,
-      bottomNavigationBarTheme: bNTheme,
+      textSelectionTheme: _tSTheme,
+      outlinedButtonTheme: _oBTheme,
+      elevatedButtonTheme: _eBTheme,
+      inputDecorationTheme: _iTheme,
+      floatingActionButtonTheme: _fATheme,
+      appBarTheme: _aBTheme,
+      bottomNavigationBarTheme: _bNTheme,
       textTheme: _typography.toTextTheme(),
       iconTheme: _iconTheme?.call(colorPalete),
       primaryColor: colorPalete.primary,
@@ -311,22 +351,23 @@ final class FkTheme extends ThemeExtension<FkTheme> {
   }
 
   @override
-  FkTheme copyWith({
-    FkColorPalete? colorPalete,
-    FkTypography? typography,
-    BackgroundColorFunc? background,
-    OutlinedButtonThemeFunc? outlinedButtonTheme,
-    ElevatedButtonThemeFunc? elevatedButtonTheme,
-    FloatingActionButtonThemeFunc? floatingActionButtonTheme,
-    InputDecorationThemeFunc? inputDecorationTheme,
-    AppBarThemeFunc? appBarTheme,
-    BottomNavigationBarThemeFunc? bottomNavigationBarTheme,
-    IconThemeFunc? iconTheme,
-    DefaultTextColorFunc? defaultTextColor,
-    DefaultIndicatorColorFunc? defaultIndicatorColor,
-    BoxDecoration? decoration,
-    String? fontFamily,
-  }) {
+  FkTheme copyWith(
+      {FkColorPalete? colorPalete,
+      FkTypography? typography,
+      BackgroundColorFunc? background,
+      OutlinedButtonThemeFunc? outlinedButtonTheme,
+      ElevatedButtonThemeFunc? elevatedButtonTheme,
+      FloatingActionButtonThemeFunc? floatingActionButtonTheme,
+      InputDecorationThemeFunc? inputDecorationTheme,
+      AppBarThemeFunc? appBarTheme,
+      BottomNavigationBarThemeFunc? bottomNavigationBarTheme,
+      IconThemeFunc? iconTheme,
+      DefaultTextColorFunc? defaultBodyTextColor,
+      DefaultTextColorFunc? defaultDecorationColorTextColor,
+      DefaultIndicatorColorFunc? defaultIndicatorColor,
+      BoxDecoration? decoration,
+      String? fontFamily,
+      TextSelectionThemeFunc? textSelectionTheme}) {
     var cPalete = colorPalete ?? this.colorPalete;
     return _themeData.brightness == Brightness.light
         ? FkTheme.light(
@@ -349,9 +390,13 @@ final class FkTheme extends ThemeExtension<FkTheme> {
             assetsSnippets: assetsSnippets,
             typography: typography ?? _typography,
             decoration: decoration,
-            defaultTextColor: defaultTextColor ?? _defaultTextColor,
+            defaultBodyTextColor:
+                defaultBodyTextColor ?? _defaultBodyColorTextColor,
+            defaultDecorationColorTextColor:
+                defaultDecorationColorTextColor ?? _defaultBodyColorTextColor,
             defaultIndicatorColor:
                 defaultIndicatorColor ?? _defaultIndicatorColor,
+            textSelectionTheme: textSelectionTheme ?? _textSelectionTheme,
           )
         : FkTheme.dark(
             fontFamily: fontFamily ?? this.fontFamily,
@@ -373,9 +418,13 @@ final class FkTheme extends ThemeExtension<FkTheme> {
             assetsSnippets: assetsSnippets,
             typography: typography ?? _typography,
             decoration: decoration,
-            defaultTextColor: defaultTextColor ?? _defaultTextColor,
+            defaultBodyTextColor:
+                defaultBodyTextColor ?? _defaultBodyColorTextColor,
+            defaultDecorationColorTextColor:
+                defaultDecorationColorTextColor ?? _defaultBodyColorTextColor,
             defaultIndicatorColor:
                 defaultIndicatorColor ?? _defaultIndicatorColor,
+            textSelectionTheme: textSelectionTheme ?? _textSelectionTheme,
           );
   }
 
@@ -404,8 +453,10 @@ final class FkTheme extends ThemeExtension<FkTheme> {
             themeBranchs: (_) => other._themeBranchs,
             typography: typography.lerp(other._typography, t),
             assetsSnippets: other.assetsSnippets,
-            defaultTextColor: other._defaultTextColor,
+            defaultBodyTextColor: other._defaultBodyColorTextColor,
+            defaultDecorationColorTextColor: other._defaultBodyColorTextColor,
             defaultIndicatorColor: other._defaultIndicatorColor,
+            textSelectionTheme: other._textSelectionTheme,
             decoration: other.decoration != null
                 ? decoration != null
                     ? BoxDecoration.lerp(decoration, other.decoration, t)
@@ -429,7 +480,9 @@ final class FkTheme extends ThemeExtension<FkTheme> {
             themeBranchs: (_) => other._themeBranchs,
             typography: typography.lerp(other._typography, t),
             assetsSnippets: other.assetsSnippets,
-            defaultTextColor: other._defaultTextColor,
+            defaultDecorationColorTextColor: other._defaultBodyColorTextColor,
+            defaultIndicatorColor: other._defaultIndicatorColor,
+            textSelectionTheme: other._textSelectionTheme,
             decoration: other.decoration != null
                 ? decoration != null
                     ? BoxDecoration.lerp(decoration, other.decoration, t)

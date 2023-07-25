@@ -19,6 +19,7 @@ class FkApp extends StatefulWidget {
     this.appTitle = "",
     this.globalFailureHandler,
     this.injections,
+    this.themeMode = ThemeMode.system,
   });
 
   final String appTitle;
@@ -26,6 +27,7 @@ class FkApp extends StatefulWidget {
   final FkModulesFunc modules;
   final InjectionsFunc? injections;
   final FkThemeData theme;
+  final ThemeMode themeMode;
 
   @override
   State<FkApp> createState() => _FkAppState();
@@ -89,6 +91,7 @@ class _FkAppState extends State<FkApp> {
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
+        themeMode: widget.themeMode,
         theme: widget.theme.light.nativeTheme,
         darkTheme: widget.theme.dark.nativeTheme,
         routerConfig: routerConfig,
