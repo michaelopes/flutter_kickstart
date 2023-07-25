@@ -72,11 +72,11 @@ final class FkTypography {
         heading04 ?? const TextStyle(fontSize: 72, fontWeight: FontWeight.w900);
 
     _display01 =
-        display01 ?? const TextStyle(fontSize: 64, fontWeight: FontWeight.w900);
+        display01 ?? const TextStyle(fontSize: 57, fontWeight: FontWeight.w900);
     _display02 =
-        display02 ?? const TextStyle(fontSize: 56, fontWeight: FontWeight.w900);
+        display02 ?? const TextStyle(fontSize: 45, fontWeight: FontWeight.w900);
     _display03 =
-        display03 ?? const TextStyle(fontSize: 48, fontWeight: FontWeight.w900);
+        display03 ?? const TextStyle(fontSize: 36, fontWeight: FontWeight.w900);
 
     _headline01 = headline01 ??
         const TextStyle(fontSize: 40, fontWeight: FontWeight.w700);
@@ -130,24 +130,25 @@ final class FkTypography {
 
   TextTheme toTextTheme() {
     return TextTheme(
-      headlineLarge: headline01,
+      headlineLarge: headline02,
       headlineMedium: headline03,
-      headlineSmall: headline06,
-      bodyLarge: bodyLarge,
-      bodyMedium: bodyDefault,
-      bodySmall: buttonSmall,
+      headlineSmall: headline04,
+      bodyLarge: bodyDefault,
+      bodyMedium: bodySmall,
+      bodySmall: bodyMini,
       displayLarge: display01,
       displayMedium: display02,
       displaySmall: display03,
-      labelLarge: bodyDefault.copyWith(fontWeight: FontWeight.w500),
-      labelMedium: bodySmall.copyWith(fontWeight: FontWeight.w500),
-      labelSmall: bodyMini.copyWith(fontWeight: FontWeight.w500),
-      titleLarge: bodyLarge.copyWith(fontWeight: FontWeight.w500),
+      labelLarge: bodySmall.copyWith(fontWeight: FontWeight.w500),
+      labelMedium: bodyMini.copyWith(fontWeight: FontWeight.w500),
+      labelSmall: bodyTiny.copyWith(fontWeight: FontWeight.w500),
+      titleLarge: bodyExtra,
       titleMedium: bodyDefault.copyWith(fontWeight: FontWeight.w500),
       titleSmall: bodySmall.copyWith(fontWeight: FontWeight.w500),
     ).apply(
       bodyColor: _bodyTextColor,
       decorationColor: _decorationTextColor,
+      displayColor: _bodyTextColor,
       fontFamily: _fontFamily,
     );
   }

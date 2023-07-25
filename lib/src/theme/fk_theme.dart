@@ -1,6 +1,6 @@
 export 'fk_color.dart';
 export 'fk_color_palete.dart';
-export 'fk_text_theme.dart';
+export 'fk_typography.dart';
 export 'fk_theme_data.dart';
 
 import 'package:flutter/material.dart';
