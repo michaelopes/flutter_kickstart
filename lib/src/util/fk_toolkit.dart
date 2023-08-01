@@ -6,6 +6,19 @@ import 'package:intl/intl.dart';
 typedef WhenCondition = bool Function();
 
 class FkToolkit {
+  static String capitalizeFirst(String text) {
+    return "${text[0].toUpperCase()}${text.substring(1)}";
+  }
+
+  static String capitalizeAll(String text) {
+    return text
+        .trim()
+        .split(" ")
+        .map((e) => capitalizeFirst(e))
+        .toList()
+        .join(" ");
+  }
+
   static String camelToUnderscore(String text) {
     RegExp exp = RegExp(r'(?<=[a-z])[A-Z]');
     String result = text
@@ -112,7 +125,8 @@ class FkToolkit {
     }
     var split2 = date.split("/");
     if (split2.length == 3) {
-      return "${split2[2]}-${split2[1]}-${split2[0]}$time";
+      var result = "${split2[2]}-${split2[1]}-${split2[0]}$time";
+      return result;
     } else {
       return "";
     }

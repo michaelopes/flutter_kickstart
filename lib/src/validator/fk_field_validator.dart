@@ -322,11 +322,27 @@ class FkFieldValidator {
             }
             break;
           }
+        case FkValidateTypes.isDate:
+          {
+            if (value.isEmpty) {
+              return null;
+            }
+            if (!FkValidator.isDateValid(value)) {
+              result =
+                  (errorMessage ?? FkValidator.validatorMessages.invalidDate);
+            } else {
+              result = null;
+            }
+            break;
+          }
         case FkValidateTypes.maxAge:
           {
-            var val = int.parse(value);
+            var date = DateTime.tryParse(value);
+            var val = date != null
+                ? (DateTime.now().difference(date).inDays / 365).floor()
+                : int.tryParse(value) ?? 0;
 
-            if (val > valueRule) {
+            if (val >= valueRule) {
               result = (errorMessage ?? FkValidator.validatorMessages.maxAge)
                   .replaceAll("{{p1}}", valueRule.toString());
             } else {
@@ -337,8 +353,11 @@ class FkFieldValidator {
           }
         case FkValidateTypes.minAge:
           {
-            var val = int.parse(value);
-            if (valueRule > val) {
+            var date = DateTime.tryParse(value);
+            var val = date != null
+                ? (DateTime.now().difference(date).inDays / 365).floor()
+                : int.tryParse(value) ?? 0;
+            if (valueRule >= val) {
               result = (errorMessage ?? FkValidator.validatorMessages.minAge)
                   .replaceAll("{{p1}}", valueRule.toString());
             } else {
@@ -446,19 +465,7 @@ class FkFieldValidator {
             }
             break;
           }
-        case FkValidateTypes.isDate:
-          {
-            if (value.isEmpty) {
-              return null;
-            }
-            if (!FkValidator.isDateValid(value)) {
-              result =
-                  (errorMessage ?? FkValidator.validatorMessages.invalidDate);
-            } else {
-              result = null;
-            }
-            break;
-          }
+
         case FkValidateTypes.dateGreaterThanNow:
           {
             if (value.isEmpty) {

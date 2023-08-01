@@ -177,7 +177,7 @@ class FkValidator {
   static bool isDateValid(String input) {
     try {
       var dateParts = input.split('-');
-      if (dateParts.length != 3) {
+      if (dateParts.length != 3 || input.length < 10) {
         return false;
       }
       var year = int.parse(dateParts[0]);

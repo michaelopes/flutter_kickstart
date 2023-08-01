@@ -405,7 +405,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
               return [...subs, ..._themeBranchs];
             },
             assetsSnippets: assetsSnippets,
-            typography: typography ?? _typography,
+            typography: typography ?? this.typography,
             decoration: decoration,
             defaultBodyTextColor:
                 defaultBodyTextColor ?? _defaultBodyColorTextColor,

@@ -182,7 +182,7 @@ final class FkColor implements Color {
     );
   }
 
-  FkColor invert({
+  FkColor reverse({
     bool autoGenerateShade50 = true,
   }) {
     return autoGenerateShade50

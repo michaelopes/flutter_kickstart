@@ -64,6 +64,37 @@ final class FkColorPalete {
     );
   }
 
+  FkColorPalete reverseAll({
+    bool autoGenerateShade50 = true,
+  }) {
+    return FkColorPalete(
+      primary: primary.reverse(
+        autoGenerateShade50: autoGenerateShade50,
+      ),
+      primaryVariant: primaryVariant.reverse(
+        autoGenerateShade50: autoGenerateShade50,
+      ),
+      secondary: secondary.reverse(
+        autoGenerateShade50: autoGenerateShade50,
+      ),
+      secondaryVariant: secondaryVariant.reverse(
+        autoGenerateShade50: autoGenerateShade50,
+      ),
+      neutral: neutral.reverse(
+        autoGenerateShade50: autoGenerateShade50,
+      ),
+      neutralVariant: neutralVariant.reverse(
+        autoGenerateShade50: autoGenerateShade50,
+      ),
+      error: error.reverse(
+        autoGenerateShade50: autoGenerateShade50,
+      ),
+      errorVariant: errorVariant.reverse(
+        autoGenerateShade50: autoGenerateShade50,
+      ),
+    );
+  }
+
   FkColorPalete lerp(FkColorPalete other, double t) {
     return FkColorPalete(
       primary: primary.lerp(other.primary, t),
