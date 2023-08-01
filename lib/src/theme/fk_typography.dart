@@ -155,130 +155,130 @@ final class FkTypography {
 
   TextStyle get heading01 => _heading01.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _heading01.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get heading02 => _heading02.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _heading02.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get heading03 => _heading03.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _heading03.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get heading04 => _heading04.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _heading04.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get display01 => _display01.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _display01.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get display02 => _display02.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _display02.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get display03 => _display03.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _display03.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
 
   TextStyle get headline01 => _headline01.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _headline01.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get headline02 => _headline02.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _headline02.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get headline03 => _headline03.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _headline03.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get headline04 => _headline04.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _headline04.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get headline05 => _headline05.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _headline05.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get headline06 => _headline06.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _headline06.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
 
   TextStyle get bodyTiny => _bodyTiny.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _bodyTiny.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get bodyMini => _bodyMini.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _bodyMini.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get bodySmall => _bodySmall.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _bodySmall.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get bodyDefault => _bodyDefault.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _bodyDefault.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get bodyLarge => _bodyLarge.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _bodyLarge.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get bodyExtra => _bodyExtra.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _bodyExtra.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
 
   TextStyle get buttonTiny => _buttonTiny.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _buttonTiny.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get buttonMini => _buttonMini.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _buttonMini.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get buttonSmall => _buttonSmall.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _buttonSmall.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get buttonDefault => _buttonDefault.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _buttonDefault.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get buttonLarge => _buttonLarge.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _buttonLarge.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
   TextStyle get buttonExtra => _buttonExtra.apply(
         fontFamily: _fontFamily,
-        color: _bodyTextColor,
+        color: _buttonExtra.color ?? _bodyTextColor,
         decorationColor: _decorationTextColor,
       );
 

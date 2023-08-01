@@ -28,13 +28,14 @@ class FkApp extends StatefulWidget {
   final InjectionsFunc? injections;
   final FkThemeData theme;
   final ThemeMode themeMode;
-
+  static final navigatorKey = GlobalKey<NavigatorState>();
   @override
   State<FkApp> createState() => _FkAppState();
 }
 
 class _FkAppState extends State<FkApp> {
   late final RouterConfig<Object> routerConfig;
+
   @override
   void initState() {
     if (widget.injections != null) {
@@ -53,17 +54,15 @@ class _FkAppState extends State<FkApp> {
       refreshListenable: globals.moduleMiddleware?.reactive,
       redirect: globals.moduleMiddleware?.onViewRedirect,
       errorBuilder: globals.moduleMiddleware?.onViewError,
+      navigatorKey: FkApp.navigatorKey,
     );
+
     if (widget.globalFailureHandler != null) {
-      FlutterError.onError = (error) {
-        widget.globalFailureHandler?.onFailure(
-          context,
-          error.exception,
-          error.stack ?? StackTrace.current,
-        );
-      };
       GlobalErrorObserver.listen = (e, s) {
-        widget.globalFailureHandler?.onFailure(context, e, s);
+        var ctx = FkApp.navigatorKey.currentContext;
+        if (ctx != null) {
+          widget.globalFailureHandler?.onFailure(ctx, e, s);
+        }
       };
     }
 

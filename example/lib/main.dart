@@ -17,7 +17,7 @@ void main() async {
     httpDriverMiddleware: () => AppHttpMiddleware(),
     moduleMiddleware: () => AppModuleMiddleware(),
     httpDriverResponseParser: () => AppHttpResponseParser(),
-    baseUrl: "https://www.thecocktaildb.com/api/json",
+    baseUrl: () => "https://www.thecocktaildb.com/api/json",
   );
 
   runApp(

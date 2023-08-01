@@ -95,7 +95,7 @@ class DrinkView extends FkView<DrinkViewModel> {
                     child: InkWell(
                       onTap: () {
                         vm.seletedDrink = e;
-                        nav.push(AppModules.drinkDetail);
+                        router.nav.push(AppModules.drinkDetail);
                       },
                       child: DrinkCard(
                         drinkName: e.name,

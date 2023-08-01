@@ -15,6 +15,8 @@ typedef FkBaseHttpDriverResponseParserFunc = FkBaseHttpDriverResponseParser
 
 typedef FkModuleMiddlewareFunc = FkModuleMiddleware Function();
 
+typedef BaseUrlFunc = String Function();
+
 class Fk {
   static Future<dynamic> init({
     String env = "",
@@ -27,14 +29,18 @@ class Fk {
     FkBaseHttpDriverResponseParserFunc? httpDriverResponseParser,
     HttpDriverMiddlewareFunc? httpDriverMiddleware,
     FkModuleMiddlewareFunc? moduleMiddleware,
-    String baseUrl = "",
+    BaseUrlFunc? baseUrl,
   }) async {
     WidgetsFlutterBinding.ensureInitialized();
+
+    if (env.isNotEmpty) {
+      await dotenv.load(fileName: env);
+    }
 
     globals.i18nDirectory = i18nDirectory;
 
     globals.enableHttpDriverLogger = enableHttpDriverLogger;
-    globals.baseUrl = baseUrl;
+    globals.baseUrl = baseUrl?.call() ?? "";
 
     if (httpDriverResponseParser != null) {
       globals.httpDriverResponseParser = httpDriverResponseParser();
@@ -46,9 +52,6 @@ class Fk {
 
     globals.moduleMiddleware = moduleMiddleware?.call();
 
-    if (env.isNotEmpty) {
-      await dotenv.load(fileName: env);
-    }
     return Future.wait<dynamic>([
       ...extraInits,
       FkInfos.I.init(),

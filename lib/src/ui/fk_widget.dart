@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_kickstart/src/core/fk_router.dart';
 
 import '../core/fk_reactive.dart';
 import '../i18n/fk_translate_processor.dart';
@@ -9,7 +9,7 @@ final class _FkWidgetHelper {
   late FkWidgetElement _element;
   FkTheme get theme => _element.theme;
   BuildContext get context => _element;
-  GoRouter get nav => GoRouter.of(context);
+  FkRouter get router => FkRouter.of(context);
   dynamic get tr => FkTranslatorProcessor(context);
 }
 
@@ -85,7 +85,7 @@ abstract class FkWidget<T extends FkReactive> extends _FkWidgetBase<T> {
 
   BuildContext get context => _widgetHelper.context;
   FkTheme get theme => _widgetHelper.theme;
-  GoRouter get nav => _widgetHelper.nav;
+  FkRouter get router => _widgetHelper.router;
   dynamic get tr => _widgetHelper.tr;
 
   @override

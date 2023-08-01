@@ -12,9 +12,9 @@ final class AppVerticalCardThemeBranch extends FkCustomThemeBranch {
 
   FkTheme get _dark {
     return ownerTheme.copyWith(
-      defaultTextColor: (colorPalete) => ownerTheme.colorPalete.neutral,
+      defaultBodyTextColor: (colorPalete) => ownerTheme.colorPalete.neutral,
       decoration: BoxDecoration(
-        color: ownerTheme.colorPalete.neutral.onShade800,
+        color: ownerTheme.colorPalete.neutral.shade800.highlightColor,
         borderRadius: BorderRadius.circular(10),
       ),
     );
@@ -22,7 +22,7 @@ final class AppVerticalCardThemeBranch extends FkCustomThemeBranch {
 
   FkTheme get _light {
     return ownerTheme.copyWith(
-      defaultTextColor: (colorPalete) => colorPalete.neutral,
+      defaultBodyTextColor: (colorPalete) => colorPalete.neutral,
       decoration: BoxDecoration(
         color: ownerTheme.colorPalete.neutralVariant.shade400,
         borderRadius: BorderRadius.circular(10),

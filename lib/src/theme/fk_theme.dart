@@ -4,9 +4,19 @@ export 'fk_typography.dart';
 export 'fk_theme_data.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_kickstart/flutter_kickstart.dart';
 
-typedef BackgroundColorFunc = FkColor? Function(
+import 'package:flutter_kickstart/src/extensions/color_ext.dart';
+
+import '../interfaces/fk_asset.dart';
+import '../setup/fk_animations.dart';
+import '../setup/fk_icons.dart';
+import '../setup/fk_images.dart';
+import '../util/fk_toolkit.dart';
+import 'fk_color.dart';
+import 'fk_color_palete.dart';
+import 'fk_typography.dart';
+
+typedef BackgroundColorFunc = Color? Function(
   FkColorPalete colorPalete,
 );
 typedef OutlinedButtonThemeFunc = OutlinedButtonThemeData? Function(
@@ -87,7 +97,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
   final BoxDecoration? decoration;
   final String? fontFamily;
 
-  late final FkColor _background;
+  late final Color _background;
   late final FkTypography _typography;
   late final ThemeData _themeData;
   late final List<_IFkThemeBranch> _themeBranchs;
@@ -105,7 +115,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
   late final DefaultIndicatorColorFunc? _defaultIndicatorColor;
 
   FkTypography get typography => _typography;
-  FkColor get background => _background;
+  Color get background => _background;
   ThemeData get nativeTheme => _themeData;
 
   dynamic get icons => FkDynamicIcons(iconsDirectory);
@@ -194,7 +204,6 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     _background = background?.call(colorPalete) ??
         FkColor.color(
           color: Colors.white,
-          onColor: Colors.black,
         );
 
     _typography = typography ?? FkTypography();
@@ -209,11 +218,10 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     _defaultBodyColorTextColor = defaultBodyTextColor ??
         (_) => FkToolkit.generateHighlightColor(_background);
     _defaultDecorationColorTextColor = defaultDecorationColorTextColor ??
-        (_) =>
-            FkToolkit.generateHighlightColor(_iTheme?.fillColor ?? _background);
-
+        (_) => FkToolkit.generateHighlightColor(_background);
+    var bodyColor = _defaultBodyColorTextColor!(colorPalete);
     _typography.setTextExtraData(
-      bodyColor: _defaultBodyColorTextColor!(colorPalete),
+      bodyColor: bodyColor,
       decorationColor: _defaultDecorationColorTextColor!(colorPalete),
       fontFamily: fontFamily,
     );
@@ -236,19 +244,22 @@ final class FkTheme extends ThemeExtension<FkTheme> {
       indicatorColor: _defaultIndicatorColor?.call(colorPalete),
       colorScheme: ColorScheme.light(
         background: _background,
-        onBackground: _background.onColor,
+        onBackground: (_background is FkColor)
+            ? (_background as FkColor).highlightColor
+            : bodyColor,
         primary: colorPalete.primary,
         primaryContainer: colorPalete.primaryVariant,
-        onPrimary: colorPalete.primary.onColor,
-        onPrimaryContainer: colorPalete.primaryVariant.onColor,
+        onPrimary: colorPalete.primary.harmonicHighlightColor,
+        onPrimaryContainer: colorPalete.primaryVariant.harmonicHighlightColor,
         secondary: colorPalete.secondary,
         secondaryContainer: colorPalete.secondaryVariant,
-        onSecondary: colorPalete.secondary.onColor,
-        onSecondaryContainer: colorPalete.secondaryVariant.onColor,
+        onSecondary: colorPalete.secondary.harmonicHighlightColor,
+        onSecondaryContainer:
+            colorPalete.secondaryVariant.harmonicHighlightColor,
         error: colorPalete.error,
         errorContainer: colorPalete.errorVariant,
-        onError: colorPalete.error.onColor,
-        onErrorContainer: colorPalete.errorVariant.onColor,
+        onError: colorPalete.error.harmonicHighlightColor,
+        onErrorContainer: colorPalete.errorVariant.harmonicHighlightColor,
       ),
     );
     _themeBranchs = themeBranchs?.call(this) ?? [];
@@ -289,7 +300,6 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     _background = background?.call(colorPalete) ??
         FkColor.color(
           color: Colors.white,
-          onColor: Colors.black,
         );
 
     _typography = typography ?? FkTypography();
@@ -297,9 +307,8 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     _defaultBodyColorTextColor = defaultBodyTextColor ??
         (_) => FkToolkit.generateHighlightColor(_background);
     _defaultDecorationColorTextColor = defaultDecorationColorTextColor ??
-        (_) =>
-            FkToolkit.generateHighlightColor(_iTheme?.fillColor ?? _background);
-
+        (_) => FkToolkit.generateHighlightColor(_background);
+    var bodyColor = _defaultBodyColorTextColor!(colorPalete);
     _typography.setTextExtraData(
       bodyColor: _defaultBodyColorTextColor!(colorPalete),
       decorationColor: _defaultDecorationColorTextColor!(colorPalete),
@@ -332,42 +341,47 @@ final class FkTheme extends ThemeExtension<FkTheme> {
       indicatorColor: _defaultIndicatorColor?.call(colorPalete),
       colorScheme: ColorScheme.dark(
         background: _background,
-        onBackground: _background.onColor,
+        onBackground: (_background is FkColor)
+            ? (_background as FkColor).highlightColor
+            : bodyColor,
         primary: colorPalete.primary,
         primaryContainer: colorPalete.primaryVariant,
-        onPrimary: colorPalete.primary.onColor,
-        onPrimaryContainer: colorPalete.primaryVariant.onColor,
+        onPrimary: colorPalete.primary.harmonicHighlightColor,
+        onPrimaryContainer: colorPalete.primaryVariant.harmonicHighlightColor,
         secondary: colorPalete.secondary,
         secondaryContainer: colorPalete.secondaryVariant,
-        onSecondary: colorPalete.secondary.onColor,
-        onSecondaryContainer: colorPalete.secondaryVariant.onColor,
+        onSecondary: colorPalete.secondary.harmonicHighlightColor,
+        onSecondaryContainer:
+            colorPalete.secondaryVariant.harmonicHighlightColor,
         error: colorPalete.error,
         errorContainer: colorPalete.errorVariant,
-        onError: colorPalete.error.onColor,
-        onErrorContainer: colorPalete.errorVariant.onColor,
+        onError: colorPalete.error.harmonicHighlightColor,
+        onErrorContainer: colorPalete.errorVariant.harmonicHighlightColor,
       ),
     );
     _themeBranchs = themeBranchs?.call(this) ?? [];
   }
 
   @override
-  FkTheme copyWith(
-      {FkColorPalete? colorPalete,
-      FkTypography? typography,
-      BackgroundColorFunc? background,
-      OutlinedButtonThemeFunc? outlinedButtonTheme,
-      ElevatedButtonThemeFunc? elevatedButtonTheme,
-      FloatingActionButtonThemeFunc? floatingActionButtonTheme,
-      InputDecorationThemeFunc? inputDecorationTheme,
-      AppBarThemeFunc? appBarTheme,
-      BottomNavigationBarThemeFunc? bottomNavigationBarTheme,
-      IconThemeFunc? iconTheme,
-      DefaultTextColorFunc? defaultBodyTextColor,
-      DefaultTextColorFunc? defaultDecorationColorTextColor,
-      DefaultIndicatorColorFunc? defaultIndicatorColor,
-      BoxDecoration? decoration,
-      String? fontFamily,
-      TextSelectionThemeFunc? textSelectionTheme}) {
+  FkTheme copyWith({
+    FkColorPalete? colorPalete,
+    FkTypography? typography,
+    BackgroundColorFunc? background,
+    OutlinedButtonThemeFunc? outlinedButtonTheme,
+    ElevatedButtonThemeFunc? elevatedButtonTheme,
+    FloatingActionButtonThemeFunc? floatingActionButtonTheme,
+    InputDecorationThemeFunc? inputDecorationTheme,
+    AppBarThemeFunc? appBarTheme,
+    BottomNavigationBarThemeFunc? bottomNavigationBarTheme,
+    IconThemeFunc? iconTheme,
+    DefaultTextColorFunc? defaultBodyTextColor,
+    DefaultTextColorFunc? defaultDecorationColorTextColor,
+    DefaultIndicatorColorFunc? defaultIndicatorColor,
+    BoxDecoration? decoration,
+    String? fontFamily,
+    TextSelectionThemeFunc? textSelectionTheme,
+    ThemeBranchsFunc? subThemeBranchs,
+  }) {
     var cPalete = colorPalete ?? this.colorPalete;
     return _themeData.brightness == Brightness.light
         ? FkTheme.light(
@@ -386,7 +400,10 @@ final class FkTheme extends ThemeExtension<FkTheme> {
             inputDecorationTheme: inputDecorationTheme ?? _inputDecorationTheme,
             outlinedButtonTheme: outlinedButtonTheme ?? _outlinedButtonTheme,
             iconTheme: iconTheme ?? _iconTheme,
-            themeBranchs: (_) => [],
+            themeBranchs: (owner) {
+              final subs = subThemeBranchs?.call(owner) ?? [];
+              return [...subs, ..._themeBranchs];
+            },
             assetsSnippets: assetsSnippets,
             typography: typography ?? _typography,
             decoration: decoration,
@@ -414,7 +431,10 @@ final class FkTheme extends ThemeExtension<FkTheme> {
             inputDecorationTheme: inputDecorationTheme ?? _inputDecorationTheme,
             outlinedButtonTheme: outlinedButtonTheme ?? _outlinedButtonTheme,
             iconTheme: iconTheme ?? _iconTheme,
-            themeBranchs: (_) => [],
+            themeBranchs: (owner) {
+              final subs = subThemeBranchs?.call(owner) ?? [];
+              return [...subs, ..._themeBranchs];
+            },
             assetsSnippets: assetsSnippets,
             typography: typography ?? _typography,
             decoration: decoration,
@@ -443,7 +463,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
             animationsDirectory: other.animationsDirectory,
             colorPalete: cPalete,
             appBarTheme: other._appBarTheme,
-            background: (_) => _background.lerp(other.background, t),
+            background: (_) => Color.lerp(_background, other.background, t),
             bottomNavigationBarTheme: other._bottomNavigationBarTheme,
             elevatedButtonTheme: other._elevatedButtonTheme,
             floatingActionButtonTheme: other._floatingActionButtonTheme,
@@ -470,7 +490,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
             animationsDirectory: other.animationsDirectory,
             colorPalete: cPalete,
             appBarTheme: other._appBarTheme,
-            background: (_) => _background.lerp(other.background, t),
+            background: (_) => Color.lerp(_background, other.background, t),
             bottomNavigationBarTheme: other._bottomNavigationBarTheme,
             elevatedButtonTheme: other._elevatedButtonTheme,
             floatingActionButtonTheme: other._floatingActionButtonTheme,

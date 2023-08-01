@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 
 import '../core/fk_inject.dart';
+import '../core/fk_router.dart';
 import '../core/fk_viewmodel.dart';
 import '../i18n/fk_translate_processor.dart';
 import '../theme/fk_theme.dart';
@@ -13,7 +13,7 @@ final class _FkViewHelper<VM extends FkViewModel> {
   late _FkViewState _state;
   FkTheme get theme => _state.theme;
   BuildContext get context => _state.context;
-  GoRouter get nav => GoRouter.of(context);
+  FkRouter get router => FkRouter.of(context);
   dynamic get tr => FkTranslatorProcessor(context);
   VM get vm => _state.viewModel as VM;
 }
@@ -25,7 +25,7 @@ abstract class FkView<VM extends FkViewModel> extends StatefulWidget {
 
   BuildContext get context => _viewHelper.context;
   FkTheme get theme => _viewHelper.theme;
-  GoRouter get nav => _viewHelper.nav;
+  FkRouter get router => _viewHelper.router;
   dynamic get tr => _viewHelper.tr;
   VM get vm => _viewHelper.vm;
 
@@ -45,17 +45,18 @@ class _FkViewState<VM extends FkViewModel> extends State<FkView> {
 
   @override
   void initState() {
+    widget._viewHelper._state = this;
     viewModel = _locator.get<VM>();
     viewModel?.addSetupParam("GetView", () => widget);
     viewModel?.init();
     viewModel?.reactive.addListener(_handleChange);
-    widget._viewHelper._state = this;
+
     if (widget.systemOverlayStyle != null) {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         var fkThm = Theme.of(context).extension<FkTheme>();
         _systemOverlayStyleToReset = fkThm?.brightness == Brightness.dark
-            ? SystemUiOverlayStyle.dark
-            : SystemUiOverlayStyle.light;
+            ? SystemUiOverlayStyle.light
+            : SystemUiOverlayStyle.dark;
       });
       Timer(const Duration(milliseconds: 300), () {
         SystemChrome.setSystemUIOverlayStyle(widget.systemOverlayStyle!);

@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_kickstart/src/interfaces/http_driver_interface.dart';
 
+import '../core/fk_inject.dart';
+
 abstract class FkHttpDriverMiddleware extends Interceptor {
+  final locator = FkInjectLocator();
   IHttpDriver? httpDriver;
   void setHttpDriver(IHttpDriver httpDriver) {
     this.httpDriver = httpDriver;

@@ -83,10 +83,10 @@ class AppTheme {
       inputDecorationTheme: (colorPalete, _) {
         return InputDecorationTheme(
           labelStyle: TextStyle(
-            color: colorPalete.neutral.onShade200,
+            color: colorPalete.neutral.shade200.highlightColor,
           ),
           hintStyle: TextStyle(
-            color: colorPalete.neutral.onShade400,
+            color: colorPalete.neutral.shade400.highlightColor,
           ),
           fillColor: colorPalete.neutralVariant.shade200,
           filled: true,
@@ -131,12 +131,12 @@ class AppTheme {
       inputDecorationTheme: (colorPalete, _) {
         return InputDecorationTheme(
           labelStyle: TextStyle(
-            color: colorPalete.neutral.onShade200,
+            color: colorPalete.neutral.shade200.highlightColor,
           ),
           hintStyle: TextStyle(
-            color: colorPalete.neutral.onShade300,
+            color: colorPalete.neutral.shade300.highlightColor,
           ),
-          fillColor: colorPalete.neutralVariant.onShade200,
+          fillColor: colorPalete.neutralVariant.shade200.highlightColor,
           filled: true,
           border: InputBorder.none,
           focusedBorder: OutlineInputBorder(

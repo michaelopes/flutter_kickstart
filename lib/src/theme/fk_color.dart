@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter_kickstart/src/util/fk_toolkit.dart';
+import 'package:flutter_kickstart/flutter_kickstart.dart';
 
 typedef FkColorTargetFunc = Color Function(FkColor thiz);
 
@@ -16,16 +15,6 @@ final class FkColor implements Color {
   late final Color _shade800;
   late final Color _shade900;
 
-  late final Color _onShade50;
-  late final Color _onShade100;
-  late final Color _onShade200;
-  late final Color _onShade300;
-  late final Color _onShade400;
-  late final Color _onShade500;
-  late final Color _onShade600;
-  late final Color _onShade700;
-  late final Color _onShade800;
-  late final Color _onShade900;
   late final FkColorTargetFunc? _target;
 
   FkColor({
@@ -39,16 +28,6 @@ final class FkColor implements Color {
     Color? shade700,
     Color? shade800,
     Color? shade900,
-    Color? onShade50,
-    Color? onShade100,
-    Color? onShade200,
-    Color? onShade300,
-    Color? onShade400,
-    Color? onShade500,
-    Color? onShade600,
-    Color? onShade700,
-    Color? onShade800,
-    Color? onShade900,
     FkColorTargetFunc? target,
   }) {
     var sList = [
@@ -63,18 +42,7 @@ final class FkColor implements Color {
       shade800,
       shade900
     ];
-    var onSList = [
-      onShade50,
-      onShade100,
-      onShade200,
-      onShade300,
-      onShade400,
-      onShade500,
-      onShade600,
-      onShade700,
-      onShade800,
-      onShade900
-    ];
+
     for (var i = 0; i < sList.length; i++) {
       var sColor = sList[i];
       if (sColor == null) {
@@ -90,41 +58,7 @@ final class FkColor implements Color {
       _setShadeColor(sColor, i);
     }
 
-    for (var i = 0; i < onSList.length; i++) {
-      var onSColor = onSList[i];
-      if (onSColor == null) {
-        var shadeColor = _getShadeColorByIndex(i);
-        onSColor = FkToolkit.generateHighlightHarmonicColor(shadeColor);
-      }
-      _setOnShadeColor(onSColor, i);
-    }
     _target = target;
-  }
-
-  Color _getShadeColorByIndex(int index) {
-    switch (index) {
-      case 0:
-        return _shade50;
-      case 1:
-        return _shade100;
-      case 2:
-        return _shade200;
-      case 3:
-        return _shade300;
-      case 4:
-        return _shade400;
-      case 5:
-        return _shade500;
-      case 6:
-        return _shade600;
-      case 7:
-        return _shade700;
-      case 8:
-        return _shade800;
-      case 9:
-      default:
-        return _shade900;
-    }
   }
 
   void _setShadeColor(Color color, int index) {
@@ -159,42 +93,6 @@ final class FkColor implements Color {
       case 9:
       default:
         _shade900 = color;
-        break;
-    }
-  }
-
-  void _setOnShadeColor(Color color, int index) {
-    switch (index) {
-      case 0:
-        _onShade50 = color;
-        break;
-      case 1:
-        _onShade100 = color;
-        break;
-      case 2:
-        _onShade200 = color;
-        break;
-      case 3:
-        _onShade300 = color;
-        break;
-      case 4:
-        _onShade400 = color;
-        break;
-      case 5:
-        _onShade500 = color;
-        break;
-      case 6:
-        _onShade600 = color;
-        break;
-      case 7:
-        _onShade700 = color;
-        break;
-      case 8:
-        _onShade800 = color;
-        break;
-      case 9:
-      default:
-        _onShade900 = color;
         break;
     }
   }
@@ -247,75 +145,13 @@ final class FkColor implements Color {
   Color get shade800 => _shade800;
   Color get shade900 => _shade900;
 
-  Color get onShade50 => _onShade50;
-  Color get onShade100 => _onShade100;
-  Color get onShade200 => _onShade200;
-  Color get onShade300 => _onShade300;
-  Color get onShade400 => _onShade400;
-  Color get onShade500 => _onShade500;
-  Color get onShade600 => _onShade600;
-  Color get onShade700 => _onShade700;
-  Color get onShade800 => _onShade800;
-  Color get onShade900 => _onShade900;
-
   Color get color => _target?.call(this) ?? _shade500;
-  Color get onColor {
-    if (color == shade50) {
-      return onShade50;
-    } else if (color == shade100) {
-      return onShade100;
-    } else if (color == shade200) {
-      return onShade200;
-    } else if (color == shade300) {
-      return onShade300;
-    } else if (color == shade400) {
-      return onShade400;
-    } else if (color == shade500) {
-      return onShade500;
-    } else if (color == shade600) {
-      return onShade600;
-    } else if (color == shade700) {
-      return onShade700;
-    } else if (color == shade800) {
-      return onShade800;
-    } else {
-      return onShade900;
-    }
-  }
 
   factory FkColor.color({
     required Color color,
-    Color? onColor,
   }) {
     return FkColor(
       shade500: color,
-      onShade500: onColor,
-    );
-  }
-
-  factory FkColor.onlyShade({
-    Color? shade50,
-    Color? shade100,
-    Color? shade200,
-    Color? shade300,
-    Color? shade400,
-    Color? shade500,
-    Color? shade600,
-    Color? shade700,
-    Color? shade800,
-    Color? shade900,
-  }) {
-    return FkColor(
-      shade50: shade50,
-      shade100: shade100,
-      shade200: shade200,
-      shade300: shade300,
-      shade400: shade400,
-      shade500: shade500,
-      shade600: shade600,
-      shade700: shade700,
-      shade800: shade800,
-      shade900: shade900,
     );
   }
 
@@ -330,18 +166,9 @@ final class FkColor implements Color {
     Color? shade700,
     Color? shade800,
     Color? shade900,
-    Color? onShade50,
-    Color? onShade100,
-    Color? onShade200,
-    Color? onShade300,
-    Color? onShade400,
-    Color? onShade500,
-    Color? onShade600,
-    Color? onShade700,
-    Color? onShade800,
-    Color? onShade900,
   }) {
     return FkColor(
+      target: (_) => color,
       shade50: shade50 ?? this.shade50,
       shade100: shade100 ?? this.shade100,
       shade200: shade200 ?? this.shade200,
@@ -352,17 +179,39 @@ final class FkColor implements Color {
       shade700: shade700 ?? this.shade700,
       shade800: shade800 ?? this.shade800,
       shade900: shade900 ?? this.shade900,
-      onShade50: onShade50 ?? this.onShade50,
-      onShade100: onShade100 ?? this.onShade100,
-      onShade200: onShade200 ?? this.onShade200,
-      onShade300: onShade300 ?? this.onShade300,
-      onShade400: onShade400 ?? this.onShade400,
-      onShade500: onShade500 ?? this.onShade500,
-      onShade600: onShade600 ?? this.onShade600,
-      onShade700: onShade700 ?? this.onShade700,
-      onShade800: onShade800 ?? this.onShade800,
-      onShade900: onShade900 ?? this.onShade900,
     );
+  }
+
+  FkColor invert({
+    bool autoGenerateShade50 = true,
+  }) {
+    return autoGenerateShade50
+        ? FkColor(
+            target: (_) => color,
+            shade50: shade50.highlightColor,
+            shade100: shade900,
+            shade200: shade800,
+            shade300: shade600,
+            shade400: shade700,
+            shade500: shade500,
+            shade600: shade400,
+            shade700: shade300,
+            shade800: shade200,
+            shade900: shade100,
+          )
+        : FkColor(
+            target: (_) => color,
+            shade50: shade900,
+            shade100: shade800,
+            shade200: shade700,
+            shade300: shade600,
+            shade400: shade500,
+            shade500: shade400,
+            shade600: shade300,
+            shade700: shade200,
+            shade800: shade100,
+            shade900: shade50,
+          );
   }
 
   FkColor lerp(FkColor other, double t) {
@@ -377,16 +226,6 @@ final class FkColor implements Color {
       shade700: Color.lerp(shade700, other.shade700, t),
       shade800: Color.lerp(shade800, other.shade800, t),
       shade900: Color.lerp(shade900, other.shade900, t),
-      onShade50: Color.lerp(onShade50, other.onShade50, t),
-      onShade100: Color.lerp(onShade100, other.onShade100, t),
-      onShade200: Color.lerp(onShade200, other.onShade200, t),
-      onShade300: Color.lerp(onShade300, other.onShade300, t),
-      onShade400: Color.lerp(onShade400, other.onShade400, t),
-      onShade500: Color.lerp(onShade500, other.onShade500, t),
-      onShade600: Color.lerp(onShade600, other.onShade600, t),
-      onShade700: Color.lerp(onShade700, other.onShade700, t),
-      onShade800: Color.lerp(onShade800, other.onShade800, t),
-      onShade900: Color.lerp(onShade900, other.onShade900, t),
     );
   }
 

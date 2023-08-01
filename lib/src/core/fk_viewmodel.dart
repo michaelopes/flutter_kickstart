@@ -19,7 +19,7 @@ abstract class FkViewModel<R extends FkReactive> extends ChangeNotifier {
   FkViewModel({
     required this.reactive,
   }) {
-    reactive.addListener(notifyListeners);
+    addListener(reactive.notifyListeners);
   }
 
   void init();
@@ -52,6 +52,8 @@ abstract class FkViewModel<R extends FkReactive> extends ChangeNotifier {
     return _setupParams[key];
   }
 
+  T getView<T>() => getSetupParam("GetView")();
+
   void removeSetupParam(String key) {
     _setupParams.remove(key);
   }
@@ -60,8 +62,8 @@ abstract class FkViewModel<R extends FkReactive> extends ChangeNotifier {
     for (var key in _loadings.keys) {
       _loadings[key] = false;
     }
-    for (var error in _errors) {
-      error(error);
+    for (var err in _errors) {
+      err(error);
     }
     GlobalErrorObserver.dispatch(error, stackTrace);
     notifyListeners();
@@ -87,11 +89,4 @@ abstract class FkViewModel<R extends FkReactive> extends ChangeNotifier {
   void didChangeDependencies() {}
   void deactivate() {}
   void reassemble() {}
-}
-
-abstract class FkViewModelView<R extends FkReactive, V extends Object>
-    extends FkViewModel<R> {
-  FkViewModelView({required super.reactive});
-
-  V get view => getSetupParam("GetView")();
 }

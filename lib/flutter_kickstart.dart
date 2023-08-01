@@ -2,6 +2,7 @@ library flutter_kickstart;
 
 export 'package:dio/dio.dart';
 export 'package:intl/intl.dart';
+export 'package:flutter_dotenv/flutter_dotenv.dart';
 export 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 export 'package:shimmer/shimmer.dart';
 
@@ -50,3 +51,7 @@ export 'src/util/fk_toolkit.dart';
 export 'src/validator/fk_field_validator.dart';
 export 'src/validator/fk_validador_messages.dart';
 export 'src/validator/fk_validator.dart';
+
+export 'src/extensions/state_ext.dart';
+export 'src/extensions/build_context_ext.dart';
+export 'src/extensions/color_ext.dart';
