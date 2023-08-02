@@ -38,6 +38,11 @@ class FkWidgetElement extends ComponentElement {
     markNeedsBuild();
   }
 
+  void _resetReactive() {
+    _widget.reactive.removeListener(_onReactiveChanged);
+    _widget.reactive.addListener(_onReactiveChanged);
+  }
+
   FkTheme get theme {
     var fkThm = Theme.of(this).extension<FkTheme>();
     if (fkThm != null) {
@@ -67,6 +72,7 @@ class FkWidgetElement extends ComponentElement {
     super.update(newWidget);
     assert(widget == newWidget);
     _setHelperElement();
+    _resetReactive();
     rebuild(force: true);
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:flutter_kickstart/src/interfaces/fk_asset.dart';
+
 import '../util/fk_toolkit.dart';
 
 class FkImages extends FkAsset {
@@ -71,6 +73,61 @@ class FpImage {
     }
   }
 
+  Widget toImage({double? width, double? height, BoxFit? fit}) {
+    if (directories.isEmpty) {
+      var message =
+          "Unable to load image, imagesDirectory not given on FkTheme creation";
+      debugPrint(message);
+      throw Exception(message);
+    }
+
+    return _ImageAssetLoader(
+      fileNames: fileNames,
+      fit: fit ?? (this.fit ?? BoxFit.contain),
+      width: width ?? this.width,
+      height: height ?? this.height,
+    );
+  }
+}
+
+class _ImageAssetLoader extends StatefulWidget {
+  final List<String> fileNames;
+  final double? width;
+  final double? height;
+  final BoxFit? fit;
+
+  const _ImageAssetLoader({
+    Key? key,
+    required this.fileNames,
+    this.width,
+    this.height,
+    this.fit,
+  }) : super(key: key);
+
+  @override
+  State<_ImageAssetLoader> createState() => __ImageAssetLoaderState();
+}
+
+class __ImageAssetLoaderState extends State<_ImageAssetLoader> {
+  Uint8List? _bytes;
+
+  List<String> get fileNames => widget.fileNames;
+
+  @override
+  void initState() {
+    super.initState();
+    _setup();
+  }
+
+  Future<void> _setup() async {
+    var bts = await _loadAssetFromIndex(0);
+    if (mounted) {
+      setState(() {
+        _bytes = bts;
+      });
+    }
+  }
+
   Future<Uint8List> _loadAssetFromIndex(int index) async {
     ByteData data;
     var fileName = fileNames[index];
@@ -87,28 +144,18 @@ class FpImage {
     return data.buffer.asUint8List();
   }
 
-  Widget toImage({double? width, double? height, BoxFit? fit}) {
-    if (directories.isEmpty) {
-      var message =
-          "Unable to load image, imagesDirectory not given on FkTheme creation";
-      debugPrint(message);
-      throw Exception(message);
-    }
-    return FutureBuilder<Uint8List>(
-      future: _loadAssetFromIndex(0),
-      builder: (_, snapshot) {
-        return snapshot.hasData
-            ? Image.memory(
-                snapshot.data!,
-                fit: fit ?? (this.fit ?? BoxFit.contain),
-                width: width ?? this.width,
-                height: height ?? this.height,
-              )
-            : SizedBox(
-                height: width ?? this.width,
-                width: height ?? this.height,
-              );
-      },
-    );
+  @override
+  Widget build(BuildContext context) {
+    return _bytes != null
+        ? Image.memory(
+            _bytes!,
+            fit: widget.fit,
+            width: widget.width,
+            height: widget.height,
+          )
+        : SizedBox(
+            height: widget.width,
+            width: widget.height,
+          );
   }
 }
