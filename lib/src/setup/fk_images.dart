@@ -96,13 +96,9 @@ class _ImageAssetLoader extends StatefulWidget {
   final double? height;
   final BoxFit? fit;
 
-  const _ImageAssetLoader({
-    Key? key,
-    required this.fileNames,
-    this.width,
-    this.height,
-    this.fit,
-  }) : super(key: key);
+  const _ImageAssetLoader(
+      {Key? key, required this.fileNames, this.width, this.height, this.fit})
+      : super(key: key);
 
   @override
   State<_ImageAssetLoader> createState() => __ImageAssetLoaderState();
