@@ -42,7 +42,7 @@ void main() async {
     //Com esse parser é possivel customizar erros ou respostas para 
     //cada faixa de códigos HTTP ex: 200, 400, 500, etc..
     httpDriverResponseParser: () => AppHttpResponseParser(),
-    baseUrl: "https://www.thecocktaildb.com/api/json",
+    baseUrl: () => "https://www.thecocktaildb.com/api/json",
   );
 
   runApp(
@@ -159,8 +159,8 @@ final class AppModuleMiddleware extends FkModuleMiddleware<GlobalReactive> {
 
   @override
   FutureOr<String?> onViewRedirect(BuildContext context, GoRouterState state) {
-    final isGoingToInit = state.location == AppModules.splash;
-    final isGoingToLogin = state.location == AppModules.login;
+    final isGoingToInit = state.matchedLocation == AppModules.splash;
+    final isGoingToLogin = state.matchedLocation == AppModules.login;
 
     if (!reactive.initialized && !isGoingToInit) {
       return AppModules.splash;
