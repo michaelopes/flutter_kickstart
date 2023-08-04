@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_kickstart/flutter_kickstart.dart';
 import 'package:flutter_kickstart/src/model/fk_font.dart';
 

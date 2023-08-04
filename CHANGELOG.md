@@ -1,6 +1,6 @@
 ## 1.0.0-beta.8
 
-* Otimizações de código
+* Otimizações de código 
 
 ## 1.0.0-beta.7
 
