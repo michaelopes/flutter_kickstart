@@ -96,9 +96,13 @@ class _ImageAssetLoader extends StatefulWidget {
   final double? height;
   final BoxFit? fit;
 
-  const _ImageAssetLoader(
-      {Key? key, required this.fileNames, this.width, this.height, this.fit})
-      : super(key: key);
+  const _ImageAssetLoader({
+    Key? key,
+    required this.fileNames,
+    this.width,
+    this.height,
+    this.fit,
+  }) : super(key: key);
 
   @override
   State<_ImageAssetLoader> createState() => __ImageAssetLoaderState();
@@ -106,6 +110,7 @@ class _ImageAssetLoader extends StatefulWidget {
 
 class __ImageAssetLoaderState extends State<_ImageAssetLoader> {
   Uint8List? _bytes;
+  Brightness? _currentBrightness;
 
   List<String> get fileNames => widget.fileNames;
 
@@ -118,10 +123,21 @@ class __ImageAssetLoaderState extends State<_ImageAssetLoader> {
   Future<void> _setup() async {
     var bts = await _loadAssetFromIndex(0);
     if (mounted) {
+      _currentBrightness = Theme.of(context).brightness;
       setState(() {
         _bytes = bts;
       });
     }
+  }
+
+  @override
+  void didUpdateWidget(oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    FkToolkit.when(() => mounted, () {
+      if (_currentBrightness != Theme.of(context).brightness) {
+        _setup();
+      }
+    }, 50);
   }
 
   Future<Uint8List> _loadAssetFromIndex(int index) async {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_kickstart/flutter_kickstart.dart';
 import 'package:flutter_kickstart/src/core/fk_router.dart';
 
 import '../core/fk_reactive.dart';
@@ -100,4 +101,15 @@ abstract class FkWidget<T extends FkReactive> extends _FkWidgetBase<T> {
   String get themeBranch => "";
 
   Widget build(BuildContext context);
+}
+
+abstract class _FkViewSlaveWidgetBase<VM extends FkViewModel> extends FkWidget {
+  final VM _viewModel;
+  _FkViewSlaveWidgetBase(this._viewModel, {super.key});
+}
+
+abstract class FkViewSlaveWidget<VM extends FkViewModel>
+    extends _FkViewSlaveWidgetBase<VM> {
+  FkViewSlaveWidget({super.key, required VM viewModel}) : super(viewModel);
+  VM get vm => super._viewModel;
 }

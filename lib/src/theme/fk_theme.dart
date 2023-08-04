@@ -96,6 +96,7 @@ final class FkTheme extends ThemeExtension<FkTheme> {
   final dynamic animationsDirectory;
   final BoxDecoration? decoration;
   final String? fontFamily;
+  final _namedColors = <({String name, Color color})>[];
 
   late final Color _background;
   late final FkTypography _typography;
@@ -362,6 +363,15 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     _themeBranchs = themeBranchs?.call(this) ?? [];
   }
 
+  Color namedColor(String name) {
+    final filter = _namedColors.where((e) => e.name == name);
+    if (filter.isEmpty) {
+      return Colors.red;
+    } else {
+      return filter.first.color;
+    }
+  }
+
   @override
   FkTheme copyWith({
     FkColorPalete? colorPalete,
@@ -381,9 +391,10 @@ final class FkTheme extends ThemeExtension<FkTheme> {
     String? fontFamily,
     TextSelectionThemeFunc? textSelectionTheme,
     ThemeBranchsFunc? subThemeBranchs,
+    List<({String name, Color color})> namedColors = const [],
   }) {
     var cPalete = colorPalete ?? this.colorPalete;
-    return _themeData.brightness == Brightness.light
+    var result = _themeData.brightness == Brightness.light
         ? FkTheme.light(
             fontFamily: fontFamily ?? this.fontFamily,
             colorPalete: cPalete,
@@ -446,6 +457,10 @@ final class FkTheme extends ThemeExtension<FkTheme> {
                 defaultIndicatorColor ?? _defaultIndicatorColor,
             textSelectionTheme: textSelectionTheme ?? _textSelectionTheme,
           );
+
+    result._namedColors.clear();
+    result._namedColors.addAll(namedColors);
+    return result;
   }
 
   @override
